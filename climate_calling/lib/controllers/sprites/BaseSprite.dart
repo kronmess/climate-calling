@@ -9,10 +9,13 @@ import 'package:flutter/gestures.dart';
 class BaseSprite extends BaseTimedWidget {
   //Fields
   AnimationComponent _animationComponent;
+  double xVelocity, yVelocity;
 
   //Constructor
   BaseSprite(List<Sprite> sprites) {
     this._animationComponent = AnimationComponent(0, 0, Animation.spriteList(sprites, stepTime: 0.1));
+    this.xVelocity = 0;
+    this.yVelocity = 0;
   }
 
   //Public Methods
