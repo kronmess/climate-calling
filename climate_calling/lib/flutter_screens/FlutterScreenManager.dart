@@ -23,7 +23,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            //TODO: Add the Flame and flutter widgets here
+            //TODO: Add the Flame and flutter widgets here (flame first, then flutter's)
           ],
         ),
       ),
