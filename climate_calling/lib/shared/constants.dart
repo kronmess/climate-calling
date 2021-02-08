@@ -1,0 +1,1 @@
+const double GRAVITY = -10;
