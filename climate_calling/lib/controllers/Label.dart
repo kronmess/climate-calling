@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Label extends BaseWidget {
+  
+  //Fields
   final double _xRatio, _yRatio;
   final String _text;
 
@@ -11,6 +13,7 @@ class Label extends BaseWidget {
 
   Offset _position;
 
+  //Constructor
   Label(this._text, this._xRatio, this._yRatio) {
     this._painter = TextPainter(
       textAlign: TextAlign.center,
@@ -30,10 +33,17 @@ class Label extends BaseWidget {
     this._painter.layout();
     _position = Offset(0, 0);
   }
+  
+  //Overridden Methods
+  @override
   void render(Canvas canvas){
     _painter.paint(canvas, _position);
   }
+
+  @override
   void update(){}
+
+  @override
   void resize(Size size){
     this._textStyle = TextStyle(
       color: Colors.white,
@@ -52,6 +62,8 @@ class Label extends BaseWidget {
       size.height * _yRatio - (_painter.height * _yRatio),
     );
   }
+
+  @override
   void onTapDown(TapDownDetails details, Function fn){
   }
 }
