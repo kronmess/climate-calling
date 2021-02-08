@@ -5,7 +5,9 @@ import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
+import 'package:flame/util.dart';
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 
 class ClimateCalling extends Game with TapDetector{
   //Fields
@@ -19,6 +21,9 @@ class ClimateCalling extends Game with TapDetector{
   //Constructor
   ClimateCalling() {
     this._menuScreen = MainMenuScreen();
+
+    _fnUpdate = _init;
+    _callback = _doNothing;
   }
 
   //Private Methods
@@ -30,6 +35,19 @@ class ClimateCalling extends Game with TapDetector{
       default:
         return this._menuScreen;
     }
+  }
+
+  Future<void> _init() async {
+    _fnUpdate = _update;
+
+    Util flameUtil = Util();
+    await flameUtil.fullScreen();
+    await flameUtil.setOrientation(DeviceOrientation.portraitDown);
+    //TODO: load user data (like level progress and such)
+  }
+
+  void _update() {
+    _getActiveScreen()?.update();
   }
 
   //Public Methods
@@ -46,6 +64,12 @@ class ClimateCalling extends Game with TapDetector{
         break;
     }
   }
+
+  void setCallBack(Function fn) {
+    this._callback = fn;
+  }
+
+  void _doNothing(){}
 
   //Overridden Methods
   @override
