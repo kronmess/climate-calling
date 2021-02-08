@@ -7,6 +7,7 @@ import 'package:flame/sprite.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
 class Player extends BaseTimedWidget {
+  //Fields
   AnimationComponent _player;
 
   //Constructor
