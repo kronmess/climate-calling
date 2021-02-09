@@ -17,16 +17,16 @@ class Background extends BaseWidget {
   //Overridden Methods
   @override
   void onTapDown(TapDownDetails details, Function fn) {
-      // TODO: implement onTapDown
-    }
+    // TODO: implement onTapDown
+  }
   
-    @override
-    void render(Canvas canvas) {
-     this._bgSprite.render(canvas);
-    }
-  
-    @override
-    void resize(Size size) {
+  @override
+  void render(Canvas canvas) {
+    this._bgSprite.render(canvas);
+  }
+
+  @override
+  void resize(Size size) {
     this._bgSprite.width = size.width;
     this._bgSprite.height = size.height;
   }
