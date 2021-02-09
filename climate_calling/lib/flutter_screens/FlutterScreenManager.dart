@@ -1,3 +1,5 @@
+import 'package:climate_calling/flutter_screens/FlutterMainMenu.dart';
+import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 
@@ -23,6 +25,8 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
+            climateCalling.widget,
+            FlutterMainMenuScreen(),
             //TODO: Add the Flame and flutter widgets here (flame first, then flutter's)
           ],
         ),
