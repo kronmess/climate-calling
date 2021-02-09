@@ -23,11 +23,10 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(
+        body: Stack(    //Allows widgets to be drawn on top of each other (overlapping one another)
           children: [
-            climateCalling.widget,
-            FlutterMainMenuScreen(),
-            //TODO: Add the Flame and flutter widgets here (flame first, then flutter's)
+            climateCalling.widget,    //Flame widget
+            FlutterMainMenuScreen(),  //Flutter widget
           ],
         ),
       ),
