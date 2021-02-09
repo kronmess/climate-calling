@@ -15,6 +15,6 @@ abstract class BaseWidget {
   void resize(Size size);
   /**
    * Operation to be done when the user taps on the screen
-   */
+   */ 
   void onTapDown(TapDownDetails details, Function fn);
 }
