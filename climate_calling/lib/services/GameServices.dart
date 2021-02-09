@@ -3,5 +3,5 @@ import 'package:climate_calling/shared/globals.dart';
 
 void updateScreenState(ScreenState newState, {Function callback}) {
   screenState = newState;
-  callback();
+  if (callback != null) callback();
 }
