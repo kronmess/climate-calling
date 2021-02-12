@@ -27,7 +27,9 @@ class BaseSprite extends BaseTimedWidget {
   
   @override
   void render(Canvas canvas) {
+    canvas.save();
     this._animationComponent.render(canvas);
+    canvas.restore();
   }
 
   @override
