@@ -8,5 +8,7 @@ class Player extends BaseSprite {
   //Constructor
   //TODO: Load player animations
   Player() : super([1,2,3,4].map((e) => Sprite('sprites/main_char/right/$e.png')).toList()) {
-  }
+    this.getAnimationComponent().width = 100;
+    this.getAnimationComponent().height = 100;
+  } 
 }
