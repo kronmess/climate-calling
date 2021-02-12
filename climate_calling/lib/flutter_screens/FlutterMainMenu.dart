@@ -23,13 +23,9 @@ class FlutterMainMenuScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //TODO: Replace with first button widget
-              TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateColor.resolveWith(
-                      (states) => Colors.transparent),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
-                ),
+              FlatButton(
+                textColor: Colors.black,
+                splashColor: Colors.transparent,
                 child: Text(
                   'Start',
                   style: TextStyle(fontSize: 20),
@@ -39,13 +35,9 @@ class FlutterMainMenuScreen extends StatelessWidget {
                 },
               ),
               //TODO: Replace with second button widget
-              TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateColor.resolveWith(
-                      (states) => Colors.transparent),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
-                ),
+              FlatButton(
+                textColor: Colors.black,
+                splashColor: Colors.transparent,
                 child: Text(
                   'Game Settings',
                   style: TextStyle(fontSize: 20),
