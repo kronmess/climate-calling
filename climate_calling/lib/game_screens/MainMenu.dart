@@ -1,12 +1,11 @@
 import 'dart:ui';
 
+import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/game_screens/Background.dart';
-import 'package:climate_calling/game_screens/BaseScreen.dart';
-import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
-class MainMenuScreen extends BaseScreen {
+class MainMenuScreen extends BaseTimedWidget {
   //Fields
   Background _background;
 
@@ -17,7 +16,7 @@ class MainMenuScreen extends BaseScreen {
 
   //Overridden Methods
   @override
-  void onTapDown(TapDownDetails details) {
+  void onTapDown(TapDownDetails details, Function fn) {
       // TODO: implement onTapDown
     }
   
@@ -32,7 +31,7 @@ class MainMenuScreen extends BaseScreen {
   }
 
   @override
-  void update() {
+  void update(double t) {
     // TODO: implement update
   }
 

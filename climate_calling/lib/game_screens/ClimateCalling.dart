@@ -1,5 +1,6 @@
-import 'package:climate_calling/game_screens/BaseScreen.dart';
+import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/game_screens/MainMenu.dart';
+import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/services/GameServices.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
@@ -11,7 +12,8 @@ import 'package:flutter/services.dart';
 
 class ClimateCalling extends Game with TapDetector{
   //Fields
-  BaseScreen _menuScreen;
+  BaseTimedWidget _menuScreen;
+  BaseTimedWidget _levelArctic;
 
   Function _fnUpdate;
   Function _callback;
@@ -21,33 +23,37 @@ class ClimateCalling extends Game with TapDetector{
   //Constructor
   ClimateCalling() {
     this._menuScreen = MainMenuScreen();
+    this._levelArctic = ArcticLevel();
 
     _fnUpdate = _init;
     _callback = _doNothing;
   }
 
   //Private Methods
-  BaseScreen _getActiveScreen() {
+  BaseTimedWidget _getActiveScreen() {
     switch (screenState) {
       case ScreenState.kMainMenu:
         return this._menuScreen;
+
+      case ScreenState.kPolar:
+        return this._levelArctic;
 
       default:
         return this._menuScreen;
     }
   }
 
-  Future<void> _init() async {
+  Future<void> _init(double t) async {
     _fnUpdate = _update;
 
     Util flameUtil = Util();
     await flameUtil.fullScreen();
-    await flameUtil.setOrientation(DeviceOrientation.portraitDown);
+    await flameUtil.setOrientation(DeviceOrientation.landscapeLeft);
     //TODO: load user data (like level progress and such)
   }
 
-  void _update() {
-    _getActiveScreen()?.update();
+  void _update(double t) {
+    _getActiveScreen()?.update(t);
   }
 
   //Public Methods
@@ -79,12 +85,12 @@ class ClimateCalling extends Game with TapDetector{
   
   @override
   void update(double t) {
-  // TODO: implement update
+    this._fnUpdate(t);
   }
 
   @override
   void onTapDown(TapDownDetails details) {
-    this._getActiveScreen().onTapDown(details);
+    this._getActiveScreen().onTapDown(details, null);
   }
 
   @override
