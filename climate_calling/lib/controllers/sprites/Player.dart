@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:flame/sprite.dart';
 
 class Player extends BaseSprite {
   //Fields
@@ -6,6 +7,6 @@ class Player extends BaseSprite {
 
   //Constructor
   //TODO: Load player animations
-  Player() : super(null) {
+  Player() : super([1,2,3,4].map((e) => Sprite('sprites/main_char/${e}.png')).toList()) {
   }
 }
