@@ -26,6 +26,7 @@ class FlutterMainMenuScreen extends StatelessWidget {
               FlatButton(
                 textColor: Colors.black,
                 splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 child: Text(
                   'Start',
                   style: TextStyle(fontSize: 20),
@@ -38,6 +39,7 @@ class FlutterMainMenuScreen extends StatelessWidget {
               FlatButton(
                 textColor: Colors.black,
                 splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 child: Text(
                   'Game Settings',
                   style: TextStyle(fontSize: 20),

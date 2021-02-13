@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/game_screens/GameSettings.dart';
 import 'package:climate_calling/game_screens/MainMenu.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/services/GameServices.dart';
@@ -10,10 +11,11 @@ import 'package:flame/util.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 
-class ClimateCalling extends Game with TapDetector{
+class ClimateCalling extends Game with TapDetector {
   //Fields
   BaseTimedWidget _menuScreen;
   BaseTimedWidget _levelArctic;
+  BaseTimedWidget _settingsScreen;
 
   Function _fnUpdate;
   Function _callback;
@@ -24,6 +26,7 @@ class ClimateCalling extends Game with TapDetector{
   ClimateCalling() {
     this._menuScreen = MainMenuScreen();
     this._levelArctic = ArcticLevel();
+    this._settingsScreen = GameSettingsScreen();
 
     _fnUpdate = _init;
     _callback = _doNothing;
@@ -32,6 +35,9 @@ class ClimateCalling extends Game with TapDetector{
   //Private Methods
   BaseTimedWidget _getActiveScreen() {
     switch (screenState) {
+      case ScreenState.kGameSettings:
+        return this._settingsScreen;
+
       case ScreenState.kMainMenu:
         return this._menuScreen;
 
@@ -75,14 +81,14 @@ class ClimateCalling extends Game with TapDetector{
     this._callback = fn;
   }
 
-  void _doNothing(){}
+  void _doNothing() {}
 
   //Overridden Methods
   @override
   void render(Canvas canvas) {
-      this._getActiveScreen()?.render(canvas);
-    }
-  
+    this._getActiveScreen()?.render(canvas);
+  }
+
   @override
   void update(double t) {
     this._fnUpdate(t);
@@ -97,7 +103,7 @@ class ClimateCalling extends Game with TapDetector{
   void resize(Size size) {
     this._menuScreen?.resize(size);
     this._levelArctic?.resize(size);
-
+    this._settingsScreen?.resize(size);
     this._size = size;
   }
 }
