@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';
 
 class SpriteServices {
-
+  
   /**
    * Uses AABB collision detection to detect if 2 sprites collide with one another
    */
@@ -38,5 +40,19 @@ class SpriteServices {
     }
 
     return list;
+  }
+
+  /**
+   * Returns the x and y difference between the positions of 2 sprite objects.
+   */
+  static Point getDeltaPos(BaseSprite sp1, BaseSprite sp2) {
+    //TODO: consider the width and height as well?
+    double xDiff = 0;
+    double yDiff = 0;
+
+    xDiff = sp2.getAnimationComponent().x - sp1.getAnimationComponent().x;
+    yDiff = sp2.getAnimationComponent().y - sp1.getAnimationComponent().y;
+
+    return Point(xDiff, yDiff);
   }
 }
