@@ -3,10 +3,14 @@ import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
-class FlutterMainMenuScreen extends StatelessWidget {
+class FlutterMainMenuScreen extends StatefulWidget {
+  @override
+  _FlutterMainMenuScreenState createState() => _FlutterMainMenuScreenState();
+}
+
+class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
   @override
   Widget build(BuildContext context) {
-    //TODO: Create main menu widget tree
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -14,7 +18,7 @@ class FlutterMainMenuScreen extends StatelessWidget {
           flex: 2,
           child: Image(
             image: AssetImage("assets/images/logoapp.png"),
-          ), //TODO: Replace with logo here
+          ),
         ),
         SizedBox(
           height: 180,
@@ -24,12 +28,13 @@ class FlutterMainMenuScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              //TODO: Replace with first button widget
               BackgroundButton(
                 image: AssetImage("assets/images/sprites/main menu buttons/main menu button.png"),
                 text: "Start",
                 onTap: (){
-                  screenState = ScreenState.kPolar;   //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                  this.setState(() {
+                    screenState = ScreenState.kPolar;   //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                  });
                 },
               ),
               //TODO: Replace with second button widget
