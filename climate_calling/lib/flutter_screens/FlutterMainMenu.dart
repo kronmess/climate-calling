@@ -9,9 +9,8 @@ class FlutterMainMenuScreen extends StatelessWidget {
       children: [
         Flexible(
           flex: 2,
-          child: Icon(
-            Icons.account_circle,
-            size: 300,
+          child: Image(
+            image: AssetImage("assets/images/logoapp.png"),
           ), //TODO: Replace with logo here
         ),
         SizedBox(

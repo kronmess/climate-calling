@@ -11,22 +11,22 @@ class MainMenuScreen extends BaseTimedWidget {
 
   //Constructor
   MainMenuScreen() {
-    this._background = Background("MainMenuTest.png");
+    this._background = Background("MainMenu.png");
   }
 
   //Overridden Methods
   @override
   void onTapDown(TapDownDetails details, Function fn) {
-      // TODO: implement onTapDown
-    }
-  
-    @override
-    void render(Canvas canvas) {
-      this._background?.render(canvas);
-    }
-  
-    @override
-    void resize(Size size) {
+    // TODO: implement onTapDown
+  }
+
+  @override
+  void render(Canvas canvas) {
+    this._background?.render(canvas);
+  }
+
+  @override
+  void resize(Size size) {
     this._background?.resize(size);
   }
 
@@ -34,5 +34,4 @@ class MainMenuScreen extends BaseTimedWidget {
   void update(double t) {
     // TODO: implement update
   }
-
 }
