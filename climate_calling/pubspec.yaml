@@ -55,8 +55,11 @@ flutter:
   assets:
     - assets/images/
     - assets/images/sprites/
+    - assets/images/sprites/button/
+    - assets/images/sprites/igloo/
     - assets/images/sprites/main_char/right/
     - assets/images/sprites/main_char/left/
+    - assets/images/sprites/main menu buttons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
