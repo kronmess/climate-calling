@@ -1,3 +1,4 @@
+import 'package:climate_calling/controllers/BackgroundButton.dart';
 import "package:flutter/material.dart";
 
 class FlutterMainMenuScreen extends StatelessWidget {
@@ -22,16 +23,11 @@ class FlutterMainMenuScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //TODO: Replace with first button widget
-              FlatButton(
-                textColor: Colors.black,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                child: Text(
-                  'Start',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  print('test');
+              BackgroundButton(
+                image: AssetImage("assets/images/sprites/main menu buttons/main menu button.png"),
+                text: "Start",
+                onTap: (){
+                  print("Hello there");
                 },
               ),
               //TODO: Replace with second button widget
