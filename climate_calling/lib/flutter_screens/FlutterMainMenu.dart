@@ -1,4 +1,6 @@
 import 'package:climate_calling/controllers/BackgroundButton.dart';
+import 'package:climate_calling/shared/ScreenState.dart';
+import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
 class FlutterMainMenuScreen extends StatelessWidget {
@@ -27,7 +29,7 @@ class FlutterMainMenuScreen extends StatelessWidget {
                 image: AssetImage("assets/images/sprites/main menu buttons/main menu button.png"),
                 text: "Start",
                 onTap: (){
-                  print("Hello there");
+                  screenState = ScreenState.kPolar;   //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
                 },
               ),
               //TODO: Replace with second button widget
