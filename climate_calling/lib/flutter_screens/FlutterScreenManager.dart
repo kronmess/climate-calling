@@ -1,4 +1,5 @@
 import 'package:climate_calling/flutter_screens/FlutterMainMenu.dart';
+import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
@@ -10,6 +11,30 @@ class FlutterScreenManager extends StatefulWidget {
 
 class _FlutterScreenManagerState extends State<FlutterScreenManager> {
 
+  //Fields
+  Widget mainMenu, polarLevel;
+
+  //Constructor
+  _FlutterScreenManagerState() {
+    this.mainMenu = FlutterMainMenuScreen();
+    this.polarLevel = SizedBox();
+  }
+
+  //Private methods
+  Widget getActiveScreen() {
+    switch (screenState) {
+      case ScreenState.kMainMenu:
+        return this.mainMenu;
+      
+      case ScreenState.kPolar:
+        return this.polarLevel;
+
+      default:
+        return SizedBox();
+    }
+  }
+
+  //Overridden Methods
   @override
   void initState() {
     super.initState();
@@ -26,7 +51,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
         body: Stack(    //Allows widgets to be drawn on top of each other (overlapping one another)
           children: [
             climateCalling.widget,    //Flame widget
-            FlutterMainMenuScreen(),  //Flutter widget
+            this.getActiveScreen(),  //Flutter widget
           ],
         ),
       ),
