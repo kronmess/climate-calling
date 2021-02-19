@@ -6,10 +6,12 @@ abstract class BaseLevel extends BaseTimedWidget{
   //Fields
   @protected
   Player player;
+  double gravity;
 
   //Constructor
-  BaseLevel(double x, double y) {
+  BaseLevel(double x, double y, {double gravity = 10}) {
     this.player = Player();
+    this.gravity = gravity;
 
     //Move the player to the desired position
     this.player.getAnimationComponent().x = x;
