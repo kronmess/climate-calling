@@ -20,8 +20,13 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
     this.polarLevel = SizedBox();
   }
 
+  //Public methods
+  void refreshState() {
+    setState((){});
+  }
+
   //Private methods
-  Widget getActiveScreen() {
+  Widget _getActiveScreen() {
     switch (screenState) {
       case ScreenState.kMainMenu:
         return this.mainMenu;
@@ -41,6 +46,8 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
 
     SystemChrome.setEnabledSystemUIOverlays([]);    //Remove bottom navigation bars
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);   //Make the app to use landscape by default
+
+    climateCalling.setCallBack(this.refreshState);
   }
 
   @override
@@ -51,7 +58,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
         body: Stack(    //Allows widgets to be drawn on top of each other (overlapping one another)
           children: [
             climateCalling.widget,    //Flame widget
-            this.getActiveScreen(),  //Flutter widget
+            this._getActiveScreen(),  //Flutter widget
           ],
         ),
       ),

@@ -68,7 +68,13 @@ class ClimateCalling extends Game with TapDetector {
       case ScreenState.kMainMenu:
         this._menuScreen = MainMenuScreen();
         this._menuScreen.resize(this._size);
-        updateScreenState(newScreen, callback: this._callback);
+        updateScreenState(newScreen, callback: this._callback);   //Required to render the main menu flutter widgets
+        break;
+
+      case ScreenState.kPolar:
+        this._levelArctic = ArcticLevel();
+        this._levelArctic.resize(this._size);
+        updateScreenState(newScreen, callback: this._callback);   //Required to render the polar level flutter widgets
         break;
 
       default:
