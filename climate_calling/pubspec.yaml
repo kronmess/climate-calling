@@ -59,6 +59,8 @@ flutter:
     - assets/images/sprites/igloo/
     - assets/images/sprites/main_char/right/
     - assets/images/sprites/main_char/left/
+    - assets/images/sprites/Polar Bear/left/
+    - assets/images/sprites/Polar Bear/right/
     - assets/images/sprites/main menu buttons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
