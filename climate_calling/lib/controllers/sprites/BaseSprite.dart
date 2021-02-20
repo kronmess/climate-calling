@@ -25,7 +25,7 @@ class BaseSprite extends BaseTimedWidget {
   void moveLeft() => this._animationComponent.x -= this.xVelocity;
   void moveRight() => this._animationComponent.x += this.xVelocity;
   void moveUp() => this._animationComponent.y -= this.yVelocity;    //Moving up is negative because of how the pixel coordinate works
-  void applyGravity() => this._animationComponent.y += this.yVelocity;    //Going down is positive because of how the pixel coordinate works
+  void applyGravity() => this._animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
 
   //Overridden Methods
   @override
