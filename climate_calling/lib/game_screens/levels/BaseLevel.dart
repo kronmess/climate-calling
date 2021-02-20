@@ -9,9 +9,12 @@ abstract class BaseLevel extends BaseTimedWidget{
   double gravity;
 
   //Constructor
-  BaseLevel(double x, double y, {double gravity = 10}) {
+  BaseLevel(double x, double y, {double gravity = 5}) {
     this.player = Player();
     this.gravity = gravity;
+
+    //Apply gravity to player
+    this.player.gravity = gravity;
 
     //Move the player to the desired position
     this.player.getAnimationComponent().x = x;
