@@ -12,7 +12,7 @@ class ArcticLevel extends BaseLevel {
   Size _size = Size(0, 0);
 
   //Constructor
-  ArcticLevel() : super(250, 250);
+  ArcticLevel() : super(250, 0);
 
   //Overridden Methods
   @override
@@ -41,5 +41,6 @@ class ArcticLevel extends BaseLevel {
   @override
   void update(double t) {
     this.player.update(t);
+    this.player.applyGravity();
   }
 }
