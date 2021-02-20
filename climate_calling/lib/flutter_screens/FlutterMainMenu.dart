@@ -3,6 +3,9 @@ import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
+import '../shared/constants.dart';
+import '../shared/constants.dart';
+
 class FlutterMainMenuScreen extends StatefulWidget {
   @override
   _FlutterMainMenuScreenState createState() => _FlutterMainMenuScreenState();
@@ -17,7 +20,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
         Flexible(
           flex: 2,
           child: Image(
-            image: AssetImage("assets/images/logoapp.png"),
+            image: AssetImage(PATH_LOGO_APP),
           ),
         ),
         SizedBox(
@@ -29,7 +32,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BackgroundButton(
-                image: AssetImage("assets/images/sprites/main menu buttons/main menu button.png"),
+                image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Start",
                 onTap: (){
                   climateCalling.switchScreen(ScreenState.kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead

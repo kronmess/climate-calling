@@ -5,13 +5,15 @@ import 'package:climate_calling/game_screens/Background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
+import '../shared/constants.dart';
+
 class MainMenuScreen extends BaseTimedWidget {
   //Fields
   Background _background;
 
   //Constructor
   MainMenuScreen() {
-    this._background = Background("MainMenu.png");
+    this._background = Background(PATH_MAIN_MENU_BG);
   }
 
   //Overridden Methods

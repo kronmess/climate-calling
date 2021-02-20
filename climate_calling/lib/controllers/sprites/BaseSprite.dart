@@ -16,12 +16,16 @@ class BaseSprite extends BaseTimedWidget {
     this.xVelocity = 5, 
     this.yVelocity = 5, 
     this.gravity = 0,
+    double stepTime = 0.1,
   }) {
-    this._animationComponent = AnimationComponent(0, 0, Animation.spriteList(sprites, stepTime: 0.1));
+    this._animationComponent = AnimationComponent(0, 0, Animation.spriteList(sprites, stepTime:stepTime));
   }
 
   //Public Methods
   AnimationComponent getAnimationComponent() => _animationComponent;
+  void setAnimations(List<Sprite> sprites, {double stepTime = 0.1}) {
+    this._animationComponent = AnimationComponent(this._animationComponent.width, this._animationComponent.height, Animation.spriteList(sprites, stepTime: stepTime));
+  }
   void moveLeft() => this._animationComponent.x -= this.xVelocity;
   void moveRight() => this._animationComponent.x += this.xVelocity;
   void moveUp() => this._animationComponent.y -= this.yVelocity;    //Moving up is negative because of how the pixel coordinate works
@@ -47,5 +51,4 @@ class BaseSprite extends BaseTimedWidget {
   void update(double t) {
     this._animationComponent.update(t);
   }
-  
 }
