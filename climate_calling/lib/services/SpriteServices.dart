@@ -36,7 +36,7 @@ class SpriteServices {
     List<Sprite> list = List();
 
     for (int i=1; i<=frames; i++) {
-      list.add(Sprite("$folderPath $i.png"));
+      list.add(Sprite("$folderPath$i.png"));
     }
 
     return list;
@@ -50,8 +50,42 @@ class SpriteServices {
     double xDiff = 0;
     double yDiff = 0;
 
-    xDiff = sp2.getAnimationComponent().x - sp1.getAnimationComponent().x;
-    yDiff = sp2.getAnimationComponent().y - sp1.getAnimationComponent().y;
+    AnimationComponent ac1 = sp1.getAnimationComponent();
+    AnimationComponent ac2 = sp2.getAnimationComponent();
+
+    //Calculate xDiff
+    /**
+     * 
+     */
+    // if (ac1.x + ac1.width <= ac2.x) {
+    //   xDiff = ac2.x - (ac1.x + ac1.width);
+    // } 
+    // else if (ac2.x + ac2.width <= ac1.x) {
+    //   xDiff = ac1.x - (ac2.x + ac2.width); 
+    // }
+    // else if (ac1.x <= ac2.x && ac1.x + ac1.width > ac2.x) {
+    //   xDiff = ac1.x + ac1.width - ac2.x;
+    // }
+    // else if (ac1.x >)
+    // else xDiff = (ac1.x + ac1.width) - ac2.x;
+    if (ac1.x <= ac2.x) {
+      if (ac1.x + ac1.width <= ac2.x) {
+        xDiff = ac2.x - (ac1.x + ac1.width);
+      }
+      else {
+        xDiff = ac1.x + ac1.width - ac2.x;
+      }
+    }
+    else {  //ac1.x > ac2.x
+      if (ac1.x >= ac2.x + ac2.width) {
+        xDiff = ac1.x - (ac2.x + ac2.width);
+      }
+      else {
+        //Here, the first sprite is inside the second sprite
+      }
+    }
+
+    //Calculate yDiff
 
     return Point(xDiff, yDiff);
   }
