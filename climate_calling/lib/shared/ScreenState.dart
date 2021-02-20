@@ -7,4 +7,5 @@ enum ScreenState {
   kPolar,
   kForest,
   kFactory,
+  kTest,
 }

@@ -45,7 +45,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  print('test');
+                  climateCalling.switchScreen(ScreenState.kTest);     //Remove later for screen to go to game settings
                 },
               )
             ],

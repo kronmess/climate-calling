@@ -2,6 +2,7 @@ import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/game_screens/GameSettings.dart';
 import 'package:climate_calling/game_screens/MainMenu.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
+import 'package:climate_calling/game_screens/levels/TestLevel.dart';
 import 'package:climate_calling/services/GameServices.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
@@ -15,6 +16,7 @@ class ClimateCalling extends Game with TapDetector {
   //Fields
   BaseTimedWidget _menuScreen;
   BaseTimedWidget _levelArctic;
+   BaseTimedWidget _levelTest;
   BaseTimedWidget _settingsScreen;
 
   Function _fnUpdate;
@@ -26,6 +28,7 @@ class ClimateCalling extends Game with TapDetector {
   ClimateCalling() {
     this._menuScreen = MainMenuScreen();
     this._levelArctic = ArcticLevel();
+    this._levelTest = TestLevel();
     this._settingsScreen = GameSettingsScreen();
 
     _fnUpdate = _init;
@@ -43,6 +46,9 @@ class ClimateCalling extends Game with TapDetector {
 
       case ScreenState.kPolar:
         return this._levelArctic;
+
+      case ScreenState.kTest:
+        return this._levelTest;
 
       default:
         return this._menuScreen;
@@ -74,6 +80,12 @@ class ClimateCalling extends Game with TapDetector {
       case ScreenState.kPolar:
         this._levelArctic = ArcticLevel();
         this._levelArctic.resize(this._size);
+        updateScreenState(newScreen, callback: this._callback);   //Required to render the polar level flutter widgets
+        break;
+
+      case ScreenState.kTest:
+        this._levelTest = TestLevel();
+        this._levelTest.resize(this._size);
         updateScreenState(newScreen, callback: this._callback);   //Required to render the polar level flutter widgets
         break;
 
@@ -109,6 +121,7 @@ class ClimateCalling extends Game with TapDetector {
   void resize(Size size) {
     this._menuScreen?.resize(size);
     this._levelArctic?.resize(size);
+    this._levelTest.resize(size);
     this._settingsScreen?.resize(size);
     this._size = size;
   }
