@@ -1,18 +1,21 @@
 import 'dart:ui';
 
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
-import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
+
+import '../Background.dart';
 
 class ArcticLevel extends BaseLevel {
 
   //Fields
-  PaletteEntry _blue = PaletteEntry(Colors.blue);
+  Background _bg;
   Size _size = Size(0, 0);
 
   //Constructor
-  ArcticLevel() : super(250, 0);
+  ArcticLevel() : super(250, 0) {
+    this._bg = Background("artic level final 2.png");
+  }
 
   //Overridden Methods
   @override
@@ -28,12 +31,13 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void render(Canvas canvas) {
-    canvas.drawRect(Rect.fromLTWH(0, 0, this._size.width, this._size.height), this._blue.paint);
+    this._bg.render(canvas);
     this.player.render(canvas);
   }
 
   @override
   void resize(Size size) {
+    this._bg.resize(size);
     this.player.resize(size);
     this._size = size;
   }
