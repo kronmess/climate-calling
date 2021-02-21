@@ -4,7 +4,6 @@ import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
 import '../shared/constants.dart';
-import '../shared/constants.dart';
 
 class FlutterMainMenuScreen extends StatefulWidget {
   @override
