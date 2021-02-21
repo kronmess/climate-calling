@@ -34,21 +34,17 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
               BackgroundButton(
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Start",
-                onTap: (){
-                  climateCalling.switchScreen(ScreenState.kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                onTap: () {
+                  climateCalling.switchScreen(ScreenState
+                      .kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
                 },
               ),
-              //TODO: Replace with second button widget
-              FlatButton(
-                textColor: Colors.black,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                child: Text(
-                  'Game Settings',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  climateCalling.switchScreen(ScreenState.kTest);     //Remove later for screen to go to game settings
+              BackgroundButton(
+                image: AssetImage(PATH_BUTTON_MAIN_MENU),
+                text: "Game Settings",
+                onTap: () {
+                  climateCalling.switchScreen(ScreenState
+                      .kGameSettings); //Changes the screen from main menu to settings page
                 },
               )
             ],

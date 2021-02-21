@@ -16,7 +16,7 @@ class ClimateCalling extends Game with TapDetector {
   //Fields
   BaseTimedWidget _menuScreen;
   BaseTimedWidget _levelArctic;
-   BaseTimedWidget _levelTest;
+  BaseTimedWidget _levelTest;
   BaseTimedWidget _settingsScreen;
 
   Function _fnUpdate;
@@ -74,19 +74,30 @@ class ClimateCalling extends Game with TapDetector {
       case ScreenState.kMainMenu:
         this._menuScreen = MainMenuScreen();
         this._menuScreen.resize(this._size);
-        updateScreenState(newScreen, callback: this._callback);   //Required to render the main menu flutter widgets
+        updateScreenState(newScreen,
+            callback: this
+                ._callback); //Required to render the main menu flutter widgets
         break;
 
       case ScreenState.kPolar:
         this._levelArctic = ArcticLevel();
         this._levelArctic.resize(this._size);
-        updateScreenState(newScreen, callback: this._callback);   //Required to render the polar level flutter widgets
+        updateScreenState(newScreen,
+            callback: this
+                ._callback); //Required to render the polar level flutter widgets
         break;
 
+      case ScreenState.kGameSettings:
+        this._settingsScreen = GameSettingsScreen();
+        this._settingsScreen.resize(this._size);
+        updateScreenState(newScreen,
+            callback: this
+                ._callback); //Required to render the settings menu flutter widgets
+        break;
       case ScreenState.kTest:
-        this._levelTest = TestLevel();
-        this._levelTest.resize(this._size);
-        updateScreenState(newScreen, callback: this._callback);   //Required to render the polar level flutter widgets
+        this._settingsScreen = TestLevel();
+        this._settingsScreen.resize(this._size);
+        updateScreenState(newScreen, callback: this._callback); //Test
         break;
 
       default:
