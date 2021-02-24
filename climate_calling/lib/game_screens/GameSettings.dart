@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
@@ -11,7 +12,7 @@ class GameSettingsScreen extends BaseTimedWidget {
 
   //Constructor
   GameSettingsScreen() {
-    this._background = Background("GameSettingsTest.png");
+    this._background = Background(PATH_WILDFIRE_BG);
   }
 
   //Overridden Methods

@@ -4,6 +4,8 @@ import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 
+import 'FlutterArcticLevel.dart';
+
 class FlutterScreenManager extends StatefulWidget {
   @override
   _FlutterScreenManagerState createState() => _FlutterScreenManagerState();
@@ -17,7 +19,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
   //Constructor
   _FlutterScreenManagerState() {
     this.mainMenu = FlutterMainMenuScreen();
-    this.polarLevel = SizedBox();
+    this.polarLevel = FlutterArcticLevelScreen();
   }
 
   //Public methods
