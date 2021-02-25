@@ -1,13 +1,15 @@
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
-import 'package:flame/animation.dart';
+import 'package:flame/animation.dart' as anim;
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 
 class BaseSprite extends BaseTimedWidget {
   //Fields
+  @protected
   AnimationComponent _animationComponent;
   double xVelocity, yVelocity, gravity;
   int direction;
@@ -21,14 +23,14 @@ class BaseSprite extends BaseTimedWidget {
     double stepTime = 0.1,
     this.direction = BaseSprite.RIGHT,
   }) {
-    this._animationComponent = AnimationComponent(0, 0, Animation.spriteList(sprites, stepTime:stepTime));
+    this._animationComponent = AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
   }
 
   //Public Methods
   AnimationComponent getAnimationComponent() => _animationComponent;
   void setAnimations(List<Sprite> sprites, {double stepTime = 0.1}) {
     AnimationComponent old = this._animationComponent;
-    this._animationComponent = AnimationComponent(this._animationComponent.width, this._animationComponent.height, Animation.spriteList(sprites, stepTime: stepTime));
+    this._animationComponent = AnimationComponent(this._animationComponent.width, this._animationComponent.height, anim.Animation.spriteList(sprites, stepTime: stepTime));
     this._animationComponent.x = old.x;
     this._animationComponent.y = old.y;
   }

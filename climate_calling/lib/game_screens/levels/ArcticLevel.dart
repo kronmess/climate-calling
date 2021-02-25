@@ -13,7 +13,7 @@ class ArcticLevel extends BaseLevel {
   Size _size = Size(0, 0);
 
   //Constructor
-  ArcticLevel() : super(250, 0) {
+  ArcticLevel() : super(250, 0, gravity: 0) {
     this._bg = Background("artic level final 2.png");
   }
 

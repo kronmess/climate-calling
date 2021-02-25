@@ -34,8 +34,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Start",
                 onTap: () {
-                  climateCalling.switchScreen(ScreenState
-                      .kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                  climateCalling.switchScreen(ScreenState.kTest); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
                 },
               ),
               BackgroundButton(
