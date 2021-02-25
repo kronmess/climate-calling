@@ -20,4 +20,10 @@ class Player extends BaseSprite {
     this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));
     super.moveLeft();
   }
+
+  @override
+  void moveRight() {
+    this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4));
+    super.moveRight();
+  }
 }
