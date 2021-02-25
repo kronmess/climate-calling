@@ -1,4 +1,8 @@
+import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
+import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
 class FlutterArcticLevelScreen extends StatefulWidget {
@@ -6,9 +10,12 @@ class FlutterArcticLevelScreen extends StatefulWidget {
   _FlutterArcticLevelScreenState createState() => _FlutterArcticLevelScreenState();
   }
 
+
 class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
   @override
   Widget build(BuildContext context) {
+    BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
+    level.player.xVelocity = 50;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -26,12 +33,13 @@ class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
                     child: Container(
                       height: 48,
                       width: 48,
-                      color: Color(0xffffffff),
                       child: Center(
                         child: Image.asset(PATH_BUTTON_MOTION_UP),
                       ),
                     ),
-                    onPanDown: (DragDownDetails d) {},
+                    onPanDown: (DragDownDetails d) {
+                     
+                    },
                     onPanEnd: (DragEndDetails d) {},
                   ),
                     SizedBox(width: 50),
@@ -43,26 +51,23 @@ class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
                     child: Container(
                       height: 48,
                       width: 48,
-                      color: Color(0xffffffff),
                       child: Center(
                         child: Image.asset(PATH_BUTTON_MOTION_LEFT),
                       ),
                     ),
-                    onPanDown: (DragDownDetails d) {},
-                    onPanEnd: (DragEndDetails d) {},
+                    onTap: level.player.moveLeft
                   ),
                   SizedBox(width: 50),
                   GestureDetector(
                     child: Container(
                       height: 48,
                       width: 48,
-                      color: Color(0xffffffff),
                       child: Center(
                         child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
                       ),
                     ),
-                    onPanDown: (DragDownDetails d) {},
-                    onPanEnd: (DragEndDetails d) {},
+                   onTap: level.player.moveRight
+
                   ),
                 ],
                 ),
@@ -80,9 +85,8 @@ class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
                 child: Container(
                   height: 64,
                   width: 64,
-                  color: Color(0xffffffff),
                   child: Center(
-                    child: Image.asset(PATH_BUTTON_PICKUP),
+                    child: Image.asset(PATH_BUTTON_PICKUP)
                   ),
                 ),
                 onTap: () {},
