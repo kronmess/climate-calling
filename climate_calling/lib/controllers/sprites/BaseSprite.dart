@@ -29,7 +29,6 @@ class BaseSprite extends BaseTimedWidget {
   void setAnimations(List<Sprite> sprites, {double stepTime = 0.1}) {
     AnimationComponent old = this._animationComponent;
     this._animationComponent = AnimationComponent(this._animationComponent.width, this._animationComponent.height, Animation.spriteList(sprites, stepTime: stepTime));
-    this._animationComponent.animation.currentFrame.sprite = old.animation.currentFrame.sprite;
     this._animationComponent.x = old.x;
     this._animationComponent.y = old.y;
   }
