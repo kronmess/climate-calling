@@ -10,6 +10,8 @@ class BaseSprite extends BaseTimedWidget {
   //Fields
   AnimationComponent _animationComponent;
   double xVelocity, yVelocity, gravity;
+  int direction;
+  static const int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3, IDLE = 4;
 
   //Constructor
   BaseSprite(List<Sprite> sprites, {
@@ -17,6 +19,7 @@ class BaseSprite extends BaseTimedWidget {
     this.yVelocity = 5, 
     this.gravity = 0,
     double stepTime = 0.1,
+    this.direction = BaseSprite.RIGHT,
   }) {
     this._animationComponent = AnimationComponent(0, 0, Animation.spriteList(sprites, stepTime:stepTime));
   }
@@ -24,7 +27,11 @@ class BaseSprite extends BaseTimedWidget {
   //Public Methods
   AnimationComponent getAnimationComponent() => _animationComponent;
   void setAnimations(List<Sprite> sprites, {double stepTime = 0.1}) {
+    AnimationComponent old = this._animationComponent;
     this._animationComponent = AnimationComponent(this._animationComponent.width, this._animationComponent.height, Animation.spriteList(sprites, stepTime: stepTime));
+    this._animationComponent.animation.currentFrame.sprite = old.animation.currentFrame.sprite;
+    this._animationComponent.x = old.x;
+    this._animationComponent.y = old.y;
   }
   void moveLeft() => this._animationComponent.x -= this.xVelocity;
   void moveRight() => this._animationComponent.x += this.xVelocity;

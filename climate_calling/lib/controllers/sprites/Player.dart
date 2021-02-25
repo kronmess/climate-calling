@@ -17,13 +17,19 @@ class Player extends BaseSprite {
   //Overridden Methods
   @override
   void moveLeft() {
-    this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));
+    if (this.direction != BaseSprite.LEFT) {
+      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));
+      this.direction = BaseSprite.LEFT;
+    }
     super.moveLeft();
   }
 
   @override
   void moveRight() {
-    this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4));
+    if (this.direction != BaseSprite.RIGHT) {
+      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4));
+      this.direction = BaseSprite.RIGHT;
+    }
     super.moveRight();
   }
 }
