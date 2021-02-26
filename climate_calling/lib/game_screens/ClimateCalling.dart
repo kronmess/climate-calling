@@ -130,10 +130,11 @@ class ClimateCalling extends Game with TapDetector {
 
   @override
   void resize(Size size) {
-    this._menuScreen?.resize(size);
-    this._levelArctic?.resize(size);
-    this._levelTest.resize(size);
-    this._settingsScreen?.resize(size);
+    // this._menuScreen?.resize(size);
+    // this._levelArctic?.resize(size);
+    // this._levelTest?.resize(size);
+    // this._settingsScreen?.resize(size);
+    this._getActiveScreen()?.resize(size);
     this._size = size;
   }
 }
