@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -7,12 +8,18 @@ abstract class BaseLevel extends BaseTimedWidget{
   @protected
   Player player;
   double gravity;
+  List<Platform> platforms;
   Size size = Size(0, 0);
+  bool stopGravity = false;
 
   //Constructor
   BaseLevel(double x, double y, {double gravity = 5}) {
     this.player = Player();
     this.gravity = gravity;
+    this.platforms = List();
+
+    //Initialize platforms
+    this.initPlatforms();
 
     //Apply gravity to player
     this.player.gravity = gravity;
@@ -22,13 +29,19 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.player.getAnimationComponent().y = y;
   }
 
-  //Public Methods
+  //abstrasct Methods
   bool isLevelFinished();
+  @protected
+  void initPlatforms();
 
   //Overridden Methods
   @override
   void resize(Size size) {
+    this.player.resize(size);
     this.size = size;
+    for (Platform plt in this.platforms) {
+      plt.resize(size);
+    }
   }
 
   @override
@@ -38,7 +51,12 @@ abstract class BaseLevel extends BaseTimedWidget{
     //If player goes off screen, stop applying gravity and prevent it from sinkin
     if (this.player.getAnimationComponent().y + this.player.getAnimationComponent().height >= this.size.height) {
       this.player.getAnimationComponent().y = this.size.height - this.player.getAnimationComponent().height;
+      this.stopGravity = true;
     } else {
+      this.stopGravity = false;
+    }
+
+    if (!this.stopGravity) {
       this.player.applyGravity();
     }
   }
@@ -47,5 +65,10 @@ abstract class BaseLevel extends BaseTimedWidget{
   void onTapDown(TapDownDetails details, Function fn) {}
 
   @override
-  void render(Canvas canvas) {}
+  void render(Canvas canvas) {
+    this.player.render(canvas);
+    for (Platform plt in this.platforms) {
+      plt.render(canvas);
+    }
+  }
 }

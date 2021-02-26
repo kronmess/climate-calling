@@ -3,30 +3,23 @@ import 'dart:ui' as ui;
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/ImageCombiner.dart';
-import 'package:climate_calling/services/MergeCombiner2.dart' as mc2;
 import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
-import 'package:flame/sprite.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as image;
 import 'package:flutter/material.dart';
-import 'package:flutter/src/gestures/tap.dart';
 
 class TestLevel extends BaseLevel {
 
   //Fields
   PaletteEntry _green = PaletteEntry(Colors.green);
-  Size _size = Size(0, 0);
-  List<Platform> platforms;
 
   //Constructor
-  TestLevel() : super(250, 0) {
-    this.platforms = List();
-    this._initPlatforms();
-  }
+  TestLevel() : super(250, 0);
 
-  //Private methods
-  Future<void> _initPlatforms() async{
+  //Overridden Methods
+  Future<void> initPlatforms() async{
     List<image.Image> images = List();
     for (int i=0; i<4; i++) {
       final ByteData assetImageByteData = await rootBundle.load(PATH_ARCTIC_TILE);
@@ -52,7 +45,6 @@ class TestLevel extends BaseLevel {
     
   }
 
-  //Overridden Methods
   @override
   bool isLevelFinished() {
     // TODO: implement isLevelFinished
@@ -67,29 +59,39 @@ class TestLevel extends BaseLevel {
 
   @override
   void render(Canvas canvas) {
+    canvas.drawRect(Rect.fromLTWH(0, 0, this.size.width, this.size.height), this._green.paint);
     super.render(canvas);
-    canvas.drawRect(Rect.fromLTWH(0, 0, this._size.width, this._size.height), this._green.paint);
-    this.player.render(canvas);
-    for (Platform plt in this.platforms) {
-      plt.render(canvas);
-    }
-  }
-
-  @override
-  void resize(Size size) {
-    super.resize(size);
-    this.player.resize(size);
-    this._size = size;
-    for (Platform plt in this.platforms) {
-      plt.resize(size);
-    }
   }
 
   @override
   void update(double t) async{
     super.update(t);
+    Rect playerRect = this.player.getAnimationComponent().toRect();
     for (Platform plt in this.platforms) {
-      plt.update(t);
+      //Check for player collision with platform
+      if (plt.overlaps(playerRect)) {
+        AnimationComponent pAC = this.player.getAnimationComponent();
+        AnimationComponent platAC = plt.getAnimationComponent();
+
+        //Check for y overlap
+        if (pAC.y + pAC.height >= platAC.y) {
+          pAC.y = platAC.y - pAC.height;
+          this.stopGravity = true;
+        }
+        else if (pAC.y <= platAC.y + platAC.height) {
+          pAC.y = platAC.y + platAC.height;
+        }
+        else {
+          //Check for x overlap
+          if (pAC.x + pAC.width >= platAC.x) {
+          pAC.x = platAC.x - pAC.width;
+          }
+          else if (pAC.x <= platAC.x + platAC.width) {
+            pAC.x = platAC.x + platAC.width;
+          }
+        }
+        break;
+      }
     }
   }
 }

@@ -51,4 +51,9 @@ class ArcticLevel extends BaseLevel {
     this.player.update(t);
     this.player.applyGravity();
   }
+
+  @override
+  void initPlatforms() {
+    // TODO: implement initPlatforms
+  }
 }
