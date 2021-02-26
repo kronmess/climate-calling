@@ -7,7 +7,10 @@ import 'package:flame/sprite.dart';
 class Platform extends Terrain {
   //Constructor
   Platform(List<Sprite> sprites) : super(sprites, false);
-  Platform.staticPlatform(Image img) : super(_getSpriteImageAsList(img), false);
+  Platform.staticPlatform(Image img) : super(_getSpriteImageAsList(img), false) {
+    this.getAnimationComponent().width = img.width.toDouble();
+    this.getAnimationComponent().height = img.height.toDouble();
+  }
 
   //Private Methods
   static List<Sprite> _getSpriteImageAsList(Image img) {

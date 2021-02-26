@@ -26,12 +26,12 @@ class TestLevel extends BaseLevel {
   }
 
   //Private methods
-  void _initPlatforms() async{
+  Future<void> _initPlatforms() async{
     List<image.Image> images = List();
     for (int i=0; i<4; i++) {
       final ByteData assetImageByteData = await rootBundle.load(PATH_ARCTIC_TILE);
-      image.Image img2 = image.decodeImage(assetImageByteData.buffer.asUint8List());
-      images.add(img2);
+      image.Image img = image.decodeImage(assetImageByteData.buffer.asUint8List());
+      images.add(img);
     }
     ImageCombiner combiner = ImageCombiner();
 
@@ -42,12 +42,14 @@ class TestLevel extends BaseLevel {
     image.Image combinedImage = combiner.getCombinedImage();
     ui.Codec codec = await ui.instantiateImageCodec(image.encodePng(combinedImage));
     ui.FrameInfo frameInfo = await codec.getNextFrame();
+    
     Platform plt = Platform.staticPlatform(frameInfo.image);
 
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
 
     this.platforms.add(plt);
+    
   }
 
   //Overridden Methods
@@ -68,7 +70,6 @@ class TestLevel extends BaseLevel {
     this.player.render(canvas);
     for (Platform plt in this.platforms) {
       plt.render(canvas);
-      print(plt.getAnimationComponent().animation.currentFrame.sprite.image.width);
     }
   }
 
@@ -82,7 +83,7 @@ class TestLevel extends BaseLevel {
   }
 
   @override
-  void update(double t) {
+  void update(double t) async{
     this.player.update(t);
     this.player.applyGravity();
     // this.player.moveRight();
