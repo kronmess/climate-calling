@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/controllers/MovementButton.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
@@ -15,7 +16,7 @@ class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
-    level.player.xVelocity = 50;
+    bool holdingButton = false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -47,27 +48,14 @@ class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
                 ),
                 Row(
                   children: [
-                  GestureDetector(
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      child: Center(
-                        child: Image.asset(PATH_BUTTON_MOTION_LEFT),
-                      ),
-                    ),
-                    onTap: level.player.moveLeft
+                  MovementButton(
+                    child: Image.asset(PATH_BUTTON_MOTION_LEFT),
+                    function: level.player.moveLeft,
                   ),
                   SizedBox(width: 50),
-                  GestureDetector(
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      child: Center(
-                        child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
-                      ),
-                    ),
-                   onTap: level.player.moveRight
-
+                  MovementButton(
+                    child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
+                    function: level.player.moveRight,
                   ),
                 ],
                 ),

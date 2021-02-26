@@ -45,6 +45,5 @@ class ArcticLevel extends BaseLevel {
   @override
   void update(double t) {
     this.player.update(t);
-    this.player.applyGravity();
   }
 }
