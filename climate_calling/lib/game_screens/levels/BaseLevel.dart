@@ -7,6 +7,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   @protected
   Player player;
   double gravity;
+  Size size = Size(0, 0);
 
   //Constructor
   BaseLevel(double x, double y, {double gravity = 5}) {
@@ -21,6 +22,30 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.player.getAnimationComponent().y = y;
   }
 
-  //Methods
+  //Public Methods
   bool isLevelFinished();
+
+  //Overridden Methods
+  @override
+  void resize(Size size) {
+    this.size = size;
+  }
+
+  @override
+  void update(double t) {
+    this.player.update(t);
+
+    //If player goes off screen, stop applying gravity and prevent it from sinkin
+    if (this.player.getAnimationComponent().y + this.player.getAnimationComponent().height >= this.size.height) {
+      this.player.getAnimationComponent().y = this.size.height - this.player.getAnimationComponent().height;
+    } else {
+      this.player.applyGravity();
+    }
+  }
+
+  @override
+  void onTapDown(TapDownDetails details, Function fn) {}
+
+  @override
+  void render(Canvas canvas) {}
 }
