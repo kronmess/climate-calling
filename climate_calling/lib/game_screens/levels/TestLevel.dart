@@ -20,7 +20,7 @@ class TestLevel extends BaseLevel {
   List<Platform> platforms;
 
   //Constructor
-  TestLevel() : super(250, 0, gravity: 0) {
+  TestLevel() : super(250, 0) {
     this.platforms = List();
     this._initPlatforms();
   }
@@ -61,11 +61,13 @@ class TestLevel extends BaseLevel {
 
   @override
   void onTapDown(TapDownDetails details, Function fn) {
+    super.onTapDown(details, fn);
     // TODO: implement onTapDown
   }
 
   @override
   void render(Canvas canvas) {
+    super.render(canvas);
     canvas.drawRect(Rect.fromLTWH(0, 0, this._size.width, this._size.height), this._green.paint);
     this.player.render(canvas);
     for (Platform plt in this.platforms) {
@@ -75,6 +77,7 @@ class TestLevel extends BaseLevel {
 
   @override
   void resize(Size size) {
+    super.resize(size);
     this.player.resize(size);
     this._size = size;
     for (Platform plt in this.platforms) {
@@ -84,10 +87,7 @@ class TestLevel extends BaseLevel {
 
   @override
   void update(double t) async{
-    this.player.update(t);
-    this.player.applyGravity();
-    // this.player.moveRight();
-    // this.player.moveLeft();
+    super.update(t);
     for (Platform plt in this.platforms) {
       plt.update(t);
     }

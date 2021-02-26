@@ -26,17 +26,20 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void onTapDown(TapDownDetails details, Function fn) {
+    super.onTapDown(details, fn);
     // TODO: implement onTapDown
   }
 
   @override
   void render(Canvas canvas) {
+    super.render(canvas);
     this._bg.render(canvas);
     this.player.render(canvas);
   }
 
   @override
   void resize(Size size) {
+    super.resize(size);
     this._bg.resize(size);
     this.player.resize(size);
     this._size = size;
@@ -44,6 +47,7 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void update(double t) {
+    super.update(t);
     this.player.update(t);
     this.player.applyGravity();
   }
