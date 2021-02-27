@@ -1,18 +1,16 @@
-import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/controllers/MovementButton.dart';
-import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 
-class FlutterArcticLevelScreen extends StatefulWidget {
+class FlutterPlayerControlsScreen extends StatefulWidget {
   @override
-  _FlutterArcticLevelScreenState createState() => _FlutterArcticLevelScreenState();
+  _FlutterPlayerControlsScreenState createState() => _FlutterPlayerControlsScreenState();
   }
 
 
-class _FlutterArcticLevelScreenState extends State<FlutterArcticLevelScreen> {
+class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScreen> {
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
