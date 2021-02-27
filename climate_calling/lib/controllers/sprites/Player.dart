@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
+import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/sprite.dart';
 
 import '../../shared/constants.dart';
+import '../MovementButton.dart';
 
 class Player extends BaseSprite {
   //Fields
@@ -21,7 +25,14 @@ class Player extends BaseSprite {
       this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));
       this.direction = BaseSprite.LEFT;
     }
-    super.moveLeft();
+    Timer.periodic(Duration(milliseconds: 50),(timer) {
+      if (playerButton.userIsHoldingButton() == true){
+        super.moveLeft();
+      }else{
+        timer.cancel();
+      }
+    });
+    
   }
 
   @override
@@ -30,6 +41,13 @@ class Player extends BaseSprite {
       this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4));
       this.direction = BaseSprite.RIGHT;
     }
-    super.moveRight();
+    Timer.periodic(Duration(milliseconds: 50),(timer) {
+      if (playerButton.userIsHoldingButton() == true){
+        super.moveRight();
+      }else{
+        timer.cancel();
+      }
+    });
+    
   }
 }

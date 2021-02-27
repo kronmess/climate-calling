@@ -36,24 +36,8 @@ class BaseSprite extends BaseTimedWidget {
     this._animationComponent.y = old.y;
   }
   
-  void moveLeft(){
-    Timer.periodic(Duration(milliseconds: 50),(timer) {
-      if (MovementButton().userIsHoldingButton() == true){
-        this._animationComponent.x -= this.xVelocity;
-      }else{
-        timer.cancel();
-      }
-    });
-  } 
-  void moveRight(){
-    Timer.periodic(Duration(milliseconds: 50),(timer) {
-      if (MovementButton().userIsHoldingButton() == true){
-        this._animationComponent.x += this.xVelocity;
-      }else{
-        timer.cancel();
-      }
-    });
-  }
+  void moveLeft() => this._animationComponent.x -= this.xVelocity; 
+  void moveRight() => this._animationComponent.x += this.xVelocity; 
   void moveUp() => this._animationComponent.y -= this.yVelocity;    //Moving up is negative because of how the pixel coordinate works
   void applyGravity() => this._animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
 
