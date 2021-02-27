@@ -15,14 +15,15 @@ class TestLevel extends BaseLevel {
   //Constructor
   TestLevel() : super(250, 0) {
     this.bears = List();
+    this._initPolarBears();
   }
 
   //Private Methods
-  void initPolarBears() {
+  void _initPolarBears() {
     PolarBear bear = PolarBear();
 
     bear.getAnimationComponent().x = 250;
-    bear.getAnimationComponent().y = 150;
+    bear.getAnimationComponent().y = 150 - bear.getAnimationComponent().height;
 
     this.bears.add(bear);
   }
@@ -72,6 +73,10 @@ class TestLevel extends BaseLevel {
     super.update(t);
     for (PolarBear bear in this.bears) {
       bear.applyGravity();
+      //If polar bear goes off screen, prevent it from sinkin
+      if (bear.getAnimationComponent().y + bear.getAnimationComponent().height >= this.size.height) {
+        bear.getAnimationComponent().y = this.size.height - bear.getAnimationComponent().height;
+      }
     }
   }
 }
