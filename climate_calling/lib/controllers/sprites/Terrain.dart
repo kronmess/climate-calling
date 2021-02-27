@@ -1,7 +1,7 @@
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:flame/sprite.dart';
 
-abstract class Terrain extends BaseSprite {
+class Terrain extends BaseSprite {
   //Fields
   bool canPassThrough;
 
@@ -12,5 +12,5 @@ abstract class Terrain extends BaseSprite {
   }
 
   //Abstract methods
-  void onPassThrough(double t);
+  void onPassThrough(double t){}
 }
