@@ -36,7 +36,7 @@ class ClimateCalling extends Game with TapDetector {
   }
 
   //Private Methods
-  BaseTimedWidget _getActiveScreen() {
+  BaseTimedWidget getActiveScreen() {
     switch (screenState) {
       case ScreenState.kGameSettings:
         return this._settingsScreen;
@@ -65,7 +65,7 @@ class ClimateCalling extends Game with TapDetector {
   }
 
   void _update(double t) {
-    _getActiveScreen()?.update(t);
+    getActiveScreen()?.update(t);
   }
 
   //Public Methods
@@ -115,7 +115,7 @@ class ClimateCalling extends Game with TapDetector {
   //Overridden Methods
   @override
   void render(Canvas canvas) {
-    this._getActiveScreen()?.render(canvas);
+    this.getActiveScreen()?.render(canvas);
   }
 
   @override
@@ -125,7 +125,7 @@ class ClimateCalling extends Game with TapDetector {
 
   @override
   void onTapDown(TapDownDetails details) {
-    this._getActiveScreen().onTapDown(details, null);
+    this.getActiveScreen().onTapDown(details, null);
   }
 
   @override

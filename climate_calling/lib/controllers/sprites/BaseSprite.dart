@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
@@ -34,8 +35,9 @@ class BaseSprite extends BaseTimedWidget {
     this._animationComponent.x = old.x;
     this._animationComponent.y = old.y;
   }
-  void moveLeft() => this._animationComponent.x -= this.xVelocity;
-  void moveRight() => this._animationComponent.x += this.xVelocity;
+  
+  void moveLeft() => this._animationComponent.x -= this.xVelocity; 
+  void moveRight() => this._animationComponent.x += this.xVelocity; 
   void moveUp() => this._animationComponent.y -= this.yVelocity;    //Moving up is negative because of how the pixel coordinate works
   void applyGravity() => this._animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
   bool overlaps(Rect rect) => rect.overlaps(this._animationComponent.toRect());

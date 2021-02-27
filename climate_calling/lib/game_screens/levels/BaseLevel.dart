@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 
 abstract class BaseLevel extends BaseTimedWidget{
   //Fields
-  @protected
   Player player;
   double gravity;
   List<Platform> platforms;
