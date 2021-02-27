@@ -24,10 +24,10 @@ bool userIsHoldingButton() {
         holdingButton = false;
       },
       child: Container(
-        color: Colors.brown,
+        child: this.child,
         height: 48,
         width: 48,
-        child: Center(),
+       
       )
  
     );
