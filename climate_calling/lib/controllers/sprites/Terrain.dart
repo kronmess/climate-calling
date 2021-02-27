@@ -6,7 +6,10 @@ abstract class Terrain extends BaseSprite {
   bool canPassThrough;
 
   //Constructor
-  Terrain(List<Sprite> sprites, this.canPassThrough) : super(sprites);
+  Terrain(List<Sprite> sprites, this.canPassThrough) : super(sprites) {
+    this.getAnimationComponent().width = sprites.elementAt(0).image.width.toDouble();
+    this.getAnimationComponent().height = sprites.elementAt(0).image.height.toDouble();
+  }
 
   //Abstract methods
   void onPassThrough(double t);
