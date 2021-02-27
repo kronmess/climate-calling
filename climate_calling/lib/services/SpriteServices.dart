@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
@@ -148,5 +149,17 @@ class SpriteServices {
     //Calculate yDiff
 
     return Point(xDiff, yDiff);
+  }
+
+  /**
+   * Add an image as a list of image consisting of one element
+   */
+  static List<Sprite> getSpriteImageAsList(Image img) {
+    List<Sprite> ls = List();
+
+    Sprite spr = Sprite.fromImage(img);
+    ls.add(spr);
+
+    return ls;
   }
 }
