@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
-import 'package:climate_calling/controllers/MovementButton.dart';
-import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:flame/animation.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';

@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/globals.dart';
-import 'package:flame/sprite.dart';
 
 import '../../shared/constants.dart';
-import '../MovementButton.dart';
 
 class Player extends BaseSprite {
   //Fields
