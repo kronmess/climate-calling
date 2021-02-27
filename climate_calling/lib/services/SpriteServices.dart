@@ -41,7 +41,7 @@ class SpriteServices {
    */
   static Future<ui.Image> mergeImage(String imagePath, int count) async {
     List<image.Image> images = List();
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<count; i++) {
       final ByteData assetImageByteData = await rootBundle.load(imagePath);
       image.Image img = image.decodeImage(assetImageByteData.buffer.asUint8List());
       images.add(img);
