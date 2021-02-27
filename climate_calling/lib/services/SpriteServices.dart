@@ -1,8 +1,14 @@
+import 'dart:ui' as ui;
 import 'dart:math';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter/services.dart';
+import 'package:image/image.dart' as image;
+
+import 'ImageCombiner.dart';
 
 class SpriteServices {
   
@@ -27,6 +33,29 @@ class SpriteServices {
     AnimationComponent ac2 = sp2.getAnimationComponent();
 
     return ac1.y + ac1.height == ac2.y;
+  }
+
+  /**
+   * Combine the same image X times and returns the Image object from Dart UI package
+   */
+  static Future<ui.Image> mergeImage(String imagePath, int count) async {
+    List<image.Image> images = List();
+    for (int i=0; i<4; i++) {
+      final ByteData assetImageByteData = await rootBundle.load(imagePath);
+      image.Image img = image.decodeImage(assetImageByteData.buffer.asUint8List());
+      images.add(img);
+    }
+    ImageCombiner combiner = ImageCombiner();
+
+    for (image.Image img in images) {
+      combiner.addImage(img);
+    }
+    
+    image.Image combinedImage = combiner.getCombinedImage();
+    ui.Codec codec = await ui.instantiateImageCodec(image.encodePng(combinedImage));
+    ui.FrameInfo frameInfo = await codec.getNextFrame();
+
+    return frameInfo.image;
   }
 
   /**

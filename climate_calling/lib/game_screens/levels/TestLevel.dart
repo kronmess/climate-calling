@@ -21,29 +21,13 @@ class TestLevel extends BaseLevel {
 
   //Overridden Methods
   Future<void> initPlatforms() async{
-    List<image.Image> images = List();
-    for (int i=0; i<4; i++) {
-      final ByteData assetImageByteData = await rootBundle.load(PATH_ARCTIC_TILE);
-      image.Image img = image.decodeImage(assetImageByteData.buffer.asUint8List());
-      images.add(img);
-    }
-    ImageCombiner combiner = ImageCombiner();
 
-    for (image.Image img in images) {
-      combiner.addImage(img);
-    }
-    
-    image.Image combinedImage = combiner.getCombinedImage();
-    ui.Codec codec = await ui.instantiateImageCodec(image.encodePng(combinedImage));
-    ui.FrameInfo frameInfo = await codec.getNextFrame();
-    
-    Platform plt = Platform.staticPlatform(frameInfo.image);
+    Platform plt = Platform.staticPlatform(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4));
 
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
 
     this.platforms.add(plt);
-    
   }
 
   @override
@@ -67,13 +51,5 @@ class TestLevel extends BaseLevel {
   @override
   void update(double t) async{
     super.update(t);
-    Rect playerRect = this.player.getAnimationComponent().toRect();
-    for (Platform plt in this.platforms) {
-      //Check for player collision with platform
-      if (plt.overlaps(playerRect)) {
-        SpriteServices.checkPassThrough(this.player, plt);
-        break;
-      }
-    }
   }
 }
