@@ -5,9 +5,9 @@ import 'package:climate_calling/shared/constants.dart';
 
 class PolarBear extends NPCSprite {
   //Constructor
-  PolarBear() : super(SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4)){
-    this.getAnimationComponent().width = this.getAnimationComponent().animation.currentFrame.sprite.image.width.toDouble();
-    this.getAnimationComponent().height = this.getAnimationComponent().animation.currentFrame.sprite.image.height.toDouble();
+  PolarBear({double gravity = 5}) : super(SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4), gravity: gravity){
+    this.getAnimationComponent().width = 500;
+    this.getAnimationComponent().height = 300;
   }
 
   //Overridden Methods
