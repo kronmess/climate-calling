@@ -60,7 +60,7 @@ class TestLevel extends BaseLevel {
   @override
   void resize(Size size) {
     super.resize(size);
-    this.igloo.resize(size);
+    this.igloo?.resize(size);
     for (PolarBear bear in this.bears) {
       bear.resize(size);
     }
@@ -69,7 +69,7 @@ class TestLevel extends BaseLevel {
   @override
   void render(Canvas canvas) {
     canvas.drawRect(Rect.fromLTWH(0, 0, this.size.width, this.size.height), this._green.paint);
-    this.igloo.render(canvas);
+    this.igloo?.render(canvas);
     super.render(canvas);
     for (PolarBear bear in this.bears) {
       bear.render(canvas);
