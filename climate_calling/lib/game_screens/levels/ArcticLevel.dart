@@ -51,7 +51,7 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void initPlatforms() async{
-    Platform plt = Platform.staticPlatform(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
 
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 300;

@@ -30,8 +30,7 @@ class TestLevel extends BaseLevel {
 
   //Overridden Methods
   Future<void> initPlatforms() async{
-
-    Platform plt = Platform.staticPlatform(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
 
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
