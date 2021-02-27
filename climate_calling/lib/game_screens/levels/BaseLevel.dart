@@ -10,7 +10,6 @@ abstract class BaseLevel extends BaseTimedWidget{
   double gravity;
   List<Platform> platforms;
   Size size = Size(0, 0);
-  bool stopGravity = false;
 
   //Constructor
   BaseLevel(double x, double y, {double gravity = 5}) {
@@ -47,17 +46,11 @@ abstract class BaseLevel extends BaseTimedWidget{
   @override
   void update(double t) {
     this.player.update(t);
+    this.player.applyGravity();
 
     //If player goes off screen, stop applying gravity and prevent it from sinkin
     if (this.player.getAnimationComponent().y + this.player.getAnimationComponent().height >= this.size.height) {
       this.player.getAnimationComponent().y = this.size.height - this.player.getAnimationComponent().height;
-      this.stopGravity = true;
-    } else {
-      this.stopGravity = false;
-    }
-
-    if (!this.stopGravity) {
-      this.player.applyGravity();
     }
   }
 
