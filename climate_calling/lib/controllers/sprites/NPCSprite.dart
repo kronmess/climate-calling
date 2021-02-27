@@ -7,6 +7,6 @@ class NPCSprite extends BaseSprite {
 
   //Constructor
   //TODO: Load player animations
-  NPCSprite(List<Sprite> ls) : super(ls) {
+  NPCSprite(List<Sprite> ls, {double gravity = 0}) : super(ls, gravity: gravity) {
   }
 }
