@@ -134,7 +134,7 @@ class ClimateCalling extends Game with TapDetector {
     // this._levelArctic?.resize(size);
     // this._levelTest?.resize(size);
     // this._settingsScreen?.resize(size);
-    this._getActiveScreen()?.resize(size);
+    this.getActiveScreen()?.resize(size);
     this._size = size;
   }
 }
