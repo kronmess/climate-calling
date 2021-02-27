@@ -1,5 +1,6 @@
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
+import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
@@ -11,14 +12,20 @@ class TestLevel extends BaseLevel {
   //Fields
   PaletteEntry _green = PaletteEntry(Colors.green);
   List<PolarBear> bears;
+  Terrain igloo;
 
   //Constructor
   TestLevel() : super(250, 0) {
+    this._initTerrain();
     this.bears = List();
     this._initPolarBears();
   }
 
   //Private Methods
+  void _initTerrain() async{
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    this.igloo.getAnimationComponent().x = 300;
+  }
   void _initPolarBears() {
     PolarBear bear = PolarBear();
 
@@ -53,6 +60,7 @@ class TestLevel extends BaseLevel {
   @override
   void resize(Size size) {
     super.resize(size);
+    this.igloo.resize(size);
     for (PolarBear bear in this.bears) {
       bear.resize(size);
     }
@@ -61,6 +69,7 @@ class TestLevel extends BaseLevel {
   @override
   void render(Canvas canvas) {
     canvas.drawRect(Rect.fromLTWH(0, 0, this.size.width, this.size.height), this._green.paint);
+    this.igloo.render(canvas);
     super.render(canvas);
     for (PolarBear bear in this.bears) {
       bear.render(canvas);
