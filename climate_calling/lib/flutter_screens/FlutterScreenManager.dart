@@ -1,10 +1,9 @@
 import 'package:climate_calling/flutter_screens/FlutterMainMenu.dart';
+import 'package:climate_calling/flutter_screens/FlutterPlayerControls.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-
-import 'FlutterArcticLevel.dart';
 
 class FlutterScreenManager extends StatefulWidget {
   @override
@@ -14,12 +13,12 @@ class FlutterScreenManager extends StatefulWidget {
 class _FlutterScreenManagerState extends State<FlutterScreenManager> {
 
   //Fields
-  Widget mainMenu, polarLevel;
+  Widget mainMenu, playerControls;
 
   //Constructor
   _FlutterScreenManagerState() {
     this.mainMenu = FlutterMainMenuScreen();
-    this.polarLevel = FlutterArcticLevelScreen();
+    this.playerControls = FlutterPlayerControlsScreen();
   }
 
   //Public methods
@@ -32,13 +31,13 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
     switch (screenState) {
       case ScreenState.kMainMenu:
         return this.mainMenu;
-      
-      case ScreenState.kPolar:
-        return this.polarLevel;
 
       default:
         return SizedBox();
     }
+  }
+  bool _showPlayerControls() {
+    return screenState == ScreenState.kPolar || screenState == ScreenState.kFactory || screenState == ScreenState.kForest || screenState == ScreenState.kTest;
   }
 
   //Overridden Methods
@@ -61,6 +60,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
           children: [
             climateCalling.widget,    //Flame widget
             this._getActiveScreen(),  //Flutter widget
+            this._showPlayerControls()? this.playerControls : SizedBox(),
           ],
         ),
       ),
