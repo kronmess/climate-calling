@@ -184,6 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.10-nullsafety.1"
+  merge_images:
+    dependency: "direct main"
+    description:
+      name: merge_images
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   meta:
     dependency: transitive
     description:

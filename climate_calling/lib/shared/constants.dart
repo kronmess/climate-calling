@@ -15,4 +15,4 @@ const String PATH_ARCTIC_LEVEL_BG = "arctic level final 2.png",
               PATH_PLAYER_RIGHT = "sprites/main_char/right/",
               PATH_POLAR_BEAR_LEFT = "sprites/Polar Bear/left/",
               PATH_POLAR_BEAR_RIGHT = "sprites/Polar Bear/right/",
-              PATH_ARCTIC_TILE = "assets/images/tiles.png";
+              PATH_ARCTIC_TILE = "assets/images/sprites/arctic_level/tiles/ice_tile.png";

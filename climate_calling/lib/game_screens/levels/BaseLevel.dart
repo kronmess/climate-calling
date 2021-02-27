@@ -1,6 +1,7 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
+import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class BaseLevel extends BaseTimedWidget{
@@ -50,6 +51,15 @@ abstract class BaseLevel extends BaseTimedWidget{
     //If player goes off screen, stop applying gravity and prevent it from sinkin
     if (this.player.getAnimationComponent().y + this.player.getAnimationComponent().height >= this.size.height) {
       this.player.getAnimationComponent().y = this.size.height - this.player.getAnimationComponent().height;
+    }
+
+    Rect playerRect = this.player.getAnimationComponent().toRect();
+    for (Platform plt in this.platforms) {
+      //Check for player collision with platform
+      if (plt.overlaps(playerRect)) {
+        SpriteServices.checkPassThrough(this.player, plt);
+        break;
+      }
     }
   }
 
