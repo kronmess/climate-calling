@@ -2,6 +2,7 @@ import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
+import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/palette.dart';
@@ -13,12 +14,14 @@ class TestLevel extends BaseLevel {
   PaletteEntry _green = PaletteEntry(Colors.green);
   List<PolarBear> bears;
   Terrain igloo;
+  Camera camera;
 
   //Constructor
   TestLevel() : super(0, 0) {
     this._initTerrain();
     this.bears = List();
     this._initPolarBears();
+    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, this.size.height), sprites: this.platforms);
   }
 
   //Private Methods
@@ -89,5 +92,6 @@ class TestLevel extends BaseLevel {
         bear.getAnimationComponent().y = this.size.height - bear.getAnimationComponent().height;
       }
     }
+    this.camera.update();
   }
 }

@@ -7,13 +7,16 @@ import 'package:flutter/cupertino.dart';
 
 class Camera{
   //Fields
-  List<BaseSprite> sprites = List();
+  List<BaseSprite> sprites = List();    //List of sprites to be moved, Player should not be in here
   double x, y;
   Size maxSize, phoneSize;
   Player player;
 
   //Constructors
   Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites}) {
+    if (this.sprites == null) {
+      this.sprites = List();
+    }
     //Attempt to fix max camera size
     if (this.maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
     if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
@@ -28,15 +31,23 @@ class Camera{
   void addSprite(BaseSprite sprite) {
     this.sprites.add(sprite);
   }
+
   void addSprites(List<BaseSprite> sprites) {
     this.sprites.addAll(sprites);
   }
+
   void setSprites(List<BaseSprite> sprites) {
     this.sprites = sprites;
   }
+
   List<BaseSprite> getSprites() => this.sprites;
+
   void update() {
     Point delta = this._updateCameraPos();    //Update camera position and get delta
+    for (BaseSprite sprite in this.sprites) {
+      sprite.getAnimationComponent().x += delta.x;
+      sprite.getAnimationComponent().y += delta.y;
+    }
   }
 
   //Private methods
@@ -47,8 +58,8 @@ class Camera{
                                 (player.getAnimationComponent().y + player.getAnimationComponent().height)/2);
     Point phoneCenter = Point(this.phoneSize.width/2, this.phoneSize.height);
     //Determine delta
-    xDelta = playerCenter.x - this.x;
-    yDelta = playerCenter.y - this.y;
+    xDelta = this.x - playerCenter.x;
+    yDelta = this.y - playerCenter.y;
 
     //Update camera x position
     if (playerCenter.x < phoneCenter.x) this.x = phoneCenter.x;
