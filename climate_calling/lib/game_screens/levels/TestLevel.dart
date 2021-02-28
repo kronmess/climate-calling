@@ -15,7 +15,7 @@ class TestLevel extends BaseLevel {
   Terrain igloo;
 
   //Constructor
-  TestLevel() : super(250, 0) {
+  TestLevel() : super(0, 0) {
     this._initTerrain();
     this.bears = List();
     this._initPolarBears();
@@ -38,10 +38,13 @@ class TestLevel extends BaseLevel {
   //Overridden Methods
   Future<void> initPlatforms() async{
     Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
-
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
+    this.platforms.add(plt);
 
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
+    plt.getAnimationComponent().x = 0;
+    plt.getAnimationComponent().y = 100;
     this.platforms.add(plt);
   }
 
