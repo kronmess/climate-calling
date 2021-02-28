@@ -19,11 +19,11 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
         Flexible(
           flex: 2,
           child: Image(
-            image: AssetImage(PATH_LOGO_APP),
+            image: AssetImage(PATH_LOGO_APP),height: 1000,width: 1000,
           ),
         ),
         SizedBox(
-          height: 180,
+          height: 120,
         ),
         Flexible(
           flex: 1,
@@ -41,8 +41,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Game Settings",
                 onTap: () {
-                  climateCalling.switchScreen(ScreenState
-                      .kGameSettings); //Changes the screen from main menu to settings page
+                  climateCalling.switchScreen(ScreenState.kGameSettings); //Changes the screen from main menu to settings page
                 },
               )
             ],
