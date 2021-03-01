@@ -42,8 +42,8 @@ class Camera{
 
   List<BaseSprite> getSprites() => this.sprites;
 
-  void update() {
-    Point delta = this._updateCameraPos();    //Update camera position and get delta
+  Future<void> update() async{
+    Point delta = await this._updateCameraPos();    //Update camera position and get delta
     for (BaseSprite sprite in this.sprites) {
       sprite.getAnimationComponent().x += delta.x;
       sprite.getAnimationComponent().y += delta.y;
@@ -51,7 +51,7 @@ class Camera{
   }
 
   //Private methods
-  Point _updateCameraPos() {
+  Future<Point> _updateCameraPos() async {
     double xDelta;
     double yDelta;
     Point playerCenter = Point((player.getAnimationComponent().x + player.getAnimationComponent().width)/2, 
