@@ -52,6 +52,13 @@ abstract class BaseLevel extends BaseTimedWidget{
     if (this.player.getAnimationComponent().y + this.player.getAnimationComponent().height >= this.size.height) {
       this.player.getAnimationComponent().y = this.size.height - this.player.getAnimationComponent().height;
     }
+    //Prevent player from going over the edge of the screen
+    if (this.player.getAnimationComponent().x <= 0) {
+      this.player.getAnimationComponent().x = 0;
+    }
+    else if (this.player.getAnimationComponent().x + this.player.getAnimationComponent().width >= this.size.width) {
+      this.player.getAnimationComponent().x = this.size.width - this.player.getAnimationComponent().width;
+    }
 
     Rect playerRect = this.player.getAnimationComponent().toRect();
     for (Platform plt in this.platforms) {
