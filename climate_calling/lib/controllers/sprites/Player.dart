@@ -9,6 +9,9 @@ import '../../shared/constants.dart';
 class Player extends BaseSprite {
   //Fields
   bool _guideMode = false;    //Tells if the player is currently guiding another sprite
+  double time = 0;
+  double height = 0;
+  double yPos = 0;
 
   //Constructor
   Player() : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4)) {
@@ -47,5 +50,12 @@ class Player extends BaseSprite {
       }
     });
     
+  }
+  @override
+ void moveUp() {
+   if (this.isJump == false){
+    super.moveUp();
+    this.isJump = true;
+     }
   }
 }

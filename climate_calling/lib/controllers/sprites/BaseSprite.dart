@@ -13,14 +13,16 @@ class BaseSprite extends BaseTimedWidget {
   @protected
   AnimationComponent _animationComponent;
   double xVelocity, yVelocity, gravity;
+  bool isJump;
   int direction;
   static const int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3, IDLE = 4;
 
   //Constructor
   BaseSprite(List<Sprite> sprites, {
     this.xVelocity = 5, 
-    this.yVelocity = 5, 
+    this.yVelocity = 70, 
     this.gravity = 0,
+    this.isJump = false,
     double stepTime = 0.1,
     this.direction = BaseSprite.RIGHT,
   }) {
@@ -38,7 +40,9 @@ class BaseSprite extends BaseTimedWidget {
   
   void moveLeft() => this._animationComponent.x -= this.xVelocity; 
   void moveRight() => this._animationComponent.x += this.xVelocity; 
-  void moveUp() => this._animationComponent.y -= this.yVelocity;    //Moving up is negative because of how the pixel coordinate works
+  void moveUp() {
+    this._animationComponent.y -= this.yVelocity; //Moving up is negative because of how the pixel coordinate works
+  }
   void applyGravity() => this._animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
   bool overlaps(Rect rect) => rect.overlaps(this._animationComponent.toRect());
 
@@ -61,5 +65,8 @@ class BaseSprite extends BaseTimedWidget {
   @override
   void update(double t) {
     this._animationComponent.update(t);
+    if(this._animationComponent.y >= 200){
+      this.isJump = false;
+    }
   }
 }

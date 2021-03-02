@@ -25,9 +25,8 @@ bool userIsHoldingButton() {
       },
       child: Container(
         child: this.child,
-        height: 48,
-        width: 48,
-       
+        height: 64,
+        width: 64,
       )
  
     );

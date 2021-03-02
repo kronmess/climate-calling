@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
@@ -40,7 +41,7 @@ class SpriteServices {
    */
   static Future<ui.Image> mergeImage(String imagePath, int count) async {
     List<image.Image> images = List();
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<count; i++) {
       final ByteData assetImageByteData = await rootBundle.load(imagePath);
       image.Image img = image.decodeImage(assetImageByteData.buffer.asUint8List());
       images.add(img);
@@ -148,5 +149,17 @@ class SpriteServices {
     //Calculate yDiff
 
     return Point(xDiff, yDiff);
+  }
+
+  /**
+   * Add an image as a list of image consisting of one element
+   */
+  static List<Sprite> getSpriteImageAsList(Image img) {
+    List<Sprite> ls = List();
+
+    Sprite spr = Sprite.fromImage(img);
+    ls.add(spr);
+
+    return ls;
   }
 }

@@ -14,36 +14,16 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
-    bool holdingButton = false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Spacer(),
         Row(
           children: [
-            SizedBox(width: 48),
+            SizedBox(width: 30),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  children: [
-                    SizedBox(width: 50),
-                    GestureDetector(
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      child: Center(
-                        child: Image.asset(PATH_BUTTON_MOTION_UP),
-                      ),
-                    ),
-                    onPanDown: (DragDownDetails d) {
-                     
-                    },
-                    onPanEnd: (DragEndDetails d) {},
-                  ),
-                    SizedBox(width: 50),
-                ],
-                ),
                 Row(
                   children: [
                   MovementButton(
@@ -65,7 +45,19 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   ],)
               ],
             ),
-            Spacer(),//middle space
+            Spacer(),
+            GestureDetector(
+                child: Container(
+                  height: 64,
+                  width: 64,
+                  child: Center(
+                    child: Image.asset(PATH_BUTTON_MOTION_UP)
+                  ),
+                ),
+                onTap: level.player.moveUp
+              )
+            ,
+            SizedBox(width: 50),
             Center(
               child: GestureDetector(
                 child: Container(
@@ -80,7 +72,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
             ),//space for pick up button
             SizedBox(width: 48),//space for right of button
           ],),
-          SizedBox(height:18,)
+          SizedBox(height:30,)
       ],
       );
   }
