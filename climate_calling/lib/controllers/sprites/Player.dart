@@ -53,7 +53,9 @@ class Player extends BaseSprite {
   }
   @override
  void moveUp() {
+   if (this.isJump == false){
     super.moveUp();
-    
+    this.isJump = true;
+     }
   }
 }
