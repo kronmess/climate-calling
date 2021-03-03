@@ -1,3 +1,4 @@
+import 'package:climate_calling/flutter_screens/FlutterGameSettings.dart';
 import 'package:climate_calling/flutter_screens/FlutterMainMenu.dart';
 import 'package:climate_calling/flutter_screens/FlutterPlayerControls.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
@@ -13,12 +14,13 @@ class FlutterScreenManager extends StatefulWidget {
 class _FlutterScreenManagerState extends State<FlutterScreenManager> {
 
   //Fields
-  Widget mainMenu, playerControls;
+  Widget mainMenu, playerControls, gameSettings;
 
   //Constructor
   _FlutterScreenManagerState() {
     this.mainMenu = FlutterMainMenuScreen();
     this.playerControls = FlutterPlayerControlsScreen();
+    this.gameSettings = FlutterGameSettingsScreen();
   }
 
   //Public methods
@@ -31,7 +33,8 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
     switch (screenState) {
       case ScreenState.kMainMenu:
         return this.mainMenu;
-
+      case ScreenState.kGameSettings:
+        return this.gameSettings;
       default:
         return SizedBox();
     }
