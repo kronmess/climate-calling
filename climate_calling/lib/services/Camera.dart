@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
+import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:flutter/cupertino.dart';
 
 class Camera{
@@ -11,19 +12,22 @@ class Camera{
   double x, y;
   Size maxSize, phoneSize;
   Player player;
+  Point prevPlayerCenterPos;
 
   //Constructors
   Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites}) {
     if (this.sprites == null) {
       this.sprites = List();
     }
+    this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
+
     //Attempt to fix max camera size
     if (this.maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
     if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
 
     //Determine camera center
-    this.x = 0;
-    this.y = 0;
+    this.x = this.prevPlayerCenterPos.x;
+    this.y = this.prevPlayerCenterPos.y;
     this._updateCameraPos();
   }
 
@@ -52,30 +56,37 @@ class Camera{
 
   //Private methods
   Future<Point> _updateCameraPos() async {
-    double xDelta;
-    double yDelta;
-    Point playerCenter = Point((player.getAnimationComponent().x + player.getAnimationComponent().width)/2, 
-                                (player.getAnimationComponent().y + player.getAnimationComponent().height)/2);
-    Point phoneCenter = Point(this.phoneSize.width/2, this.phoneSize.height);
+    Point playerCenter = SpriteServices.getSpriteCenter(this.player);
+    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);
+    double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
+    double yDelta = 0;
     //Determine delta
-    xDelta = this.x - playerCenter.x;
-    yDelta = this.y - playerCenter.y;
-
-    //Update camera x position
-    if (playerCenter.x < phoneCenter.x) this.x = phoneCenter.x;
-    else if (this.phoneSize.width < this.maxSize.width && playerCenter.x > phoneCenter.x) {
-      if (playerCenter.x <= this.maxSize.width - phoneCenter.x) this.x = playerCenter.x;        
-      else this.x = this.maxSize.width - phoneCenter.x;
+    if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
+    { 
+      this.x += xDelta;
+      xDelta = 0;   //Prevent other sprites from moving
     }
-    else this.x = playerCenter.x;
-
-    //Update camera y position
-    if (playerCenter.y < phoneCenter.y) this.y = phoneCenter.y;
-    else if (this.phoneSize.height < this.maxSize.height && playerCenter.y > phoneCenter.y) {
-      if (playerCenter.y <= this.maxSize.height - phoneCenter.y) this.y = playerCenter.y;        
-      else this.y = this.maxSize.height - phoneCenter.y;
+    else if (this.x >= this.maxSize.width - phoneCenter.x)
+    {
+      this.x += xDelta;
+      xDelta = 0;   //Prevent other sprites from moving
     }
-    else this.y = playerCenter.y;
+    else    //Between min and max camera pan, this is where sprites will move
+    {
+      xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
+      this.x += xDelta;
+      xDelta *= -1;   //Sprite motion is opposite of the camera
+      this.player.getAnimationComponent().x += xDelta;    //Make the player remain in the center
+    }
+
+    // print("");
+    // print("Phone center: ${phoneCenter.x}, ${phoneCenter.y}");
+    // print("Player center: ${playerCenter.x}, ${playerCenter.y}");
+    // print("Camera Pos: $x, $y");
+    // print("Camera max size: ${maxSize.width}, ${maxSize.height}");
+    // print("Deltas $xDelta, $yDelta");
+
+    this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
     return Point(xDelta, yDelta);
   }
