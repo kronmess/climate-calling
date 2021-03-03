@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
@@ -15,6 +14,7 @@ class BaseSprite extends BaseTimedWidget {
   double xVelocity, yVelocity, gravity;
   bool isJump;
   int direction;
+  Size fixedSize;
   static const int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3, IDLE = 4;
 
   //Constructor
@@ -25,8 +25,10 @@ class BaseSprite extends BaseTimedWidget {
     this.isJump = false,
     double stepTime = 0.1,
     this.direction = BaseSprite.RIGHT,
+    Size fixedSize,
   }) {
     this._animationComponent = AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
+    this.fixedSize = fixedSize == null ? Size(-1, -1) : fixedSize;
   }
 
   //Public Methods
@@ -60,6 +62,12 @@ class BaseSprite extends BaseTimedWidget {
   @override
   void resize(Size size) {
     this._animationComponent.resize(size);
+    try
+    {
+      this._animationComponent.width = this.fixedSize.width != -1 ? this.fixedSize.width : this._animationComponent.animation.currentFrame.sprite.image.width.toDouble();
+      this._animationComponent.height = this.fixedSize.height != -1 ? this.fixedSize.height : this._animationComponent.animation.currentFrame.sprite.image.height.toDouble();
+    }
+    catch(e) {}
   }
 
   @override

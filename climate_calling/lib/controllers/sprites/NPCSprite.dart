@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:flame/sprite.dart';
 
@@ -7,6 +9,5 @@ class NPCSprite extends BaseSprite {
 
   //Constructor
   //TODO: Load player animations
-  NPCSprite(List<Sprite> ls, {double gravity = 0}) : super(ls, gravity: gravity) {
-  }
+  NPCSprite(List<Sprite> ls, {double gravity = 0, Size fixedSize}) : super(ls, gravity: gravity, fixedSize: fixedSize);
 }

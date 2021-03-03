@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
@@ -14,10 +15,7 @@ class Player extends BaseSprite {
   double yPos = 0;
 
   //Constructor
-  Player() : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4)) {
-    this.getAnimationComponent().width = 100;
-    this.getAnimationComponent().height = 100;
-  }
+  Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize);
 
   //Overridden Methods
   @override
