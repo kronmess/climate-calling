@@ -57,10 +57,11 @@ class Camera{
   //Private methods
   Future<Point> _updateCameraPos() async {
     Point playerCenter = SpriteServices.getSpriteCenter(this.player);
-    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);
+    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
-    double yDelta = 0;
+    double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
     //Determine delta
+    //Determine xDelta
     if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
     { 
       this.x += xDelta;
@@ -76,7 +77,26 @@ class Camera{
       xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
       this.x += xDelta;
       xDelta *= -1;   //Sprite motion is opposite of the camera
-      this.player.getAnimationComponent().x += xDelta;    //Make the player remain in the center
+      this.player.getAnimationComponent().x = phoneCenter.x * 2 - this.player.getAnimationComponent().width;    //Make the player remain in the center
+    }
+
+    //Determine yDelta
+    if (this.y <= phoneCenter.y)  //If camera pos is between 0 - phoneCenter.y
+    { 
+      this.y += yDelta;
+      yDelta = 0;   //Prevent other sprites from moving
+    }
+    else if (this.y >= this.maxSize.height - phoneCenter.y)
+    {
+      this.y += yDelta;
+      yDelta = 0;   //Prevent other sprites from moving
+    }
+    else    //Between min and max camera pan, this is where sprites will move
+    {
+      yDelta = playerCenter.y - this.prevPlayerCenterPos.y;   //Calculate delta for camera increment
+      this.y += yDelta;
+      yDelta *= -1;   //Sprite motion is opposite of the camera
+      this.player.getAnimationComponent().y = phoneCenter.y * 2 - this.player.getAnimationComponent().height;    //Make the player remain in the center
     }
 
     // print("");
