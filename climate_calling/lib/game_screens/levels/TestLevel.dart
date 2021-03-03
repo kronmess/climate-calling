@@ -17,11 +17,11 @@ class TestLevel extends BaseLevel {
   Camera camera;
 
   //Constructor
-  TestLevel() : super(0, 0) {
+  TestLevel() : super(0, 0, fixedPlayerSize: Size(80, 80)) {
     this._initTerrain();
     this.bears = List();
     this._initPolarBears();
-    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, this.size.height), sprites: this.platforms);
+    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
   }
 
   //Private Methods
@@ -40,12 +40,12 @@ class TestLevel extends BaseLevel {
 
   //Overridden Methods
   Future<void> initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)), fixedSize: Size(200, 80));
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)), fixedSize: Size(200, 80));
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 100;
     this.platforms.add(plt);
@@ -67,6 +67,7 @@ class TestLevel extends BaseLevel {
   void resize(Size size) {
     super.resize(size);
     this.igloo?.resize(size);
+    this.camera.phoneSize = size;
     for (PolarBear bear in this.bears) {
       bear.resize(size);
     }
@@ -75,11 +76,11 @@ class TestLevel extends BaseLevel {
   @override
   void render(Canvas canvas) {
     canvas.drawRect(Rect.fromLTWH(0, 0, this.size.width, this.size.height), this._green.paint);
-    this.igloo?.render(canvas);
+    // this.igloo?.render(canvas);
     super.render(canvas);
-    for (PolarBear bear in this.bears) {
-      bear.render(canvas);
-    }
+    // for (PolarBear bear in this.bears) {
+    //   bear.render(canvas);
+    // }
   }
 
   @override
