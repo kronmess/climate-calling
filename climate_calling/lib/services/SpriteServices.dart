@@ -162,4 +162,13 @@ class SpriteServices {
 
     return ls;
   }
+
+  /**
+   * Get the location of the sprite's center
+   */
+  static Point getSpriteCenter(BaseSprite sprite)
+  {
+    return Point((sprite.getAnimationComponent().x + sprite.getAnimationComponent().width)/2, 
+                  (sprite.getAnimationComponent().y + sprite.getAnimationComponent().height)/2);
+  }
 }
