@@ -12,8 +12,8 @@ abstract class BaseLevel extends BaseTimedWidget{
   Size size = Size(0, 0);
 
   //Constructor
-  BaseLevel(double x, double y, {double gravity = 5}) {
-    this.player = Player();
+  BaseLevel(double x, double y, {double gravity = 5, Size fixedPlayerSize}) {
+    this.player = Player(fixedSize: fixedPlayerSize);
     this.gravity = gravity;
     this.platforms = List();
 
