@@ -16,7 +16,7 @@ class ArcticLevel extends BaseLevel {
   Background _bg;
   Camera camera;
   //Constructor
-  ArcticLevel() : super(250, 0 ,fixedPlayerSize: Size(80, 80)) {
+  ArcticLevel() : super(0, 0 ,fixedPlayerSize: Size(80, 80)) {
     this._bg = Background(PATH_ARCTIC_LEVEL_BG);
     this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
   }
