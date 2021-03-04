@@ -1,7 +1,7 @@
 const double GRAVITY = -10;
 
 //paths
-const String PATH_ARCTIC_LEVEL_BG = "arctic level final 2.png",
+const String  PATH_ARCTIC_LEVEL_BG = "artic level final 2.png",
               PATH_MAIN_MENU_BG = "MainMenu.png",
               PATH_LOGO_APP = "assets/images/logoapp.png",
               PATH_LOGO_MAIN = "assets/images/logomain.png",
