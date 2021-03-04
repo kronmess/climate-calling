@@ -77,7 +77,9 @@ class Camera{
       xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
       this.x += xDelta;
       xDelta *= -1;   //Sprite motion is opposite of the camera
-      this.player.getAnimationComponent().x = phoneCenter.x * 2 - this.player.getAnimationComponent().width;    //Make the player remain in the center
+      if (phoneCenter.x != 0) {
+        this.player.getAnimationComponent().x = phoneCenter.x * 2 - this.player.getAnimationComponent().width;    //Make the player remain in the center
+      }
     }
 
     //Determine yDelta
