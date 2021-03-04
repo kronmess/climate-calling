@@ -1,3 +1,4 @@
+import 'package:climate_calling/shared/constants.dart';
 import "package:flutter/material.dart";
 
 class FlutterGameSettingsScreen extends StatefulWidget {
@@ -8,7 +9,6 @@ class FlutterGameSettingsScreen extends StatefulWidget {
 class _FlutterGameSettingsScreenState extends State<FlutterGameSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    //TODO: replace with widget tree for game settings screen
     return Container();
   }
 }
