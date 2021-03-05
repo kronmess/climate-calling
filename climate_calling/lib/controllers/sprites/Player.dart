@@ -9,7 +9,11 @@ import '../../shared/constants.dart';
 
 class Player extends BaseSprite {
   //Fields
-  bool _guideMode = false;    //Tells if the player is currently guiding another sprite
+  bool _guideMode = false,    //Tells if the player is currently guiding another sprite
+        isMovingRight = false,
+        isMovingLeft = false,
+        isMovingUp = false,
+        isMovingDown = false;
   double time = 0;
   double height = 0;
   double yPos = 0;
@@ -55,5 +59,19 @@ class Player extends BaseSprite {
     super.moveUp();
     this.isJump = true;
      }
+  }
+
+  @override
+  void update(double t) {
+    super.update(t);
+    if (this.isMovingLeft) {
+      this.moveLeft();
+    }
+    if (this.isMovingRight) {
+      this.moveRight();
+    }
+    if (this.isMovingUp) {
+      this.moveUp();
+    }
   }
 }
