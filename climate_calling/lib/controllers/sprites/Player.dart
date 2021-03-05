@@ -9,7 +9,7 @@ import '../../shared/constants.dart';
 
 class Player extends BaseSprite {
   //Fields
-  bool _guideMode = false,    //Tells if the player is currently guiding another sprite
+  bool isPickedUp = false,    //Tells if the player is currently guiding another sprite
         isMovingRight = false,
         isMovingLeft = false,
         isMovingUp = false,
@@ -25,7 +25,7 @@ class Player extends BaseSprite {
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));
+      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));    //TODO: if player is picking up bear, load the pick up polar bear left movement animaiton
       this.direction = BaseSprite.LEFT;
     }
     Timer.periodic(Duration(milliseconds: 50),(timer) {
@@ -41,7 +41,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4));
+      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4)); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
       this.direction = BaseSprite.RIGHT;
     }
     Timer.periodic(Duration(milliseconds: 50),(timer) {
