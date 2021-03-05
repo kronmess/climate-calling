@@ -21,17 +21,13 @@ class TestLevel extends BaseLevel {
 
   //Constructor
   TestLevel() : super(0, 0, fixedPlayerSize: Size(80, 80)) {
-    this._initTerrain();
     this.bears = List();
     this._initPolarBears();
     this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(1000, 500), sprites: this.platforms);
+    this.player.xVelocity = 12;
   }
 
   //Private Methods
-  void _initTerrain() async{
-    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
-    this.igloo.getAnimationComponent().x = 300;
-  }
   void _initPolarBears() {
     PolarBear bear = PolarBear();
 
@@ -46,7 +42,7 @@ class TestLevel extends BaseLevel {
     ui.Image platformImg = await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4);
     List<Sprite> platformImgList = SpriteServices.getSpriteImageAsList(platformImg);
     
-    Platform plt = Platform(platformImgList, fixedSize: Size(200, 80));
+    Platform plt = Platform(platformImgList, fixedSize: Size(500, 80));
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
     this.platforms.add(plt);
@@ -56,6 +52,22 @@ class TestLevel extends BaseLevel {
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 100;
     this.platforms.add(plt);
+
+    plt = Platform(platformImgList, fixedSize: Size(400, 80));
+    plt.getAnimationComponent().x = 750;
+    plt.getAnimationComponent().y = 250;
+    this.platforms.add(plt);
+
+    plt = Platform(platformImgList, fixedSize: Size(200, 80));
+    plt.getAnimationComponent().x = 550;
+    plt.getAnimationComponent().y = 120;
+    this.platforms.add(plt);
+  }
+
+  @override
+  void initTerrain() async {
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    this.igloo.getAnimationComponent().x = 300;
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/Platform.dart';
+import 'package:climate_calling/controllers/sprites/PolarBear.dart';
+import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
@@ -15,10 +17,19 @@ class ArcticLevel extends BaseLevel {
   //Fields
   Background _bg;
   Camera camera;
+  List<PolarBear> _bears;
+  Terrain igloo;
   //Constructor
   ArcticLevel() : super(0, 0 ,fixedPlayerSize: Size(80, 80)) {
     this._bg = Background(PATH_ARCTIC_LEVEL_BG);
     this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
+    this._bears = List();
+    this._initBears();
+  }
+
+  //Private Methods
+  void _initBears() {
+    //Initialize polar bears here and add them to _bears List
   }
 
   //Overridden Methods
@@ -51,6 +62,13 @@ class ArcticLevel extends BaseLevel {
   void update(double t) {
     super.update(t);
     this.camera.update();
+
+    ///Polar bear interaction
+    for (PolarBear bear in this._bears) {
+      if (this.player.getAnimationComponent().toRect().overlaps(bear.getAnimationComponent().toRect())) {
+        //TODO: pick up polar bear
+      }
+    }
   }
 
   @override
@@ -61,5 +79,10 @@ class ArcticLevel extends BaseLevel {
     plt.getAnimationComponent().y = 300;
 
     this.platforms.add(plt);
+  }
+
+  @override
+  void initTerrain() async {
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
   }
 }
