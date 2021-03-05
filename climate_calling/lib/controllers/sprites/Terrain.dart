@@ -8,10 +8,7 @@ class Terrain extends BaseSprite {
   bool canPassThrough;
 
   //Constructor
-  Terrain(List<Sprite> sprites, this.canPassThrough, {Size fixedSize}) : super(sprites, fixedSize: fixedSize) {
-    this.getAnimationComponent().width = sprites.elementAt(0).image.width.toDouble();
-    this.getAnimationComponent().height = sprites.elementAt(0).image.height.toDouble();
-  }
+  Terrain(List<Sprite> sprites, this.canPassThrough, {Size fixedSize}) : super(sprites, fixedSize: fixedSize);
 
   //Abstract methods
   void onPassThrough(double t){}
