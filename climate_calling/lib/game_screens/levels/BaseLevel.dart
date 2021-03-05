@@ -2,6 +2,7 @@ import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
+import 'package:flame/components/animation_component.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class BaseLevel extends BaseTimedWidget{
@@ -65,7 +66,6 @@ abstract class BaseLevel extends BaseTimedWidget{
       //Check for player collision with platform
       if (plt.overlaps(playerRect)) {
         SpriteServices.checkPassThrough(this.player, plt);
-        break;
       }
     }
   }
@@ -77,7 +77,15 @@ abstract class BaseLevel extends BaseTimedWidget{
   void render(Canvas canvas) {
     this.player.render(canvas);
     for (Platform plt in this.platforms) {
-      plt.render(canvas);
+      AnimationComponent ac = plt.getAnimationComponent();
+      //Only render if the position of the platform is within the phone screen
+      if (ac.x + ac.width >= 0 && 
+          ac.x <= this.size.width &&
+          ac.y + ac.height >= 0 &&
+          ac.y <= this.size.height
+      ) {
+        plt.render(canvas);
+      }
     }
   }
 }
