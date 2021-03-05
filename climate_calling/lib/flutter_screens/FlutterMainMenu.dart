@@ -19,7 +19,9 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
         Flexible(
           flex: 2,
           child: Image(
-            image: AssetImage(PATH_LOGO_APP),height: 1000,width: 1000,
+            image: AssetImage(PATH_LOGO_APP),
+            height: 1000,
+            width: 1000,
           ),
         ),
         SizedBox(
@@ -34,14 +36,16 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Start",
                 onTap: () {
-                  climateCalling.switchScreen(ScreenState.kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                  climateCalling.switchScreen(ScreenState
+                      .kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
                 },
               ),
               BackgroundButton(
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
-                text: "Game Settings",
+                text: "Games Settings",
                 onTap: () {
-                  climateCalling.switchScreen(ScreenState.kGameSettings); //Changes the screen from main menu to settings page
+                  climateCalling.switchScreen(ScreenState
+                      .kGameSettings); //Changes the screen from main menu to settings page
                 },
               )
             ],
