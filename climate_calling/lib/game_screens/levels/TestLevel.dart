@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
@@ -6,6 +8,7 @@ import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/palette.dart';
+import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 
 class TestLevel extends BaseLevel {
@@ -21,7 +24,7 @@ class TestLevel extends BaseLevel {
     this._initTerrain();
     this.bears = List();
     this._initPolarBears();
-    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
+    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(1000, 500), sprites: this.platforms);
   }
 
   //Private Methods
@@ -40,12 +43,16 @@ class TestLevel extends BaseLevel {
 
   //Overridden Methods
   Future<void> initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)), fixedSize: Size(200, 80));
+    ui.Image platformImg = await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4);
+    List<Sprite> platformImgList = SpriteServices.getSpriteImageAsList(platformImg);
+    
+    Platform plt = Platform(platformImgList, fixedSize: Size(200, 80));
     plt.getAnimationComponent().x = 250;
     plt.getAnimationComponent().y = 250;
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)), fixedSize: Size(200, 80));
+    // plt = Platform.from(plt, fixedSize: Size(100, 80));
+    plt = Platform(platformImgList, fixedSize: Size(400, 80));
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 100;
     this.platforms.add(plt);

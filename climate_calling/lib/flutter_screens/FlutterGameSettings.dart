@@ -2,9 +2,8 @@ import 'package:climate_calling/controllers/SettingsButton.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flutter/cupertino.dart';
-import "package:flutter/material.dart";
-
-import '../shared/constants.dart';
+import 'package:climate_calling/shared/constants.dart';
+import 'package:flutter/material.dart';
 
 class FlutterGameSettingsScreen extends StatefulWidget {
   @override
