@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 
-class BackgroundButton extends GestureDetector {
+class SettingsButton extends GestureDetector {
   //Constructor
-  BackgroundButton(
+  SettingsButton(
       {@required AssetImage image,
       String text,
       Function onTap,
@@ -10,7 +10,7 @@ class BackgroundButton extends GestureDetector {
       EdgeInsets padding})
       : super(
           child: Container(
-            padding: padding ?? EdgeInsets.fromLTRB(50, 20, 50, 25),
+            padding: padding ?? EdgeInsets.fromLTRB(5, 5, 10, 10),
             decoration: BoxDecoration(
               color: color,
               image: DecorationImage(
