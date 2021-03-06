@@ -20,7 +20,7 @@ class ArcticLevel extends BaseLevel {
   List<PolarBear> _bears;
   Terrain igloo;
   //Constructor
-  ArcticLevel() : super(0, 0 ,fixedPlayerSize: Size(80, 80)) {
+  ArcticLevel() : super(50, 0 ,fixedPlayerSize: Size(80, 80)) {
     this._bg = Background(PATH_ARCTIC_LEVEL_BG);
     this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
     this._bears = List();
@@ -73,7 +73,7 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)),fixedSize: Size(1000,50));
 
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 300;
