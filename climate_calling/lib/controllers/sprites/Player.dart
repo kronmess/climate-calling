@@ -28,14 +28,7 @@ class Player extends BaseSprite {
       this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));    //TODO: if player is picking up bear, load the pick up polar bear left movement animaiton
       this.direction = BaseSprite.LEFT;
     }
-    Timer.periodic(Duration(milliseconds: 50),(timer) {
-      if (playerButton.userIsHoldingButton() == true){
-        super.moveLeft();
-      }else{
-        timer.cancel();
-      }
-    });
-    
+    super.moveLeft();
   }
 
   @override
@@ -44,13 +37,7 @@ class Player extends BaseSprite {
       this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4)); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
       this.direction = BaseSprite.RIGHT;
     }
-    Timer.periodic(Duration(milliseconds: 50),(timer) {
-      if (playerButton.userIsHoldingButton() == true){
-        super.moveRight();
-      }else{
-        timer.cancel();
-      }
-    });
+    super.moveRight();
     
   }
   @override
@@ -73,5 +60,18 @@ class Player extends BaseSprite {
     if (this.isMovingUp) {
       this.moveUp();
     }
+  }
+  void flagLeft(){
+    this.isMovingLeft = true;
+  }
+  void flagLeftNo(){
+    this.isMovingLeft = false;
+  }
+
+  void flagRight(){
+    this.isMovingRight = true;
+  }
+  void flagRightNo(){
+    this.isMovingRight = false;
   }
 }

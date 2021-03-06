@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 class MovementButton extends StatelessWidget {
   final child;
-  final function;
+  final functionDown;
+  final functionUp;
   static bool holdingButton = false;
 
 //
-MovementButton({this.child, this.function});
+MovementButton({this.child, this.functionDown,this.functionUp});
 
 bool userIsHoldingButton() {
   return holdingButton;
@@ -18,10 +19,11 @@ bool userIsHoldingButton() {
     return GestureDetector(
       onTapDown: (_){
         holdingButton = true;
-        function();
+        functionDown();
       },
       onTapUp:  (_){
         holdingButton = false;
+        functionUp();
       },
       child: Container(
         child: this.child,

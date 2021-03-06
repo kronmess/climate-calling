@@ -28,12 +28,15 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   children: [
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_LEFT),
-                    function: level.player.moveLeft,
+                    functionDown: level.player.flagLeft,
+                    functionUp: level.player.flagLeftNo,
+                    
                   ),
                   SizedBox(width: 50),
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
-                    function: level.player.moveRight,
+                    functionDown: level.player.flagRight,
+                    functionUp: level.player.flagRightNo,
                   ),
                 ],
                 ),
