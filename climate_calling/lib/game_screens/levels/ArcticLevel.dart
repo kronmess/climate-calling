@@ -29,7 +29,7 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    //Initialize polar bears here and add them to _bears List
+    //TODO: Initialize polar bears here and add them to _bears List
   }
 
   //Overridden Methods
@@ -46,9 +46,13 @@ class ArcticLevel extends BaseLevel {
   }
 
   @override
-  void render(Canvas canvas) {
+  void render(Canvas canvas) async{
     this._bg.render(canvas);
     super.render(canvas);
+    //TODO: Render igloo
+    for (PolarBear bear in this._bears) {
+      bear.render(canvas);
+    }
   }
 
   @override
@@ -84,5 +88,6 @@ class ArcticLevel extends BaseLevel {
   @override
   void initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    //TODO: position igloo
   }
 }
