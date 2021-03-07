@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/MovementButton.dart';
+import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
@@ -29,14 +30,20 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_LEFT),
                     functionDown: level.player.flagLeft,
-                    functionUp: level.player.flagLeftNo,
+                    functionUp: () {
+                      level.player.flagLeftNo();
+                      level.player.direction = BaseSprite.IDLE;
+                    },
                     
                   ),
                   SizedBox(width: 50),
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
                     functionDown: level.player.flagRight,
-                    functionUp: level.player.flagRightNo,
+                    functionUp: () {
+                      level.player.flagRightNo();
+                      level.player.direction = BaseSprite.IDLE;
+                    },
                   ),
                 ],
                 ),

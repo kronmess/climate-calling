@@ -24,7 +24,7 @@ class BaseSprite extends BaseTimedWidget {
     this.gravity = 0,
     this.isJump = false,
     double stepTime = 0.1,
-    this.direction = BaseSprite.RIGHT,
+    this.direction = BaseSprite.IDLE,
     Size fixedSize,
   }) {
     this.animationComponent = sprites == null ? null : AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
@@ -34,13 +34,17 @@ class BaseSprite extends BaseTimedWidget {
   //Public Methods
   AnimationComponent getAnimationComponent() => animationComponent;
   void setAnimations(List<Sprite> sprites, {double stepTime = 0.1}) {
-    AnimationComponent old = this.animationComponent;
+    try {
+      AnimationComponent old = this.animationComponent;
     this.animationComponent = AnimationComponent(this.animationComponent.width, this.animationComponent.height, anim.Animation.spriteList(sprites, stepTime: stepTime));
     this.animationComponent.x = old.x;
     this.animationComponent.y = old.y;
+    } catch(e) {}
   }
   
-  void moveLeft() => this.animationComponent.x -= this.xVelocity; 
+  void moveLeft() {
+    this.animationComponent.x -= this.xVelocity;
+  }
   void moveRight() => this.animationComponent.x += this.xVelocity; 
   void moveUp() {
     this.animationComponent.y -= this.yVelocity; //Moving up is negative because of how the pixel coordinate works
@@ -75,6 +79,11 @@ class BaseSprite extends BaseTimedWidget {
     this.animationComponent?.update(t);
     if(this.animationComponent.y >= 200){
       this.isJump = false;
+    }
+
+    //Set idle animation
+    if (this.direction == BaseSprite.IDLE) {
+      this.animationComponent.animation.currentIndex = 0;
     }
   }
 }

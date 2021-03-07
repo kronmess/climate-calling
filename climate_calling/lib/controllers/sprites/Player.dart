@@ -33,7 +33,7 @@ class Player extends BaseSprite {
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(this.isPickedUp? this._spritesLeftBear : this._spritesLeftBear);
+      this.setAnimations(this.isPickedUp? this._spritesLeftBear : this._spritesLeft);
       this.direction = BaseSprite.LEFT;
     }
     super.moveLeft();
@@ -42,7 +42,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickedUp? this._spritesRightBear : this._spritesRightBear); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
+      this.setAnimations(this.isPickedUp? this._spritesRightBear : this._spritesRight); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
       this.direction = BaseSprite.RIGHT;
     }
     super.moveRight();
