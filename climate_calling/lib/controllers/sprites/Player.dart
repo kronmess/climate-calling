@@ -1,11 +1,9 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
-import 'package:climate_calling/shared/globals.dart';
-
-import '../../shared/constants.dart';
+import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/sprite.dart';
 
 class Player extends BaseSprite {
   //Fields
@@ -17,15 +15,25 @@ class Player extends BaseSprite {
   double time = 0;
   double height = 0;
   double yPos = 0;
+  List<Sprite> spritesLeft, 
+                spritesRight, 
+                spritesLeftBear, 
+                spritesRightBear, 
+                jumpLeft, 
+                jumpRight;
 
   //Constructor
-  Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize);
+  Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize) {
+    this.spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4);
+    this.spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4);
+    //TODO: initialize sprites list for bear left and right, as well as jump left right.
+  }
 
   //Overridden Methods
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4));    //TODO: if player is picking up bear, load the pick up polar bear left movement animaiton
+      this.setAnimations(this.isPickedUp? this.spritesLeftBear : this.spritesLeftBear);
       this.direction = BaseSprite.LEFT;
     }
     super.moveLeft();
@@ -34,7 +42,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4)); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
+      this.setAnimations(this.isPickedUp? this.spritesRightBear : this.spritesRightBear); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
       this.direction = BaseSprite.RIGHT;
     }
     super.moveRight();
