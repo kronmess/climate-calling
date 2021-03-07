@@ -15,17 +15,17 @@ class Player extends BaseSprite {
   double time = 0;
   double height = 0;
   double yPos = 0;
-  List<Sprite> spritesLeft, 
-                spritesRight, 
-                spritesLeftBear, 
-                spritesRightBear, 
-                jumpLeft, 
-                jumpRight;
+  List<Sprite> _spritesLeft, 
+                _spritesRight, 
+                _spritesLeftBear, 
+                _spritesRightBear, 
+                _jumpLeft, 
+                _jumpRight;
 
   //Constructor
   Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize) {
-    this.spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4);
-    this.spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4);
+    this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4);
+    this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4);
     //TODO: initialize sprites list for bear left and right, as well as jump left right.
   }
 
@@ -33,7 +33,7 @@ class Player extends BaseSprite {
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(this.isPickedUp? this.spritesLeftBear : this.spritesLeftBear);
+      this.setAnimations(this.isPickedUp? this._spritesLeftBear : this._spritesLeftBear);
       this.direction = BaseSprite.LEFT;
     }
     super.moveLeft();
@@ -42,7 +42,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickedUp? this.spritesRightBear : this.spritesRightBear); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
+      this.setAnimations(this.isPickedUp? this._spritesRightBear : this._spritesRightBear); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
       this.direction = BaseSprite.RIGHT;
     }
     super.moveRight();
