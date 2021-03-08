@@ -4,6 +4,7 @@ import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame/time.dart';
 
 class Player extends BaseSprite {
   //Fields
@@ -52,9 +53,8 @@ class Player extends BaseSprite {
  void moveUp() {
    if (this.isJump == false){
     super.moveUp();
-    this.isJump = true;
-     }
   }
+ }
 
   @override
   void update(double t) {
@@ -67,19 +67,10 @@ class Player extends BaseSprite {
     }
     if (this.isMovingUp) {
       this.moveUp();
+      this.isJump = true;
     }
   }
-  void flagLeft(){
-    this.isMovingLeft = true;
-  }
-  void flagLeftNo(){
-    this.isMovingLeft = false;
-  }
-
-  void flagRight(){
-    this.isMovingRight = true;
-  }
-  void flagRightNo(){
-    this.isMovingRight = false;
+  void flagisMovingUpNo(){
+    this.isMovingUp = false;
   }
 }

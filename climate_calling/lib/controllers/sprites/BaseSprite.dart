@@ -20,7 +20,7 @@ class BaseSprite extends BaseTimedWidget {
   //Constructor
   BaseSprite(List<Sprite> sprites, {
     this.xVelocity = 5, 
-    this.yVelocity = 70, 
+    this.yVelocity = 200, 
     this.gravity = 0,
     this.isJump = false,
     double stepTime = 0.1,
@@ -77,10 +77,6 @@ class BaseSprite extends BaseTimedWidget {
   @override
   void update(double t) {
     this.animationComponent?.update(t);
-    if(this.animationComponent.y >= 200){
-      this.isJump = false;
-    }
-
     //Set idle animation
     if (this.direction == BaseSprite.IDLE) {
       this.animationComponent.animation.currentIndex = 0;

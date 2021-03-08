@@ -88,6 +88,10 @@ abstract class BaseLevel extends BaseTimedWidget{
         if (this.player.isMovingLeft && !this.player.isMovingDown && !SpriteServices.isDirectlyOnTop(this.player, plt)) {
           pAC.x = platAC.x + platAC.width;
         }
+        if(!SpriteServices.isDirectlyOnTop(this.player, plt)){
+          this.player.isMovingUp = false;
+          this.player.isJump = false;
+        }
       }
     }
   }

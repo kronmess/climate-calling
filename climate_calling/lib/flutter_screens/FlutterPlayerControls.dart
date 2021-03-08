@@ -29,9 +29,11 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   children: [
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_LEFT),
-                    functionDown: level.player.flagLeft,
+                    functionDown: (){
+                      level.player.isMovingLeft = true;
+                    },
                     functionUp: () {
-                      level.player.flagLeftNo();
+                      level.player.isMovingLeft = false;
                       level.player.direction = BaseSprite.IDLE;
                     },
                     
@@ -39,9 +41,11 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   SizedBox(width: 50),
                   MovementButton(
                     child: Image.asset(PATH_BUTTON_MOTION_RIGHT),
-                    functionDown: level.player.flagRight,
+                    functionDown:(){
+                      level.player.isMovingRight = true;
+                    },
                     functionUp: () {
-                      level.player.flagRightNo();
+                      level.player.isMovingRight = false;
                       level.player.direction = BaseSprite.IDLE;
                     },
                   ),
@@ -64,7 +68,9 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                     child: Image.asset(PATH_BUTTON_MOTION_UP)
                   ),
                 ),
-                onTap: level.player.moveUp
+                onTap:(){
+                  level.player.isMovingUp = true;
+                }
               )
             ,
             SizedBox(width: 50),
