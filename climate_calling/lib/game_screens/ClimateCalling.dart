@@ -80,11 +80,9 @@ class ClimateCalling extends Game with TapDetector {
         break;
 
       case ScreenState.kPolar:
-        this._levelArctic = ArcticLevel();
-        this._levelArctic.resize(this._size);
-        updateScreenState(newScreen,
-            callback: this
-                ._callback); //Required to render the polar level flutter widgets
+        // this._levelArctic = ArcticLevel();
+        // this._levelArctic.resize(this._size);
+        updateScreenState(newScreen, callback: this._callback);
         break;
 
       case ScreenState.kGameSettings:
@@ -95,8 +93,8 @@ class ClimateCalling extends Game with TapDetector {
                 ._callback); //Required to render the settings menu flutter widgets
         break;
       case ScreenState.kTest:
-        this._settingsScreen = TestLevel();
-        this._settingsScreen.resize(this._size);
+        // this._levelTest = TestLevel();
+        // this._levelTest.resize(this._size);
         updateScreenState(newScreen, callback: this._callback); //Test
         break;
 
