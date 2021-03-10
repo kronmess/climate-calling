@@ -19,10 +19,20 @@ class ArcticLevel extends BaseLevel {
   Camera camera;
   List<PolarBear> _bears;
   Terrain igloo;
+  int _bearRescued;   //The number of bears that has been rescued
+
   //Constructor
-  ArcticLevel() : super(0, 0 ,fixedPlayerSize: Size(80, 80)) {
-    this._bg = Background(PATH_ARCTIC_LEVEL_BG);
-    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
+  ArcticLevel() : super(50, 0 ,fixedPlayerSize: Size(80, 80)) {
+    this._bearRescued = 0;
+    this._bg = Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080));
+    this.camera = Camera(this.player, 
+      phoneSize: this.size, 
+      maxSize: Size(this._bg.getSpriteComponent().width, 
+                    this._bg.getSpriteComponent().height
+      ), 
+      sprites: this.platforms, 
+      background: this._bg
+    );
     this._bears = List();
     this._initBears();
   }
@@ -54,8 +64,8 @@ class ArcticLevel extends BaseLevel {
   @override
   void resize(Size size) {
     super.resize(size);
-    this._bg.resize(size);
     this.camera.phoneSize = size;
+    this._bg.resize(this.camera.maxSize);
   }
 
   @override
@@ -69,6 +79,11 @@ class ArcticLevel extends BaseLevel {
         //TODO: pick up polar bear
       }
     }
+
+    //Check collision with igloo
+    // if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
+    //   //TODO: wrap in condition if player presses the Use button, drop polar bear and increment _bearRescued++
+    // }
   }
 
   @override

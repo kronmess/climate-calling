@@ -75,18 +75,22 @@ abstract class BaseLevel extends BaseTimedWidget{
       if (plt.overlaps(playerRect)) {
         // SpriteServices.checkPassThrough(this.player, plt);
         AnimationComponent platAC = plt.getAnimationComponent();
-        if (this.player.isMovingDown) {
+        if (this.player.isMovingDown && pAC.y + pAC.height <= platAC.y + this.gravity) {    //Use gravity value for margin of error
           pAC.y = platAC.y - pAC.height;
           this.player.isMovingDown = false;
         }
-        if (this.player.isMovingUp) {
-          pAC.y = platAC.y + platAC.height;
-        }
-        if (this.player.isMovingRight && !this.player.isMovingDown) {
-          pAC.x = platAC.x - pAC.width;
-        }
-        if (this.player.isMovingLeft) {
-          pAC.x = platAC.x + platAC.width;
+        // if (this.player.isMovingUp) {
+        //   pAC.y = platAC.y + platAC.height;
+        // }
+        // if (this.player.isMovingRight && !this.player.isMovingDown && !SpriteServices.isDirectlyOnTop(this.player, plt)) {
+        //   pAC.x = platAC.x - pAC.width;
+        // }
+        // if (this.player.isMovingLeft && !this.player.isMovingDown && !SpriteServices.isDirectlyOnTop(this.player, plt)) {
+        //   pAC.x = platAC.x + platAC.width;
+        // }
+        if(!SpriteServices.isDirectlyOnTop(this.player, plt)){
+          this.player.isMovingUp = false;
+          this.player.isJump = false;
         }
       }
     }
@@ -97,7 +101,6 @@ abstract class BaseLevel extends BaseTimedWidget{
 
   @override
   void render(Canvas canvas) {
-    this.player.render(canvas);
     for (Platform plt in this.platforms) {
       AnimationComponent ac = plt.getAnimationComponent();
       //Only render if the position of the platform is within the phone screen
@@ -109,5 +112,6 @@ abstract class BaseLevel extends BaseTimedWidget{
         plt.render(canvas);
       }
     }
+    this.player.render(canvas);
   }
 }

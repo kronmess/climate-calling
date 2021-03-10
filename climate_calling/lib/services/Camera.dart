@@ -3,23 +3,28 @@ import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
+import 'package:climate_calling/game_screens/Background.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
+import 'package:flame/components/animation_component.dart';
+import 'package:flame/components/component.dart';
 import 'package:flutter/cupertino.dart';
 
 class Camera{
   //Fields
   List<BaseSprite> sprites = List();    //List of sprites to be moved, Player should not be in here
+  Background bg;   //Background if present that should be moved
   double x, y;
   Size maxSize, phoneSize;
   Player player;
   Point prevPlayerCenterPos;
 
   //Constructors
-  Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites}) {
+  Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites, Background background}) {
     if (this.sprites == null) {
       this.sprites = List();
     }
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
+    this.bg = background;
 
     //Attempt to fix max camera size
     if (this.maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
@@ -48,6 +53,9 @@ class Camera{
 
   Future<void> update() async{
     Point delta = await this._updateCameraPos();    //Update camera position and get delta
+    if (this.bg != null) {
+      this._calcBackgroundPos();
+    }
     for (BaseSprite sprite in this.sprites) {
       sprite.getAnimationComponent().x += delta.x;
       sprite.getAnimationComponent().y += delta.y;
@@ -60,6 +68,7 @@ class Camera{
     Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
     double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
+    
     //Determine delta
     //Determine xDelta
     if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
@@ -113,5 +122,32 @@ class Camera{
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
     return Point(xDelta, yDelta);
+  }
+
+  void _calcBackgroundPos(Size phoneSize, Point phoneCenter) {
+    // double x = this.x * -1;
+    // double y = this.y * -1;
+    // this.bg.getSpriteComponent().x = x;
+    // this.bg.getSpriteComponent().y = y;
+    SpriteComponent bgAC = this.bg.getSpriteComponent();
+    if (this.x <= phoneCenter.x) {
+      bgAC.x = 0;   //Anchor background to 0 on x on the phone
+    }
+    else if (this.x >= this.maxSize.width - phoneCenter.x) {
+      bgAC.x = 0 - bgAC.width.toDouble() + phoneSize.width;   //Anchor the background image X so that only the remaning right side is visible
+    }
+    else {
+      //TODO: Make the background move according to the player position in the real world
+    }
+
+    if (this.y <= phoneCenter.y) { //If camera pos is between 0 - phoneCenter.y
+      bgAC.y = 0;   //Anchor the background y to 0 on the phone
+    }
+    else if (this.y >= this.maxSize.height - phoneCenter.y) {
+      bgAC.y = 0 - bgAC.height.toDouble() + phoneSize.height;   //Anchor the background image y so that only the remaning bottom side is visible
+    }
+    else {
+      //TODO: Make the background move according to the player position in the real world
+    }
   }
 }

@@ -13,6 +13,9 @@ class Background extends BaseWidget {
   Background(String src) {
     this._bgSprite = SpriteComponent.fromSprite(0, 0, Sprite(src));
   }
+  
+  //Public Methods
+  SpriteComponent getSpriteComponent() => this._bgSprite;
 
   //Overridden Methods
   @override
