@@ -10,8 +10,12 @@ class Background extends BaseWidget {
   SpriteComponent _bgSprite;
 
   //Constructor
-  Background(String src) {
+  Background(String src, {Size size}) {
     this._bgSprite = SpriteComponent.fromSprite(0, 0, Sprite(src));
+    if (size != null) {
+      this._bgSprite.width = size.width > 0 ? size.width : this._bgSprite.width;
+      this._bgSprite.height = size.height > 0 ? size.height : this._bgSprite.height;
+    }
   }
   
   //Public Methods
