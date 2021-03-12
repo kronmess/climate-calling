@@ -19,7 +19,7 @@ class ArcticLevel extends BaseLevel {
   Camera camera;
   List<PolarBear> _bears;
   Terrain igloo;
-  int _bearRescued;   //The number of bears that has been rescued
+  int _bearRescued;   //The number of bears that has been rescued 
 
   //Constructor
   ArcticLevel() : super(50, 0 ,fixedPlayerSize: Size(80, 80)) {
@@ -69,7 +69,7 @@ class ArcticLevel extends BaseLevel {
   void resize(Size size) {
     super.resize(size);
     this.camera.phoneSize = size;
-    this._bg.resize(this.camera.maxSize);
+    // this._bg.resize(this.camera.maxSize);
   }
 
   @override
