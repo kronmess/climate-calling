@@ -33,7 +33,7 @@ class Camera{
     //Determine camera center
     this.x = this.prevPlayerCenterPos.x;
     this.y = this.prevPlayerCenterPos.y;
-    this._updateCameraPos();
+    // this._updateCameraPos();
   }
 
   //Public methods
@@ -52,22 +52,23 @@ class Camera{
   List<BaseSprite> getSprites() => this.sprites;
 
   Future<void> update() async{
-    Point delta = await this._updateCameraPos();    //Update camera position and get delta
-    if (this.bg != null) {
-      this._calcBackgroundPos();
-    }
+    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
+    Point delta = await this._updateCameraPos(phoneCenter);    //Update camera position and get delta
     for (BaseSprite sprite in this.sprites) {
       sprite.getAnimationComponent().x += delta.x;
       sprite.getAnimationComponent().y += delta.y;
     }
+    if (this.bg != null) {
+      this._calcBackgroundPos(this.phoneSize, phoneCenter);
+    }
   }
 
   //Private methods
-  Future<Point> _updateCameraPos() async {
+  Future<Point> _updateCameraPos(Point phoneCenter) async {
     Point playerCenter = SpriteServices.getSpriteCenter(this.player);
-    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
     double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
+    AnimationComponent pAC = this.player.getAnimationComponent();
     
     //Determine delta
     //Determine xDelta
@@ -87,7 +88,7 @@ class Camera{
       this.x += xDelta;
       xDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.x != 0) {
-        this.player.getAnimationComponent().x = phoneCenter.x * 2 - this.player.getAnimationComponent().width;    //Make the player remain in the center
+        pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
       }
     }
 
@@ -108,16 +109,16 @@ class Camera{
       this.y += yDelta;
       yDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.y != 0) {
-        this.player.getAnimationComponent().y = phoneCenter.y * 2 - this.player.getAnimationComponent().height;    //Make the player remain in the center
+        pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
       }
     }
 
-    // print("");
-    // print("Phone center: ${phoneCenter.x}, ${phoneCenter.y}");
-    // print("Player center: ${playerCenter.x}, ${playerCenter.y}");
-    // print("Camera Pos: $x, $y");
-    // print("Camera max size: ${maxSize.width}, ${maxSize.height}");
-    // print("Deltas $xDelta, $yDelta");
+    print("");
+    print("Phone center: ${phoneCenter.x}, ${phoneCenter.y}");
+    print("Player center: ${playerCenter.x}, ${playerCenter.y}");
+    print("Camera Pos: $x, $y");
+    print("Camera max size: ${maxSize.width}, ${maxSize.height}");
+    print("Deltas $xDelta, $yDelta");
 
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
@@ -138,6 +139,7 @@ class Camera{
     }
     else {
       //TODO: Make the background move according to the player position in the real world
+      // bgAC.x = 0 - this.x + phoneCenter.x;
     }
 
     if (this.y <= phoneCenter.y) { //If camera pos is between 0 - phoneCenter.y
@@ -148,6 +150,7 @@ class Camera{
     }
     else {
       //TODO: Make the background move according to the player position in the real world
+      bgAC.y = 0 - this.y + phoneCenter.y;
     }
   }
 }
