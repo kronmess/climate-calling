@@ -70,8 +70,8 @@ abstract class BaseLevel extends BaseTimedWidget{
     }
 
     Rect playerRect = pAC.toRect();
+    //Check for player collision with platform
     for (Platform plt in this.platforms) {
-      //Check for player collision with platform
       if (plt.overlaps(playerRect)) {
         // SpriteServices.checkPassThrough(this.player, plt);
         AnimationComponent platAC = plt.getAnimationComponent();
@@ -88,6 +88,10 @@ abstract class BaseLevel extends BaseTimedWidget{
         // if (this.player.isMovingLeft && !this.player.isMovingDown && !SpriteServices.isDirectlyOnTop(this.player, plt)) {
         //   pAC.x = platAC.x + platAC.width;
         // }
+        if(!SpriteServices.isDirectlyOnTop(this.player, plt)){
+          this.player.isMovingUp = false;
+          this.player.isJump = false;
+        }
         if(!SpriteServices.isDirectlyOnTop(this.player, plt)){
           this.player.isMovingUp = false;
           this.player.isJump = false;

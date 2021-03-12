@@ -39,7 +39,7 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    //Initialize polar bears here and add them to _bears List
+    //TODO: Initialize polar bears here and add them to _bears List
   }
 
   //Overridden Methods
@@ -56,9 +56,13 @@ class ArcticLevel extends BaseLevel {
   }
 
   @override
-  void render(Canvas canvas) {
+  void render(Canvas canvas) async{
     this._bg.render(canvas);
     super.render(canvas);
+    //TODO: Render igloo
+    for (PolarBear bear in this._bears) {
+      bear.render(canvas);
+    }
   }
 
   @override
@@ -72,11 +76,14 @@ class ArcticLevel extends BaseLevel {
   void update(double t) {
     super.update(t);
     this.camera.update();
+    Rect playerRect = this.player.getAnimationComponent().toRect();
 
     ///Polar bear interaction
     for (PolarBear bear in this._bears) {
-      if (this.player.getAnimationComponent().toRect().overlaps(bear.getAnimationComponent().toRect())) {
-        //TODO: pick up polar bear
+      if (playerRect.overlaps(bear.getAnimationComponent().toRect())) {
+        if (!this.player.isPickedUp) {    //If player isnt currently picking up a polar bear
+          //TODO: update player animation to the one picking up the polar bear
+        }
       }
     }
 
@@ -88,7 +95,7 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)),fixedSize: Size(1000,50));
 
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 300;
@@ -99,5 +106,6 @@ class ArcticLevel extends BaseLevel {
   @override
   void initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    //TODO: position igloo
   }
 }
