@@ -57,6 +57,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Climate Calling",
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(    //Allows widgets to be drawn on top of each other (overlapping one another)
