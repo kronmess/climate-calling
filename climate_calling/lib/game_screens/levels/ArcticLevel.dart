@@ -15,24 +15,18 @@ import '../Background.dart';
 class ArcticLevel extends BaseLevel {
 
   //Fields
-  Background _bg;
-  Camera camera;
   List<PolarBear> _bears;
   Terrain igloo;
   int _bearRescued;   //The number of bears that has been rescued 
 
   //Constructor
-  ArcticLevel() : super(50, 0 ,fixedPlayerSize: Size(80, 80)) {
+  ArcticLevel() : super(
+    50, 
+    0 ,
+    fixedPlayerSize: Size(80, 80), 
+    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080))
+  ) {
     this._bearRescued = 0;
-    this._bg = Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080));
-    this.camera = Camera(this.player, 
-      phoneSize: this.size, 
-      maxSize: Size(this._bg.getSpriteComponent().width, 
-                    this._bg.getSpriteComponent().height
-      ), 
-      sprites: this.platforms, 
-      background: this._bg
-    );
     this._bears = List();
     this._initBears();
   }
@@ -57,7 +51,6 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void render(Canvas canvas) async{
-    this._bg.render(canvas);
     super.render(canvas);
     //TODO: Render igloo
     for (PolarBear bear in this._bears) {
