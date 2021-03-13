@@ -52,7 +52,7 @@ class Camera{
   List<BaseSprite> getSprites() => this.sprites;
 
   Future<void> update() async{
-    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
+    Point<double> phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     Point delta = await this._updateCameraPos(phoneCenter);    //Update camera position and get delta
     for (BaseSprite sprite in this.sprites) {
       sprite.getAnimationComponent().x += delta.x;
@@ -84,11 +84,12 @@ class Camera{
     }
     else    //Between min and max camera pan, this is where sprites will move
     {
-      xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
       this.x += xDelta;
+      xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
       xDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.x != 0) {
-        pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
+        // pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
+        pAC.x = this.x + pAC.width + pAC.width/2;
       }
     }
 
@@ -105,11 +106,12 @@ class Camera{
     }
     else    //Between min and max camera pan, this is where sprites will move
     {
-      yDelta = playerCenter.y - this.prevPlayerCenterPos.y;   //Calculate delta for camera increment
       this.y += yDelta;
+      yDelta = playerCenter.y - this.prevPlayerCenterPos.y;   //Calculate delta for camera increment
       yDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.y != 0) {
-        pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
+        // pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
+        pAC.y = this.y + pAC.height - pAC.height/2;
       }
     }
 
@@ -119,7 +121,7 @@ class Camera{
     print("Camera Pos: $x, $y");
     print("Camera max size: ${maxSize.width}, ${maxSize.height}");
     print("Deltas $xDelta, $yDelta");
-    print("Background coordinates: ${this.bg.getSpriteComponent().x}, ${this.bg.getSpriteComponent().y}");
+    // print("Background coordinates: ${this.bg.getSpriteComponent().x}, ${this.bg.getSpriteComponent().y}");
 
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
@@ -139,8 +141,7 @@ class Camera{
       bgAC.x = 0 - bgAC.width.toDouble() + phoneSize.width;   //Anchor the background image X so that only the remaning right side is visible
     }
     else {
-      //TODO: Make the background move according to the player position in the real world
-      bgAC.x = 0 - this.x + phoneCenter.x;
+      bgAC.x = 0 - this.x + phoneCenter.x;    //This shifts the virtual world for some reason idk im crying
     }
 
     if (this.y <= phoneCenter.y) { //If camera pos is between 0 - phoneCenter.y
@@ -150,8 +151,7 @@ class Camera{
       bgAC.y = 0 - bgAC.height.toDouble() + phoneSize.height;   //Anchor the bac kground image y so that only the remaning bottom side is visible
     }
     else {
-      //TODO: Make the background move according to the player position in the real world
-      bgAC.y = 0 - this.y + phoneCenter.y;
+      bgAC.y = 0 - this.y + phoneCenter.y;  //This shifts the virtual world for some reason idk im crying
     }
   }
 }
