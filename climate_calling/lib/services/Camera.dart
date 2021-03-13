@@ -119,6 +119,7 @@ class Camera{
     print("Camera Pos: $x, $y");
     print("Camera max size: ${maxSize.width}, ${maxSize.height}");
     print("Deltas $xDelta, $yDelta");
+    print("Background coordinates: ${this.bg.getSpriteComponent().x}, ${this.bg.getSpriteComponent().y}");
 
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
@@ -139,14 +140,14 @@ class Camera{
     }
     else {
       //TODO: Make the background move according to the player position in the real world
-      // bgAC.x = 0 - this.x + phoneCenter.x;
+      bgAC.x = 0 - this.x + phoneCenter.x;
     }
 
     if (this.y <= phoneCenter.y) { //If camera pos is between 0 - phoneCenter.y
       bgAC.y = 0;   //Anchor the background y to 0 on the phone
     }
     else if (this.y >= this.maxSize.height - phoneCenter.y) {
-      bgAC.y = 0 - bgAC.height.toDouble() + phoneSize.height;   //Anchor the background image y so that only the remaning bottom side is visible
+      bgAC.y = 0 - bgAC.height.toDouble() + phoneSize.height;   //Anchor the bac kground image y so that only the remaning bottom side is visible
     }
     else {
       //TODO: Make the background move according to the player position in the real world
