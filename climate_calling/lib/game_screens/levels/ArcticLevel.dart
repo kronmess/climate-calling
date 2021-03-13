@@ -94,6 +94,12 @@ class ArcticLevel extends BaseLevel {
     plt.getAnimationComponent().y = 300;
 
     this.platforms.add(plt);
+
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(400,20));
+    plt.getAnimationComponent().x = 180;
+    plt.getAnimationComponent().y = 400;
+
+    this.platforms.add(plt);
   }
 
   @override
