@@ -69,6 +69,8 @@ class Camera{
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
     double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
     AnimationComponent pAC = this.player.getAnimationComponent();
+
+    this.x += xDelta;
     
     //Determine delta
     //Determine xDelta
@@ -79,13 +81,11 @@ class Camera{
     }
     else if (this.x >= this.maxSize.width - phoneCenter.x)
     {
-      this.x += xDelta;
       xDelta = 0;   //Prevent other sprites from moving
     }
     else    //Between min and max camera pan, this is where sprites will move
     {
-      this.x += xDelta;
-      xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
+      // xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
       xDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.x != 0) {
         // pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
