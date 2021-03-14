@@ -76,7 +76,6 @@ class Camera{
     //Determine xDelta
     if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
     { 
-      this.x += xDelta;
       xDelta = 0;   //Prevent other sprites from moving
     }
     else if (this.x >= this.maxSize.width - phoneCenter.x)
