@@ -19,7 +19,7 @@ class ArcticLevel extends BaseLevel {
   List<PolarBear> _bears;
   Terrain igloo;
   int _bearRescued;   //The number of bears that has been rescued 
-  PaletteEntry _camColor = PaletteEntry(Colors.yellow);
+  // PaletteEntry _camColor = PaletteEntry(Colors.yellow);
 
   //Constructor
   ArcticLevel() : super(
@@ -58,7 +58,7 @@ class ArcticLevel extends BaseLevel {
     for (PolarBear bear in this._bears) {
       bear.render(canvas);
     }
-    canvas.drawRect(Rect.fromLTWH(this.camera.x - 25, this.camera.y - 25, 50, 50), this._camColor.paint);   //Camera position debug
+    // canvas.drawRect(Rect.fromLTWH(this.camera.x - 25, this.camera.y - 25, 50, 50), this._camColor.paint);   //Camera position debug
   }
 
   @override

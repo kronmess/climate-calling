@@ -58,9 +58,9 @@ class Camera{
       sprite.getAnimationComponent().x += delta.x;
       sprite.getAnimationComponent().y += delta.y;
     }
-    if (this.bg != null) {
-      this._calcBackgroundPos(this.phoneSize, phoneCenter);
-    }
+    // if (this.bg != null) {
+    //   this._calcBackgroundPos(this.phoneSize, phoneCenter);
+    // }
   }
 
   //Private methods
@@ -69,26 +69,27 @@ class Camera{
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
     double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
     AnimationComponent pAC = this.player.getAnimationComponent();
-
-    this.x += xDelta;
     
     //Determine delta
     //Determine xDelta
     if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
     { 
+      this.x += xDelta;
       xDelta = 0;   //Prevent other sprites from moving
     }
     else if (this.x >= this.maxSize.width - phoneCenter.x)
     {
+      this.x += xDelta;
       xDelta = 0;   //Prevent other sprites from moving
     }
     else    //Between min and max camera pan, this is where sprites will move
     {
-      // xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
+      xDelta = playerCenter.x - this.prevPlayerCenterPos.x;   //Calculate delta for camera increment
+      this.x += xDelta;
       xDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.x != 0) {
-        // pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
-        pAC.x = this.x + pAC.width + pAC.width/2;
+        pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
+        // pAC.x = this.x + pAC.width + pAC.width/2;    //Attempt for moving alongside background
       }
     }
 
@@ -105,12 +106,12 @@ class Camera{
     }
     else    //Between min and max camera pan, this is where sprites will move
     {
-      this.y += yDelta;
       yDelta = playerCenter.y - this.prevPlayerCenterPos.y;   //Calculate delta for camera increment
+      this.y += yDelta;
       yDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.y != 0) {
-        // pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
-        pAC.y = this.y + pAC.height - pAC.height/2;
+        pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
+        // pAC.y = this.y + pAC.height - pAC.height/2; //Attempt for moving alongside background
       }
     }
 

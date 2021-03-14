@@ -84,10 +84,10 @@ abstract class BaseLevel extends BaseTimedWidget{
 
       //If player goes off screen, stop applying gravity and prevent it from sinkin
       // if (pAC.y + pAC.height >= this.size.height) {
-      if (pAC.y + pAC.height >= this.camera.maxSize.height) {
+      if (pAC.y + pAC.height >= this.size.height) {
         if (pAC.width > 0) {
-          //pAC.y = this.size.height - pAC.height;
-          pAC.y = this.camera.maxSize.height - pAC.height;
+          pAC.y = this.size.height - pAC.height;
+          // pAC.y = this.camera.maxSize.height - pAC.height;
         }
         this.player.isMovingDown = false;
       }
@@ -95,11 +95,11 @@ abstract class BaseLevel extends BaseTimedWidget{
       if (pAC.x < 0) {
         pAC.x = 0;
       }
-      // else if (pAC.x + pAC.width >= this.size.width) {
-      else if (pAC.x + pAC.width >= this.camera.maxSize.width) {
+      else if (pAC.x + pAC.width >= this.size.width) {
+      // else if (pAC.x + pAC.width >= this.camera.maxSize.width) {
         if (pAC.width > 0) {
-          //pAC.x = this.size.width - pAC.width;
-          pAC.x = this.camera.maxSize.width - pAC.width;
+          pAC.x = this.size.width - pAC.width;
+          // pAC.x = this.camera.maxSize.width - pAC.width;
         }
       }
 
