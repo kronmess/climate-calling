@@ -7,6 +7,7 @@ import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
@@ -15,17 +16,19 @@ import '../Background.dart';
 class ArcticLevel extends BaseLevel {
 
   //Fields
-  Background _bg;
-  Camera camera;
   List<PolarBear> _bears;
   Terrain igloo;
-  int _bearRescued;
+  int _bearRescued;   //The number of bears that has been rescued 
+  // PaletteEntry _camColor = PaletteEntry(Colors.yellow);
 
   //Constructor
-  ArcticLevel() : super(50, 0 ,fixedPlayerSize: Size(80, 80)) {
+  ArcticLevel() : super(
+    50, 
+    0 ,
+    fixedPlayerSize: Size(80, 80), 
+    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080))
+  ) {
     this._bearRescued = 0;
-    this._bg = Background(PATH_ARCTIC_LEVEL_BG);
-    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(2000, 1000), sprites: this.platforms);
     this._bears = List();
     this._initBears();
   }
@@ -50,19 +53,19 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void render(Canvas canvas) async{
-    this._bg.render(canvas);
     super.render(canvas);
     //TODO: Render igloo
     for (PolarBear bear in this._bears) {
       bear.render(canvas);
     }
+    // canvas.drawRect(Rect.fromLTWH(this.camera.x - 25, this.camera.y - 25, 50, 50), this._camColor.paint);   //Camera position debug
   }
 
   @override
   void resize(Size size) {
     super.resize(size);
-    this._bg.resize(size);
     this.camera.phoneSize = size;
+    // this._bg.resize(this.camera.maxSize);
   }
 
   @override
@@ -81,9 +84,9 @@ class ArcticLevel extends BaseLevel {
     }
 
     //Check collision with igloo
-    if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
-      //TODO: wrap in condition if player presses the Use button, drop polar bear and increment _bearRescued++
-    }
+    // if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
+    //   //TODO: wrap in condition if player presses the Use button, drop polar bear and increment _bearRescued++
+    // }
   }
 
   @override
@@ -92,6 +95,12 @@ class ArcticLevel extends BaseLevel {
 
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 300;
+
+    this.platforms.add(plt);
+
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(400,20));
+    plt.getAnimationComponent().x = 180;
+    plt.getAnimationComponent().y = 400;
 
     this.platforms.add(plt);
   }
