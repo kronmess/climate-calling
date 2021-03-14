@@ -115,12 +115,12 @@ class Camera{
       }
     }
 
-    print("");
-    print("Phone center: ${phoneCenter.x}, ${phoneCenter.y}");
-    print("Player center: ${playerCenter.x}, ${playerCenter.y}");
-    print("Camera Pos: $x, $y");
-    print("Camera max size: ${maxSize.width}, ${maxSize.height}");
-    print("Deltas $xDelta, $yDelta");
+    // print("");
+    // print("Phone center: ${phoneCenter.x}, ${phoneCenter.y}");
+    // print("Player center: ${playerCenter.x}, ${playerCenter.y}");
+    // print("Camera Pos: $x, $y");
+    // print("Camera max size: ${maxSize.width}, ${maxSize.height}");
+    // print("Deltas $xDelta, $yDelta");
     // print("Background coordinates: ${this.bg.getSpriteComponent().x}, ${this.bg.getSpriteComponent().y}");
 
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
