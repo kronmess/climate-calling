@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/sprite.dart';
@@ -8,8 +9,7 @@ import 'package:flame/time.dart';
 
 class Player extends BaseSprite {
   //Fields
-  bool isPickedUp = false,    //Tells if the player is currently guiding another sprite
-        isMovingRight = false,
+  bool isMovingRight = false,
         isMovingLeft = false,
         isMovingUp = false,
         isMovingDown = false;
@@ -20,8 +20,11 @@ class Player extends BaseSprite {
                 _spritesRight, 
                 _spritesLeftBear, 
                 _spritesRightBear, 
-                _jumpLeft, 
-                _jumpRight;
+                _jumpLeft,
+                _jumpLeftBear, 
+                _jumpRight,
+                _jumpRightBear;
+  PolarBear pickedUpBear;
 
   //Constructor
   Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize) {
@@ -30,11 +33,14 @@ class Player extends BaseSprite {
     //TODO: initialize sprites list for bear left and right, as well as jump left right.
   }
 
+  //Public Methods
+  bool isPickingUpBear() => this.pickedUpBear != null;
+
   //Overridden Methods
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(this.isPickedUp? this._spritesLeftBear : this._spritesLeft);
+      this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
       this.direction = BaseSprite.LEFT;
     }
     super.moveLeft();
@@ -43,7 +49,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickedUp? this._spritesRightBear : this._spritesRight); //TODO: if player is picking up bear, load the pick up polar bear right movement animaiton
+      this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
       this.direction = BaseSprite.RIGHT;
     }
     super.moveRight();
@@ -51,7 +57,13 @@ class Player extends BaseSprite {
   }
   @override
  void moveUp() {
-   if (this.isJump == false){
+  if (this.isJump == false) {
+    if (this.direction == BaseSprite.RIGHT) {
+      this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
+    }
+    else if (this.direction == BaseSprite.LEFT) {
+      this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
+    }
     super.moveUp();
   }
  }

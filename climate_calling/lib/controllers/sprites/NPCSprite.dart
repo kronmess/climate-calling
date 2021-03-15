@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class NPCSprite extends BaseSprite {
   //Fields
-  bool _guided = false;    //Tells if the NPC is currently being guided by the player
   List<Sprite> _spritesLeft, _spritesRight;
 
   //Constructor

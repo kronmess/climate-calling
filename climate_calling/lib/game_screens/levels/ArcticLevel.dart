@@ -45,6 +45,33 @@ class ArcticLevel extends BaseLevel {
     return false;
   }
 
+  //Public methods
+  Future<bool> pickUpPolarBear() async {
+    if (!this.player.isPickingUpBear()) {
+      Rect pRect = this.player.getAnimationComponent().toRect();
+      for (PolarBear bear in this._bears) {
+        if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
+          this.player.pickedUpBear = bear;
+          bear.isPickedUp = true;
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  bool dropPolarBear() {
+    if (this.player.isPickingUpBear()) {
+      PolarBear bear = this.player.pickedUpBear;
+      bear.isPickedUp = false;
+      bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
+      bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+      this.player.pickedUpBear = null;
+      return true;
+    }
+    return false;
+  }
+
+  //Overridden Methods
   @override
   void onTapDown(TapDownDetails details, Function fn) {
     super.onTapDown(details, fn);
@@ -73,15 +100,6 @@ class ArcticLevel extends BaseLevel {
     super.update(t);
     this.camera.update();
     Rect playerRect = this.player.getAnimationComponent().toRect();
-
-    ///Polar bear interaction
-    for (PolarBear bear in this._bears) {
-      if (playerRect.overlaps(bear.getAnimationComponent().toRect())) {
-        if (!this.player.isPickedUp) {    //If player isnt currently picking up a polar bear
-          //TODO: update player animation to the one picking up the polar bear
-        }
-      }
-    }
 
     //Check collision with igloo
     // if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
