@@ -114,4 +114,9 @@ class TestLevel extends BaseLevel {
     }
     this.camera.update();
   }
+
+  @override
+  void onInitCamera() {
+    super.onInitCamera();
+  }
 }

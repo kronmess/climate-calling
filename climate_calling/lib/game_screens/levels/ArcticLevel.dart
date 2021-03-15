@@ -98,9 +98,9 @@ class ArcticLevel extends BaseLevel {
   @override
   void render(Canvas canvas) async{
     super.render(canvas);
-    //TODO: Render igloo
+    this.igloo?.render(canvas);
     for (PolarBear bear in this._bears) {
-      bear.render(canvas);
+      bear?.render(canvas);
     }
     // canvas.drawRect(Rect.fromLTWH(this.camera.x - 25, this.camera.y - 25, 50, 50), this._camColor.paint);   //Camera position debug
   }
@@ -109,6 +109,10 @@ class ArcticLevel extends BaseLevel {
   void resize(Size size) {
     super.resize(size);
     this.camera.phoneSize = size;
+    this.igloo?.resize(size);
+    for (PolarBear bear in this._bears) {
+      bear?.resize(size);
+    }
     // this._bg.resize(this.camera.maxSize);
   }
 
@@ -150,6 +154,15 @@ class ArcticLevel extends BaseLevel {
   @override
   void initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
-    //TODO: position igloo
+    this.igloo.getAnimationComponent().x = 20;
+    this.igloo.getAnimationComponent().y = 10;
+  }
+
+  @override
+  void onInitCamera() {
+    super.onInitCamera();
+    //Add sprites to camera
+    this.camera.addSprites(this._bears);
+    this.camera.addSprite(this.igloo);
   }
 }
