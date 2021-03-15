@@ -46,6 +46,9 @@ class ArcticLevel extends BaseLevel {
   }
 
   //Public methods
+  /**
+   * Method to pick up bear. Returns true if polar bear is successfully picked up.
+   */
   Future<bool> pickUpPolarBear() async {
     if (!this.player.isPickingUpBear()) {
       Rect pRect = this.player.getAnimationComponent().toRect();
@@ -59,13 +62,27 @@ class ArcticLevel extends BaseLevel {
     }
     return false;
   }
+  /**
+   * Method to drop polar bear.
+   * Dropped polar bear will be rendered and dropped at the player's current position
+   * Returns true if polar bear is successfully dropped.
+   */
   bool dropPolarBear() {
     if (this.player.isPickingUpBear()) {
       PolarBear bear = this.player.pickedUpBear;
+      Rect pRect = this.player.getAnimationComponent().toRect();
       bear.isPickedUp = false;
-      bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
-      bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+      if (pRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
+        this._bearRescued++;        //Increase bear rescued counter
+        this._bears.remove(bear);   //Remove bear object
+      }
+      else {
+        //Move bear to player pos
+        bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
+        bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+      }
       this.player.pickedUpBear = null;
+
       return true;
     }
     return false;
@@ -97,6 +114,13 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void update(double t) {
+    
+    //Polar bear apply gravity
+    for (PolarBear bear in this._bears) {
+      bear.update(t);
+      bear.applyGravity();
+    }
+
     super.update(t);
     this.camera.update();
     Rect playerRect = this.player.getAnimationComponent().toRect();
