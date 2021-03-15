@@ -33,18 +33,6 @@ class ArcticLevel extends BaseLevel {
     this._initBears();
   }
 
-  //Private Methods
-  void _initBears() {
-    //TODO: Initialize polar bears here and add them to _bears List
-  }
-
-  //Overridden Methods
-  @override
-  bool isLevelFinished() {
-    // TODO: implement isLevelFinished
-    return false;
-  }
-
   //Public methods
   /**
    * Method to pick up bear. Returns true if polar bear is successfully picked up.
@@ -85,6 +73,17 @@ class ArcticLevel extends BaseLevel {
 
       return true;
     }
+    return false;
+  }
+
+  //Private Methods
+  void _initBears() {
+    //TODO: Initialize polar bears here and add them to _bears List (dont forget to set gravity value)
+  }
+
+  @override
+  bool isLevelFinished() {
+    // TODO: implement isLevelFinished
     return false;
   }
 
