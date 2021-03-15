@@ -7,6 +7,7 @@ import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
@@ -126,12 +127,18 @@ class ArcticLevel extends BaseLevel {
 
     super.update(t);
     this.camera.update();
-    Rect playerRect = this.player.getAnimationComponent().toRect();
+    // Rect playerRect = this.player.getAnimationComponent().toRect();
 
-    //Check collision with igloo
-    // if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
-    //   //TODO: wrap in condition if player presses the Use button, drop polar bear and increment _bearRescued++
-    // }
+    //Polar bear collision with platform
+    for (PolarBear bear in this._bears) {
+      AnimationComponent bAC = bear.getAnimationComponent();
+      for (Platform platform in this.platforms) {
+        AnimationComponent platAC = platform.getAnimationComponent();
+        if (bAC.y + bAC.height <= platAC.y + this.gravity) {
+          bAC.y = platAC.y - bAC.height;
+        }
+      }
+    }
   }
 
   @override
