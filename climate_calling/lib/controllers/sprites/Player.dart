@@ -27,7 +27,17 @@ class Player extends BaseSprite {
   PolarBear pickedUpBear;
 
   //Constructor
-  Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), fixedSize: fixedSize) {
+  Player(
+    {Size fixedSize, 
+    double xPos, 
+    double yPos}
+  ) 
+  : super(
+    SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), 
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
+  ) {
     this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4);
     this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4);
     //TODO: initialize sprites list for bear left and right, as well as jump left right.

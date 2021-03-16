@@ -11,8 +11,17 @@ class NPCSprite extends BaseSprite {
   //Constructor
   NPCSprite({@required List<Sprite> spritesLeft, 
     @required List<Sprite> spritesRight, 
-    gravity = 0, Size fixedSize
-  }) : super(spritesRight, gravity: gravity, fixedSize: fixedSize) {
+    double gravity = 0, 
+    Size fixedSize,
+    double xPos,
+    double yPos,
+  }) : super(
+    spritesRight, 
+    gravity: gravity, 
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
+    ) {
     this._spritesLeft = spritesLeft;
     this._spritesRight = spritesRight;
   }

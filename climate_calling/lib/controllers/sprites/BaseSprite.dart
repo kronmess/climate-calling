@@ -26,9 +26,14 @@ class BaseSprite extends BaseTimedWidget {
     double stepTime = 0.1,
     this.direction = BaseSprite.IDLE,
     Size fixedSize,
+    double xPos = 0,
+    double yPos = 0,
   }) {
     this.animationComponent = sprites == null ? null : AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
     this.fixedSize = fixedSize == null ? Size(-1, -1) : fixedSize;
+
+    this.animationComponent.x = xPos == null? 0 : xPos;
+    this.animationComponent.y = yPos == null? 0 : yPos;
   }
 
   //Public Methods

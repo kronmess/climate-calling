@@ -88,7 +88,7 @@ class TestLevel extends BaseLevel {
     this.igloo?.resize(size);
     this.camera.phoneSize = size;
     for (PolarBear bear in this.bears) {
-      bear.resize(size);
+      bear?.resize(size);
     }
   }
 
@@ -118,5 +118,7 @@ class TestLevel extends BaseLevel {
   @override
   void onInitCamera() {
     super.onInitCamera();
+    this.camera.addSprites(this.bears);
+    this.camera.addSprite(this.igloo);
   }
 }

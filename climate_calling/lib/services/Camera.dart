@@ -28,8 +28,10 @@ class Camera{
     this.bg = background;
 
     //Attempt to fix max camera size
-    if (this.maxSize == null || maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
-    if (this.maxSize == null || this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    if (maxSize != null) {
+      if (maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
+      if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    }
 
     //Determine camera center
     this.x = this.prevPlayerCenterPos.x;

@@ -80,6 +80,9 @@ class ArcticLevel extends BaseLevel {
   //Private Methods
   void _initBears() {
     //TODO: Initialize polar bears here and add them to _bears List (dont forget to set gravity value)
+    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
+
+    this._bears.add(bear);
   }
 
   @override
@@ -134,8 +137,10 @@ class ArcticLevel extends BaseLevel {
       AnimationComponent bAC = bear.getAnimationComponent();
       for (Platform platform in this.platforms) {
         AnimationComponent platAC = platform.getAnimationComponent();
-        if (bAC.y + bAC.height <= platAC.y + this.gravity) {
-          bAC.y = platAC.y - bAC.height;
+        if (bAC.toRect().overlaps(platAC.toRect())) {
+          if (bAC.y + bAC.height <= platAC.y + this.gravity) {
+            bAC.y = platAC.y - bAC.height;
+          }
         }
       }
     }

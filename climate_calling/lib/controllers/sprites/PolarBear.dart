@@ -10,12 +10,22 @@ class PolarBear extends NPCSprite {
   bool isPickedUp;    //Flags whether it is being picked up by the player or not
 
   //Constructor
-  PolarBear({double gravity = 5}) : super(spritesRight: SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4), 
+  PolarBear({
+    double gravity = 5, 
+    Size fixedSize,
+    double xPos,
+    double yPos,
+  }) : super(
+    spritesRight: SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4), 
     spritesLeft: SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, 4), 
-    gravity: gravity
+    gravity: gravity,
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
   ){
     this.getAnimationComponent().width = 500;
     this.getAnimationComponent().height = 300;
+    this.isPickedUp = false;
   }
 
   //Overridden Methods

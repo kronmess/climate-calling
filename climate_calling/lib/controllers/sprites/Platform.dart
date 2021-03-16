@@ -5,7 +5,18 @@ import 'package:flame/sprite.dart';
 
 class Platform extends Terrain {
   //Constructor
-  Platform(List<Sprite> sprites, {Size fixedSize}) : super(sprites, false, fixedSize: fixedSize);
+  Platform(
+    List<Sprite> sprites, 
+    {Size fixedSize,
+    double xPos,
+    double yPos,
+  }) : super(
+    sprites, 
+    false, 
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
+  );
   @deprecated
   Platform.from(Platform platform, {Size fixedSize}) : super(null, false, fixedSize: fixedSize == null? platform.fixedSize : fixedSize)
   {
