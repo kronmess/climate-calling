@@ -19,16 +19,19 @@ class Camera{
   Point prevPlayerCenterPos;
 
   //Constructors
-  Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites, Background background}) {
+  Camera(this.player, {@required this.phoneSize, @required this.maxSize, List<BaseSprite> sprites, Background background}) {
+    this.sprites = List.empty(growable: true);
     if (this.sprites == null) {
-      this.sprites = List();
+      this.addSprites(sprites);
     }
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     this.bg = background;
 
     //Attempt to fix max camera size
-    if (this.maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
-    if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    if (maxSize != null) {
+      if (maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
+      if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    }
 
     //Determine camera center
     this.x = this.prevPlayerCenterPos.x;
@@ -55,8 +58,10 @@ class Camera{
     Point<double> phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     Point delta = await this._updateCameraPos(phoneCenter);    //Update camera position and get delta
     for (BaseSprite sprite in this.sprites) {
-      sprite.getAnimationComponent().x += delta.x;
-      sprite.getAnimationComponent().y += delta.y;
+      if (sprite != null) {
+        sprite.getAnimationComponent().x += delta.x;
+        sprite.getAnimationComponent().y += delta.y;
+      }
     }
     // if (this.bg != null) {
     //   this._calcBackgroundPos(this.phoneSize, phoneCenter);

@@ -7,6 +7,7 @@ import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
@@ -33,18 +34,64 @@ class ArcticLevel extends BaseLevel {
     this._initBears();
   }
 
-  //Private Methods
-  void _initBears() {
-    //TODO: Initialize polar bears here and add them to _bears List
+  //Public methods
+  /**
+   * Method to pick up bear. Returns true if polar bear is successfully picked up.
+   */
+  Future<bool> pickUpPolarBear() async {
+    if (!this.player.isPickingUpBear()) {
+      Rect pRect = this.player.getAnimationComponent().toRect();
+      for (PolarBear bear in this._bears) {
+        if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
+          this.player.pickedUpBear = bear;
+          bear.isPickedUp = true;
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  /**
+   * Method to drop polar bear.
+   * Dropped polar bear will be rendered and dropped at the player's current position
+   * Returns true if polar bear is successfully dropped.
+   */
+  bool dropPolarBear() {
+    if (this.player.isPickingUpBear()) {
+      PolarBear bear = this.player.pickedUpBear;
+      Rect pRect = this.player.getAnimationComponent().toRect();
+      bear.isPickedUp = false;
+      if (pRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
+        this._bearRescued++;        //Increase bear rescued counter
+        this._bears.remove(bear);   //Remove bear object
+      }
+      else {
+        //Move bear to player pos
+        bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
+        bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+      }
+      this.player.pickedUpBear = null;
+
+      return true;
+    }
+    return false;
   }
 
-  //Overridden Methods
+  //Private Methods
+  void _initBears() {
+    //TODO: Initialize polar bears here and add them to _bears List (dont forget to set gravity value)
+    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
+
+    this._bears.add(bear);
+  }
+
   @override
   bool isLevelFinished() {
     // TODO: implement isLevelFinished
     return false;
   }
 
+  //Overridden Methods
   @override
   void onTapDown(TapDownDetails details, Function fn) {
     super.onTapDown(details, fn);
@@ -54,9 +101,9 @@ class ArcticLevel extends BaseLevel {
   @override
   void render(Canvas canvas) async{
     super.render(canvas);
-    //TODO: Render igloo
+    this.igloo?.render(canvas);
     for (PolarBear bear in this._bears) {
-      bear.render(canvas);
+      bear?.render(canvas);
     }
     // canvas.drawRect(Rect.fromLTWH(this.camera.x - 25, this.camera.y - 25, 50, 50), this._camColor.paint);   //Camera position debug
   }
@@ -65,28 +112,38 @@ class ArcticLevel extends BaseLevel {
   void resize(Size size) {
     super.resize(size);
     this.camera.phoneSize = size;
+    this.igloo?.resize(size);
+    for (PolarBear bear in this._bears) {
+      bear?.resize(size);
+    }
     // this._bg.resize(this.camera.maxSize);
   }
 
   @override
   void update(double t) {
+    
+    //Polar bear apply gravity
+    for (PolarBear bear in this._bears) {
+      bear.update(t);
+      bear.applyGravity();
+    }
+
     super.update(t);
     this.camera.update();
-    Rect playerRect = this.player.getAnimationComponent().toRect();
+    // Rect playerRect = this.player.getAnimationComponent().toRect();
 
-    ///Polar bear interaction
+    //Polar bear collision with platform
     for (PolarBear bear in this._bears) {
-      if (playerRect.overlaps(bear.getAnimationComponent().toRect())) {
-        if (!this.player.isPickedUp) {    //If player isnt currently picking up a polar bear
-          //TODO: update player animation to the one picking up the polar bear
+      AnimationComponent bAC = bear.getAnimationComponent();
+      for (Platform platform in this.platforms) {
+        AnimationComponent platAC = platform.getAnimationComponent();
+        if (bAC.toRect().overlaps(platAC.toRect())) {
+          if (bAC.y + bAC.height <= platAC.y + this.gravity) {
+            bAC.y = platAC.y - bAC.height;
+          }
         }
       }
     }
-
-    //Check collision with igloo
-    // if (playerRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
-    //   //TODO: wrap in condition if player presses the Use button, drop polar bear and increment _bearRescued++
-    // }
   }
 
   @override
@@ -108,6 +165,15 @@ class ArcticLevel extends BaseLevel {
   @override
   void initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
-    //TODO: position igloo
+    this.igloo.getAnimationComponent().x = 20;
+    this.igloo.getAnimationComponent().y = 10;
+  }
+
+  @override
+  void onInitCamera() {
+    super.onInitCamera();
+    //Add sprites to camera
+    this.camera.addSprites(this._bears);
+    this.camera.addSprite(this.igloo);
   }
 }

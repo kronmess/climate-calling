@@ -8,7 +8,18 @@ class Terrain extends BaseSprite {
   bool canPassThrough;
 
   //Constructor
-  Terrain(List<Sprite> sprites, this.canPassThrough, {Size fixedSize}) : super(sprites, fixedSize: fixedSize);
+  Terrain(
+    List<Sprite> sprites, 
+    this.canPassThrough, 
+    {Size fixedSize,
+    double xPos, 
+    double yPos,
+  }) : super(
+    sprites, 
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
+  );
 
   //Abstract methods
   void onPassThrough(double t){}

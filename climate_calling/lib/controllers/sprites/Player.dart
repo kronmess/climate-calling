@@ -1,14 +1,14 @@
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/sprite.dart';
 
 class Player extends BaseSprite {
   //Fields
-  bool isPickedUp = false,    //Tells if the player is currently guiding another sprite
-        isMovingRight = false,
+  bool isMovingRight = false,
         isMovingLeft = false,
         isMovingUp = false,
         isMovingDown = false;
@@ -23,9 +23,20 @@ class Player extends BaseSprite {
                 _jumpLeftBear, 
                 _jumpRight,
                 _jumpRightBear;
+  PolarBear pickedUpBear;
 
   //Constructor
-  Player({Size fixedSize}) : super(SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4), fixedSize: fixedSize) {
+  Player(
+    {Size fixedSize, 
+    double xPos, 
+    double yPos}
+  ) 
+  : super(
+    SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4), 
+    fixedSize: fixedSize,
+    xPos: xPos,
+    yPos: yPos,
+  ) {
     this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4);
     this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 1, finalFrame: 4);
     this._spritesLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 7, finalFrame: 10);
@@ -36,11 +47,14 @@ class Player extends BaseSprite {
     this._jumpRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 12, finalFrame: 12);
   }
 
+  //Public Methods
+  bool isPickingUpBear() => this.pickedUpBear != null;
+
   //Overridden Methods
   @override
   void moveLeft() {
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(this.isPickedUp? this._spritesLeftBear : this._spritesLeft);
+      this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
       this.direction = BaseSprite.LEFT;
     }
     super.moveLeft();
@@ -49,7 +63,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickedUp? this._spritesRightBear : this._spritesRight);
+      this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
       this.direction = BaseSprite.RIGHT;
     }
     super.moveRight();
@@ -59,10 +73,10 @@ class Player extends BaseSprite {
  void moveUp() {
   if (this.isJump == false) {
     if (this.direction == BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickedUp? this._jumpRightBear : this._jumpRight);
+      this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
     }
     else if (this.direction == BaseSprite.LEFT) {
-      this.setAnimations(this.isPickedUp? this._jumpLeftBear : this._jumpLeft);
+      this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
     }
     super.moveUp();
   }

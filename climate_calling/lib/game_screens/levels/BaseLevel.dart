@@ -36,25 +36,33 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.platforms = List();
     this.applyGravity = true;
     this.bg = await background;
-    this.camera = Camera(this.player, 
+
+    //Initialize platforms and terrain
+    await this.initPlatforms();
+    await this.initTerrain();
+
+    this.camera = await Camera(this.player, 
       phoneSize: this.size, 
       maxSize: this.bg != null? Size(this.bg.getSpriteComponent().width, 
                     this.bg.getSpriteComponent().height
       ) : cameraSize, 
-      sprites: this.platforms, 
       background: this.bg
     );
 
-    //Initialize platforms and terrain
-    this.initPlatforms();
-    this.initTerrain();
-
-    //Apply gravity to player
+    //Set gravity value to player
     this.player.gravity = gravity;
 
     //Move the player to the desired position
     this.player.getAnimationComponent().x = x;
     this.player.getAnimationComponent().y = y;
+
+    this.onInitCamera();  //Function call after camera is initialized
+  }
+
+  //Protected methods
+  @protected
+  void onInitCamera() {
+    this.camera.addSprites(this.platforms);
   }
 
   //abstrasct Methods
