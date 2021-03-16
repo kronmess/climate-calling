@@ -60,15 +60,15 @@ class ArcticLevel extends BaseLevel {
     if (this.player.isPickingUpBear()) {
       PolarBear bear = this.player.pickedUpBear;
       Rect pRect = this.player.getAnimationComponent().toRect();
-      bear.isPickedUp = false;
       if (pRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
         this._bearRescued++;        //Increase bear rescued counter
-        this._bears.remove(bear);   //Remove bear object
+        // this._bears.remove(bear);   //Remove bear object
       }
       else {
         //Move bear to player pos
         bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
         bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+        bear.isPickedUp = false;
       }
       this.player.pickedUpBear = null;
 
@@ -83,12 +83,6 @@ class ArcticLevel extends BaseLevel {
     PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
 
     this._bears.add(bear);
-  }
-
-  @override
-  bool isLevelFinished() {
-    // TODO: implement isLevelFinished
-    return false;
   }
 
   //Overridden Methods
@@ -121,6 +115,11 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void update(double t) {
+
+    //Check game status
+    if (this._bearRescued == this._bears.length) {
+      this.victory = true;
+    }
     
     //Polar bear apply gravity
     for (PolarBear bear in this._bears) {
