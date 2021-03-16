@@ -18,265 +18,273 @@ class _FlutterGameSettingsScreenState extends State<FlutterGameSettingsScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          height: 700,
-          width: 50,
-        ),
-        Flexible(
-          flex: 3,
-          child: Image(
-            image: AssetImage(PATH_SETTINGS_TILE),
-            height: 1000,
-            width: 1000,
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                widthFactor: 3,
+                child: Image(
+                  image: AssetImage(PATH_SETTINGS_TILE),
+                  height: 400,
+                  width: 400,
+                ),
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 50,
-        ),
-        Stack(
-          children: [
-            Positioned(
-              bottom: 270,
-              right: 340,
-              child: Text(
-                'Background Music',
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 6,
+                widthFactor: 21,
+                child: Image(
+                  image: AssetImage(PATH_NOTO_FIRE),
+                  height: 40,
+                  width: 40,
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
-        Stack(
-          children: [
-            Positioned(
-              bottom: 220,
-              right: 350,
-              child: Text(
-                'Sound Effects',
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                  child: Center(
+                heightFactor: 3,
+                widthFactor: 8.5,
+                child: Text(
+                  'Background Music',
+                  style: TextStyle(
+                      height: 5, fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              )),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Center(
+                  heightFactor: 10,
+                  widthFactor: 21,
+                  child: Image(
+                    image: AssetImage(PATH_NOTO_FIRE),
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
               ),
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  bottom: 220,
-                  right: 259,
-                  height: 300,
-                  width: 300,
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Center(
+                  heightFactor: 5,
+                  widthFactor: 8.5,
+                  child: Text(
+                    'Sound Effects',
+                    style: TextStyle(
+                        height: 5, fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Center(
+                  heightFactor: 0.3,
+                  widthFactor: 3,
                   child: Image(
                     image: AssetImage(PATH_BUTTON_MAIN_MENU),
                     height: 350,
                     width: 400,
                   ),
                 ),
-                Stack(
-                  children: [
-                    Positioned(
-                      bottom: 330,
-                      right: 350,
-                      child: Text(
-                        'Settings',
-                        style: TextStyle(
-                            height: 5,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        Stack(
-          children: [
-            Positioned(
-              bottom: 65,
-              right: 300,
-              height: 98,
-              width: 200,
-              child: SettingsButton(
-                image: AssetImage(PATH_SETTINGS_BORDER),
               ),
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  bottom: 100,
-                  right: 310,
-                  child: SettingsButton(
-                    image: AssetImage(PATH_SETTINGS_BUTTON),
-                    text: "Enable Hints",
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 0.2,
+                widthFactor: 8.5,
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                      height: 5, fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SingleChildScrollView(
+                child: Center(
+                  heightFactor: 15.5,
+                  widthFactor: 20,
+                  child: Image(
+                    image: AssetImage(PATH_SOUND),
+                    height: 30,
+                    width: 30,
                   ),
                 ),
-                Stack(
-                  children: [
-                    Positioned(
-                      bottom: 50,
-                      right: 330,
-                      child: SettingsButton(
-                          image: AssetImage(PATH_SETTINGS_BUTTON),
-                          text: "Return to Main Menu",
-                          onTap: () {
-                            climateCalling.switchScreen(ScreenState.kMainMenu);
-                          }),
-                    ),
-                    Container(
-                      height: 2000,
-                      width: 200,
-                    ),
-                    Stack(
-                      children: [
-                        Positioned(
-                          bottom: 295,
-                          right: 380,
-                          height: 40,
-                          width: 40,
-                          child: SettingsButton(
-                            image: AssetImage(PATH_NOTO_FIRE),
-                          ),
-                        ),
-                        Stack(
-                          children: [
-                            Positioned(
-                              bottom: 290,
-                              right: 380,
-                              child: Text(
-                                'Music',
-                                style: TextStyle(
-                                    height: 5, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Stack(
-                              children: [
-                                Positioned(
-                                  bottom: 150,
-                                  right: 380,
-                                  height: 40,
-                                  width: 40,
-                                  child: SettingsButton(
-                                    image: AssetImage(PATH_NOTO_FIRE),
-                                  ),
-                                ),
-                                Stack(
-                                  children: [
-                                    Positioned(
-                                      bottom: 150,
-                                      right: 360,
-                                      child: Text(
-                                        'Game Guide',
-                                        style: TextStyle(
-                                            height: 5,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Stack(
-                                      children: [
-                                        Positioned(
-                                          bottom: 250,
-                                          right: 490,
-                                          height: 30,
-                                          width: 30,
-                                          child: SettingsButton(
-                                            image: AssetImage(PATH_SOUND),
-                                          ),
-                                        ),
-                                        Stack(
-                                          children: [
-                                            Positioned(
-                                              bottom: 200,
-                                              right: 490,
-                                              height: 30,
-                                              width: 30,
-                                              child: SettingsButton(
-                                                image: AssetImage(PATH_SOUND),
-                                              ),
-                                            ),
-                                            Stack(children: [
-                                              Positioned(
-                                                bottom: 80,
-                                                right: 410,
-                                                height: 80,
-                                                width: 80,
-                                                child: Image(
-                                                  image:
-                                                      AssetImage(PATH_LOGO_APP),
-                                                  height: 350,
-                                                  width: 400,
-                                                ),
-                                              ),
-                                              Stack(
-                                                children: [
-                                                  Positioned(
-                                                    bottom: 223,
-                                                    right: 275,
-                                                    width: 220,
-                                                    height: 80,
-                                                    child: Slider(
-                                                        value: _value,
-                                                        divisions: 10,
-                                                        min: 0,
-                                                        max: 100,
-                                                        activeColor:
-                                                            Colors.black,
-                                                        inactiveColor:
-                                                            Colors.grey,
-                                                        label: _value
-                                                            .round()
-                                                            .toString(),
-                                                        onChanged:
-                                                            (double newValue) {
-                                                          setState(() {
-                                                            _value = newValue;
-                                                          });
-                                                        }),
-                                                  ),
-                                                  Stack(
-                                                    children: [
-                                                      Positioned(
-                                                        bottom: 170,
-                                                        right: 275,
-                                                        width: 220,
-                                                        height: 80,
-                                                        child: Slider(
-                                                            value: _valuetwo,
-                                                            divisions: 10,
-                                                            min: 0,
-                                                            max: 100,
-                                                            activeColor:
-                                                                Colors.black,
-                                                            inactiveColor:
-                                                                Colors.grey,
-                                                            label: _valuetwo
-                                                                .round()
-                                                                .toString(),
-                                                            onChanged: (double
-                                                                newValue) {
-                                                              setState(() {
-                                                                _valuetwo =
-                                                                    newValue;
-                                                              });
-                                                            }),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ]),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 10.5,
+                widthFactor: 20,
+                child: Image(
+                  image: AssetImage(PATH_SOUND),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 8,
+                widthFactor: 4,
+                child: Image(
+                  image: AssetImage(PATH_SETTINGS_BORDER),
+                  height: 78,
+                  width: 200,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 11,
+                widthFactor: 8,
+                child: Image(
+                  image: AssetImage(PATH_LOGO_APP),
+                  height: 50,
+                  width: 80,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 20,
+                widthFactor: 5.5,
+                child: SettingsButton(
+                    image: AssetImage(PATH_SETTINGS_BUTTON),
+                    text: "Return to Main Menu",
+                    onTap: () {
+                      climateCalling.switchScreen(ScreenState.kMainMenu);
+                    }),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 6,
+                widthFactor: 5.5,
+                child: SizedBox(
+                  height: 80,
+                  width: 220,
+                  child: Slider(
+                      value: _value,
+                      divisions: 10,
+                      min: 0,
+                      max: 100,
+                      activeColor: Colors.black,
+                      inactiveColor: Colors.grey,
+                      label: _valuetwo.round().toString(),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          _value = newValue;
+                        });
+                      }),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                heightFactor: 4,
+                widthFactor: 5.5,
+                child: SizedBox(
+                  height: 80,
+                  width: 220,
+                  child: Slider(
+                      value: _valuetwo,
+                      divisions: 10,
+                      min: 0,
+                      max: 100,
+                      activeColor: Colors.black,
+                      inactiveColor: Colors.grey,
+                      label: _valuetwo.round().toString(),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          _valuetwo = newValue;
+                        });
+                      }),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
