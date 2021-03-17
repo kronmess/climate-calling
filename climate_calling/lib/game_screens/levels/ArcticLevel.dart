@@ -121,7 +121,7 @@ class ArcticLevel extends BaseLevel {
     
     //Polar bear apply gravity
     for (PolarBear bear in this._bears) {
-      bear.update(t);
+      bear.update(t); 
       bear.applyGravity();
     }
 
@@ -129,14 +129,20 @@ class ArcticLevel extends BaseLevel {
     this.camera.update();
     // Rect playerRect = this.player.getAnimationComponent().toRect();
 
-    //Polar bear collision with platform
+    //Polar bear collision
     for (PolarBear bear in this._bears) {
       AnimationComponent bAC = bear.getAnimationComponent();
+      //Polar bear collision with platform
       for (Platform platform in this.platforms) {
         AnimationComponent platAC = platform.getAnimationComponent();
         if (bAC.y + bAC.height <= platAC.y + this.gravity) {
           bAC.y = platAC.y - bAC.height;
         }
+      }
+      //Pollar bear collision with world limit
+      if (bAC.y + bAC.height > this.camera.maxSize.height) {
+        //Kill polar bear
+        bear.isPickedUp = true; //Just to make it invisible
       }
     }
   }
