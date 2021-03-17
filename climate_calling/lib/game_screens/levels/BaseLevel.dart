@@ -16,6 +16,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   bool applyGravity;
   Background bg;
   Camera camera;
+  bool victory;
 
   //Constructor
   BaseLevel(double x, double y, {double gravity = 5, Size fixedPlayerSize, Background background, Size cameraSize}) {
@@ -36,6 +37,7 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.platforms = List();
     this.applyGravity = true;
     this.bg = await background;
+    this.victory = null;
 
     //Initialize platforms and terrain
     await this.initPlatforms();
@@ -66,7 +68,6 @@ abstract class BaseLevel extends BaseTimedWidget{
   }
 
   //abstrasct Methods
-  bool isLevelFinished();
   @protected
   void initPlatforms();
   @protected
@@ -95,6 +96,7 @@ abstract class BaseLevel extends BaseTimedWidget{
       if (pAC.y + pAC.height >= this.size.height) {
         if (pAC.width > 0) {
           pAC.y = this.size.height - pAC.height;
+          this.victory = false;   //Defeat
           // pAC.y = this.camera.maxSize.height - pAC.height;
         }
         this.player.isMovingDown = false;

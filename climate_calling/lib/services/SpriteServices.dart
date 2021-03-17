@@ -1,15 +1,14 @@
 import 'dart:ui' as ui;
 import 'dart:math';
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
-import 'package:climate_calling/controllers/sprites/Platform.dart';
+import 'package:climate_calling/services/ImageCombiner.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as image;
-
-import 'ImageCombiner.dart';
 
 class SpriteServices {
   
@@ -62,10 +61,13 @@ class SpriteServices {
   /**
    * Loads sprites from the resource folder
    */
-  static List<Sprite> loadSprites(String folderPath, int frames) {
+  static List<Sprite> loadSprites(String folderPath, {@required int initialFrame, @required int finalFrame}) {
     List<Sprite> list = List();
 
-    for (int i=1; i<=frames; i++) {
+    if (initialFrame <= 0) initialFrame = 1;
+    if (finalFrame < initialFrame) finalFrame = initialFrame;
+
+    for (int i=initialFrame; i<=finalFrame; i++) {
       list.add(Sprite("$folderPath$i.png"));
     }
 
@@ -154,7 +156,7 @@ class SpriteServices {
   /**
    * Add an image as a list of image consisting of one element
    */
-  static List<Sprite> getSpriteImageAsList(Image img) {
+  static List<Sprite> getSpriteImageAsList(ui.Image img) {
     List<Sprite> ls = List();
 
     Sprite spr = Sprite.fromImage(img);

@@ -16,8 +16,8 @@ class PolarBear extends NPCSprite {
     double xPos,
     double yPos,
   }) : super(
-    spritesRight: SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4), 
-    spritesLeft: SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, 4), 
+    spritesRight: SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, initialFrame: 1, finalFrame: 4), 
+    spritesLeft: SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, initialFrame: 1, finalFrame: 4), 
     gravity: gravity,
     fixedSize: fixedSize,
     xPos: xPos,
@@ -33,7 +33,7 @@ class PolarBear extends NPCSprite {
   void moveLeft() {
     super.moveLeft();
     if (this.direction != BaseSprite.LEFT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, 4));
+      this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, initialFrame: 1, finalFrame: 4));
       this.direction = BaseSprite.LEFT;
     }
   }
@@ -42,7 +42,7 @@ class PolarBear extends NPCSprite {
   void moveRight() {
     super.moveRight();
     if (this.direction != BaseSprite.RIGHT) {
-      this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, 4));
+      this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, initialFrame: 1, finalFrame: 4));
       this.direction = BaseSprite.RIGHT;
     }
   }

@@ -5,7 +5,6 @@ import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flame/sprite.dart';
-import 'package:flame/time.dart';
 
 class Player extends BaseSprite {
   //Fields
@@ -33,14 +32,19 @@ class Player extends BaseSprite {
     double yPos}
   ) 
   : super(
-    SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4), 
+    SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4), 
     fixedSize: fixedSize,
     xPos: xPos,
     yPos: yPos,
   ) {
-    this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, 4);
-    this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, 4);
-    //TODO: initialize sprites list for bear left and right, as well as jump left right.
+    this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4);
+    this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 1, finalFrame: 4);
+    this._spritesLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 7, finalFrame: 10);
+    this._spritesRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 7, finalFrame: 10);
+    this._jumpLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 11, finalFrame: 11);
+    this._jumpRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 11, finalFrame: 11);
+    this._jumpLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 12, finalFrame: 12);
+    this._jumpRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 12, finalFrame: 12);
   }
 
   //Public Methods
