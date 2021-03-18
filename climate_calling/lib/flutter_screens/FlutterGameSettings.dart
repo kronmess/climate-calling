@@ -16,155 +16,131 @@ class _FlutterGameSettingsScreenState extends State<FlutterGameSettingsScreen> {
   double _valuetwo = 0.5;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(PATH_SETTINGS_TILE),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            heightFactor: 0.5,
-            child: Image(
-              image: AssetImage(PATH_BUTTON_MAIN_MENU),
-              height: 200,
-              width: 350,
-            ),
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(PATH_SETTINGS_TILE),
           ),
-          Stack(
-            children: [
-              Center(
-                heightFactor: 0,
-                child: Text(
-                  "Settings",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(PATH_BUTTON_MAIN_MENU),
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                  child: Text(
+                    "Settings",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        heightFactor: 0,
-                        widthFactor: 0,
-                        child: Image(
-                          image: AssetImage(PATH_NOTO_FIRE),
-                          height: 50,
-                          width: 50,
-                        ),
-                      ),
-                      Text("Background Music",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image(
-                                image: AssetImage(PATH_SOUND),
-                                height: 30,
-                                width: 30,
-                              ),
-                              Slider(
-                                  value: _value,
-                                  min: 0,
-                                  max: 100,
-                                  activeColor: Colors.black,
-                                  inactiveColor: Colors.grey,
-                                  label: _valuetwo.round().toString(),
-                                  onChanged: (double newValue) {
-                                    setState(() {
-                                      _value = newValue;
-                                    });
-                                  }),
-                            ],
-                          ),
-                          SizedBox(height: 20.0),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                heightFactor: 0,
-                                widthFactor: 0,
-                                child: Image(
-                                  image: AssetImage(PATH_NOTO_FIRE),
-                                  height: 50,
-                                  width: 50,
-                                ),
-                              ),
-                              Text("Sound Effects",
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image(
-                                    image: AssetImage(PATH_SOUND),
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                  Slider(
-                                      value: _valuetwo,
-                                      min: 0,
-                                      max: 100,
-                                      activeColor: Colors.black,
-                                      inactiveColor: Colors.grey,
-                                      label: _valuetwo.round().toString(),
-                                      onChanged: (double newValue) {
-                                        setState(() {
-                                          _valuetwo = newValue;
-                                        });
-                                      }),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  SizedBox(
-                                    height: 100,
-                                    width: 200,
-                                    child: Image(
-                                      image: AssetImage(PATH_SETTINGS_BORDER),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
-                                  children: [
-                                    SettingsButton(
-                                        image: AssetImage(PATH_SETTINGS_BUTTON),
-                                        text: "Return to Main Menu",
-                                        onTap: () {
-                                          climateCalling.switchScreen(
-                                              ScreenState.kMainMenu);
-                                        }),
-                                    Image(
-                                      image: AssetImage(PATH_LOGO_APP),
-                                      height: 60,
-                                      width: 60,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ]),
+            ),
+            // SizedBox(height: 20.0,),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(PATH_NOTO_FIRE),
+                  fit: BoxFit.fitHeight
+                ),
               ),
-            ],
-          ),
-        ],
+              child: Text("Background Music",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage(PATH_SOUND),
+                  height: 30,
+                  width: 30,
+                ),
+                Slider(
+                    value: _value,
+                    min: 0,
+                    max: 100,
+                    activeColor: Colors.black,
+                    inactiveColor: Colors.grey,
+                    label: _valuetwo.round().toString(),
+                    onChanged: (double newValue) {
+                      setState(() {
+                        _value = newValue;
+                      });
+                    }),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(PATH_NOTO_FIRE),
+                  fit: BoxFit.fitHeight
+                ),
+              ),
+              child: Text("Sound Effects",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage(PATH_SOUND),
+                  height: 30,
+                  width: 30,
+                ),
+                Slider(
+                  value: _valuetwo,
+                  min: 0,
+                  max: 100,
+                  activeColor: Colors.black,
+                  inactiveColor: Colors.grey,
+                  label: _valuetwo.round().toString(),
+                  onChanged: (double newValue) {
+                    setState(() {
+                      _valuetwo = newValue;
+                    });
+                  },
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(PATH_SETTINGS_BORDER),
+                  fit: BoxFit.fill,
+                )
+              ),
+              child: SettingsButton(
+                image: AssetImage(PATH_SETTINGS_BUTTON),
+                text: "Return to Main Menu",
+                onTap: () {
+                  climateCalling.switchScreen(ScreenState.kMainMenu);
+                },
+              ),
+            ),
+            // SizedBox(height: 5.0,),
+            Image(
+              image: AssetImage(PATH_LOGO_APP),
+              height: 40,
+              width: 40,
+            ),
+          ],
+        ),
       ),
     );
   }
