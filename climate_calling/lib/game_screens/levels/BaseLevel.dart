@@ -59,6 +59,8 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.player.getAnimationComponent().y = y;
 
     this.onInitCamera();  //Function call after camera is initialized
+
+    this.resize(this.size);
   }
 
   //Protected methods

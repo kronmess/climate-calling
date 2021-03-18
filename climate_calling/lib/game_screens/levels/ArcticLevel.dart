@@ -25,7 +25,7 @@ class ArcticLevel extends BaseLevel {
   //Constructor
   ArcticLevel() : super(
     50, 
-    0 ,
+    0,
     fixedPlayerSize: Size(80, 80), 
     background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080))
   ) {
@@ -43,7 +43,7 @@ class ArcticLevel extends BaseLevel {
       Rect pRect = this.player.getAnimationComponent().toRect();
       for (PolarBear bear in this._bears) {
         if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
-          this.player.pickedUpBear = bear;
+          this.player.pickUpPolarBear(bear);
           bear.isPickedUp = true;
           return true;
         }
@@ -70,7 +70,7 @@ class ArcticLevel extends BaseLevel {
         bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
         bear.isPickedUp = false;
       }
-      this.player.pickedUpBear = null;
+      this.player.dropPolarBear();
 
       return true;
     }
@@ -79,7 +79,6 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    //TODO: Initialize polar bears here and add them to _bears List (dont forget to set gravity value)
     PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
 
     this._bears.add(bear);
@@ -105,7 +104,7 @@ class ArcticLevel extends BaseLevel {
   @override
   void resize(Size size) {
     super.resize(size);
-    this.camera.phoneSize = size;
+    this.camera?.phoneSize = size;
     this.igloo?.resize(size);
     for (PolarBear bear in this._bears) {
       bear?.resize(size);
@@ -127,7 +126,8 @@ class ArcticLevel extends BaseLevel {
     }
 
     super.update(t);
-    this.camera.update();
+    this.camera?.update();
+    this.igloo?.update(t);
     // Rect playerRect = this.player.getAnimationComponent().toRect();
 
     //Polar bear collision
@@ -143,7 +143,7 @@ class ArcticLevel extends BaseLevel {
         }
       }
       //Pollar bear collision with world limit
-      if (bAC.y + bAC.height > this.camera.maxSize.height) {
+      if (this.camera != null && bAC.y + bAC.height > this.camera.maxSize.height) {
         //Kill polar bear
         bear.isPickedUp = true; //Just to make it invisible
         this.victory = false;   //Game defeat
