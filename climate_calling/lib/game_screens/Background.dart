@@ -17,8 +17,8 @@ class Background extends BaseWidget {
       this._bgSprite.height = size.height >= 0? size.height : this._bgSprite.height;
     }
   }
-
-  //Public methods
+  
+  //Public Methods
   SpriteComponent getSpriteComponent() => this._bgSprite;
 
   //Overridden Methods

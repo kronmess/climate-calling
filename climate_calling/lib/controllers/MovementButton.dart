@@ -17,11 +17,11 @@ bool userIsHoldingButton() {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_){
+      onPanDown: (_){
         holdingButton = true;
         functionDown();
       },
-      onTapUp:  (_){
+      onPanEnd:  (_){
         holdingButton = false;
         functionUp();
       },

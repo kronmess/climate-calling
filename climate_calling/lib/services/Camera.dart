@@ -3,32 +3,40 @@ import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
+import 'package:climate_calling/game_screens/Background.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
+import 'package:flame/components/animation_component.dart';
+import 'package:flame/components/component.dart';
 import 'package:flutter/cupertino.dart';
 
 class Camera{
   //Fields
   List<BaseSprite> sprites = List();    //List of sprites to be moved, Player should not be in here
+  Background bg;   //Background if present that should be moved
   double x, y;
   Size maxSize, phoneSize;
   Player player;
   Point prevPlayerCenterPos;
 
   //Constructors
-  Camera(this.player, {@required this.phoneSize, @required this.maxSize, this.sprites}) {
+  Camera(this.player, {@required this.phoneSize, @required this.maxSize, List<BaseSprite> sprites, Background background}) {
+    this.sprites = List.empty(growable: true);
     if (this.sprites == null) {
-      this.sprites = List();
+      this.addSprites(sprites);
     }
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
+    this.bg = background;
 
     //Attempt to fix max camera size
-    if (this.maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
-    if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    if (maxSize != null) {
+      if (maxSize.width < this.phoneSize.width) this.maxSize = Size(this.phoneSize.width, this.maxSize.height);
+      if (this.maxSize.height < this.phoneSize.height) this.maxSize = Size(this.maxSize.width, this.phoneSize.height);
+    }
 
     //Determine camera center
     this.x = this.prevPlayerCenterPos.x;
     this.y = this.prevPlayerCenterPos.y;
-    this._updateCameraPos();
+    // this._updateCameraPos();
   }
 
   //Public methods
@@ -47,19 +55,26 @@ class Camera{
   List<BaseSprite> getSprites() => this.sprites;
 
   Future<void> update() async{
-    Point delta = await this._updateCameraPos();    //Update camera position and get delta
+    Point<double> phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
+    Point delta = await this._updateCameraPos(phoneCenter);    //Update camera position and get delta
     for (BaseSprite sprite in this.sprites) {
-      sprite.getAnimationComponent().x += delta.x;
-      sprite.getAnimationComponent().y += delta.y;
+      if (sprite != null) {
+        sprite.getAnimationComponent().x += delta.x;
+        sprite.getAnimationComponent().y += delta.y;
+      }
     }
+    // if (this.bg != null) {
+    //   this._calcBackgroundPos(this.phoneSize, phoneCenter);
+    // }
   }
 
   //Private methods
-  Future<Point> _updateCameraPos() async {
+  Future<Point> _updateCameraPos(Point phoneCenter) async {
     Point playerCenter = SpriteServices.getSpriteCenter(this.player);
-    Point phoneCenter = Point(this.phoneSize.width/4, this.phoneSize.height/4);   //Divide by 4 bc idk why honestly
     double xDelta = playerCenter.x - this.prevPlayerCenterPos.x;
     double yDelta = playerCenter.y - this.prevPlayerCenterPos.y;
+    AnimationComponent pAC = this.player.getAnimationComponent();
+    
     //Determine delta
     //Determine xDelta
     if (this.x <= phoneCenter.x)  //If camera pos is between 0 - phoneCenter.x
@@ -78,7 +93,8 @@ class Camera{
       this.x += xDelta;
       xDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.x != 0) {
-        this.player.getAnimationComponent().x = phoneCenter.x * 2 - this.player.getAnimationComponent().width;    //Make the player remain in the center
+        pAC.x = phoneCenter.x * 2 - pAC.width;    //Make the player remain in the center
+        // pAC.x = this.x + pAC.width + pAC.width/2;    //Attempt for moving alongside background
       }
     }
 
@@ -99,7 +115,8 @@ class Camera{
       this.y += yDelta;
       yDelta *= -1;   //Sprite motion is opposite of the camera
       if (phoneCenter.y != 0) {
-        this.player.getAnimationComponent().y = phoneCenter.y * 2 - this.player.getAnimationComponent().height;    //Make the player remain in the center
+        pAC.y = phoneCenter.y * 2 - pAC.height;    //Make the player remain in the center
+        // pAC.y = this.y + pAC.height - pAC.height/2; //Attempt for moving alongside background
       }
     }
 
@@ -109,9 +126,37 @@ class Camera{
     // print("Camera Pos: $x, $y");
     // print("Camera max size: ${maxSize.width}, ${maxSize.height}");
     // print("Deltas $xDelta, $yDelta");
+    // print("Background coordinates: ${this.bg.getSpriteComponent().x}, ${this.bg.getSpriteComponent().y}");
 
     this.prevPlayerCenterPos = SpriteServices.getSpriteCenter(this.player);
     
     return Point(xDelta, yDelta);
+  }
+
+  void _calcBackgroundPos(Size phoneSize, Point phoneCenter) {
+    // double x = this.x * -1;
+    // double y = this.y * -1;
+    // this.bg.getSpriteComponent().x = x;
+    // this.bg.getSpriteComponent().y = y;
+    SpriteComponent bgAC = this.bg.getSpriteComponent();
+    if (this.x <= phoneCenter.x) {
+      bgAC.x = 0;   //Anchor background to 0 on x on the phone
+    }
+    else if (this.x >= this.maxSize.width - phoneCenter.x) {
+      bgAC.x = 0 - bgAC.width.toDouble() + phoneSize.width;   //Anchor the background image X so that only the remaning right side is visible
+    }
+    else {
+      bgAC.x = 0 - this.x + phoneCenter.x;    //This shifts the virtual world for some reason idk im crying
+    }
+
+    if (this.y <= phoneCenter.y) { //If camera pos is between 0 - phoneCenter.y
+      bgAC.y = 0;   //Anchor the background y to 0 on the phone
+    }
+    else if (this.y >= this.maxSize.height - phoneCenter.y) {
+      bgAC.y = 0 - bgAC.height.toDouble() + phoneSize.height;   //Anchor the bac kground image y so that only the remaning bottom side is visible
+    }
+    else {
+      bgAC.y = 0 - this.y + phoneCenter.y;  //This shifts the virtual world for some reason idk im crying
+    }
   }
 }
