@@ -27,7 +27,7 @@ class ClimateCalling extends Game with TapDetector {
   //Constructor
   ClimateCalling() {
     this._menuScreen = MainMenuScreen();
-    this._levelArctic = ArcticLevel();
+    // this._levelArctic = ArcticLevel();
     this._levelTest = TestLevel();
     this._settingsScreen = GameSettingsScreen();
 
@@ -80,8 +80,8 @@ class ClimateCalling extends Game with TapDetector {
         break;
 
       case ScreenState.kPolar:
-        // this._levelArctic = ArcticLevel();
-        // this._levelArctic.resize(this._size);
+        this._levelArctic = ArcticLevel();
+        this._levelArctic.resize(this._size);
         updateScreenState(newScreen, callback: this._callback);
         break;
 
