@@ -23,7 +23,8 @@ class Player extends BaseSprite {
                 _jumpLeftBear, 
                 _jumpRight,
                 _jumpRightBear;
-  PolarBear pickedUpBear;
+  PolarBear _pickedUpBear;
+  PolarBear get pickedUpBear => this._pickedUpBear;
 
   //Constructor
   Player(
@@ -48,7 +49,13 @@ class Player extends BaseSprite {
   }
 
   //Public Methods
-  bool isPickingUpBear() => this.pickedUpBear != null;
+  bool isPickingUpBear() => this._pickedUpBear != null;
+  void pickUpPolarBear(PolarBear bear) {
+    this._pickedUpBear = bear;
+  }
+  void dropPolarBear() {
+    this._pickedUpBear = null;
+  }
 
   //Overridden Methods
   @override
@@ -70,17 +77,17 @@ class Player extends BaseSprite {
     
   }
   @override
- void moveUp() {
-  if (this.isJump == false) {
-    if (this.direction == BaseSprite.RIGHT) {
-      this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
+  void moveUp() {
+    if (this.isJump == false) {
+      if (this.direction == BaseSprite.RIGHT) {
+        this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
+      }
+      else if (this.direction == BaseSprite.LEFT) {
+        this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
+      }
+      super.moveUp();
     }
-    else if (this.direction == BaseSprite.LEFT) {
-      this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
-    }
-    super.moveUp();
   }
- }
 
   @override
   void update(double t) {
