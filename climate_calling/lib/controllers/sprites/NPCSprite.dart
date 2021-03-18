@@ -29,18 +29,18 @@ class NPCSprite extends BaseSprite {
   //Overridden Methods
   @override
   void moveLeft() {
-    if (this.direction != BaseSprite.LEFT) {
+    if (this.direction != Direction.left) {
       this.setAnimations(this._spritesLeft);
-      this.direction = BaseSprite.LEFT;
+      this.direction = Direction.left;
     }
     super.moveLeft();
   }
 
   @override
   void moveRight() {
-    if (this.direction != BaseSprite.RIGHT) {
+    if (this.direction != Direction.right) {
       this.setAnimations(this._spritesRight);
-      this.direction = BaseSprite.RIGHT;
+      this.direction = Direction.right;
     }
     super.moveRight();
   }

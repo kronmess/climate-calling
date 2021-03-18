@@ -52,26 +52,38 @@ class Player extends BaseSprite {
   bool isPickingUpBear() => this._pickedUpBear != null;
   void pickUpPolarBear(PolarBear bear) {
     this._pickedUpBear = bear;
+    if (bear != null) {
+      if (this.direction == Direction.left && this.isIdle) {
+        this.setAnimations(this._spritesLeftBear);
+      } else if (this.direction == Direction.right  && this.isIdle) {
+        this.setAnimations(this._spritesRightBear);
+      }
+    }
   }
   void dropPolarBear() {
     this._pickedUpBear = null;
+    if (this.direction == Direction.left) {
+        this.setAnimations(this._spritesLeft);
+      } else if (this.direction == Direction.right) {
+        this.setAnimations(this._spritesRight);
+      }
   }
 
   //Overridden Methods
   @override
   void moveLeft() {
-    if (this.direction != BaseSprite.LEFT) {
+    if (this.direction != Direction.left) {
       this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
-      this.direction = BaseSprite.LEFT;
+      this.direction = Direction.left;
     }
     super.moveLeft();
   }
 
   @override
   void moveRight() {
-    if (this.direction != BaseSprite.RIGHT) {
+    if (this.direction != Direction.right) {
       this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
-      this.direction = BaseSprite.RIGHT;
+      this.direction = Direction.right;
     }
     super.moveRight();
     
@@ -79,10 +91,10 @@ class Player extends BaseSprite {
   @override
   void moveUp() {
     if (this.isJump == false) {
-      if (this.direction == BaseSprite.RIGHT) {
+      if (this.direction == Direction.right) {
         this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
       }
-      else if (this.direction == BaseSprite.LEFT) {
+      else if (this.direction == Direction.left) {
         this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
       }
       super.moveUp();

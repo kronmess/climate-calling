@@ -32,18 +32,18 @@ class PolarBear extends NPCSprite {
   @override
   void moveLeft() {
     super.moveLeft();
-    if (this.direction != BaseSprite.LEFT) {
+    if (this.direction != Direction.left) {
       this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, initialFrame: 1, finalFrame: 4));
-      this.direction = BaseSprite.LEFT;
+      this.direction = Direction.left;
     }
   }
   
   @override
   void moveRight() {
     super.moveRight();
-    if (this.direction != BaseSprite.RIGHT) {
+    if (this.direction != Direction.right) {
       this.setAnimations(SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, initialFrame: 1, finalFrame: 4));
-      this.direction = BaseSprite.RIGHT;
+      this.direction = Direction.right;
     }
   }
 

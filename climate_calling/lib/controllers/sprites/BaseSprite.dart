@@ -7,15 +7,22 @@ import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 
+enum Direction {
+  left,
+  right,
+  up,
+  down
+}
+
 class BaseSprite extends BaseTimedWidget {
   //Fields
   @protected
   AnimationComponent animationComponent;
   double xVelocity, yVelocity, gravity;
   bool isJump;
-  int direction;
+  Direction direction;
+  bool isIdle = true;
   Size fixedSize;
-  static const int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3, IDLE = 4;
 
   //Constructor
   BaseSprite(List<Sprite> sprites, {
@@ -24,7 +31,7 @@ class BaseSprite extends BaseTimedWidget {
     this.gravity = 0,
     this.isJump = false,
     double stepTime = 0.1,
-    this.direction = BaseSprite.IDLE,
+    this.direction = Direction.right,
     Size fixedSize,
     double xPos = 0,
     double yPos = 0,
@@ -83,7 +90,7 @@ class BaseSprite extends BaseTimedWidget {
   void update(double t) {
     this.animationComponent?.update(t);
     //Set idle animation
-    if (this.direction == BaseSprite.IDLE) {
+    if (this.isIdle) {
       this.animationComponent.animation.currentIndex = 0;
     }
   }

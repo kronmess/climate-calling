@@ -80,7 +80,9 @@ class ArcticLevel extends BaseLevel {
   //Private Methods
   void _initBears() {
     PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
+    this._bears.add(bear);
 
+    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 300, yPos: 20);
     this._bears.add(bear);
   }
 
@@ -145,7 +147,7 @@ class ArcticLevel extends BaseLevel {
       //Pollar bear collision with world limit
       if (this.camera != null && bAC.y + bAC.height > this.camera.maxSize.height) {
         //Kill polar bear
-        bear.isPickedUp = true; //Just to make it invisible
+        // bear.isPickedUp = true; //Just to make it invisible
         this.victory = false;   //Game defeat
       }
     }
