@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
 import 'package:climate_calling/game_screens/Background.dart';
@@ -135,8 +136,14 @@ abstract class BaseLevel extends BaseTimedWidget{
           //   pAC.x = platAC.x + platAC.width;
           // }
           if(SpriteServices.isDirectlyOnTop(this.player, plt)){
+            if (this.player.isJump) {
+              this.player.changeToNormalAnimation();
+            }
             this.player.isMovingUp = false;
             this.player.isJump = false;
+            if (!this.player.isMovingLeft && !this.player.isMovingRight) {
+              this.player.movementStatus = MovementStatus.idle;
+            }
           }
         }
       }

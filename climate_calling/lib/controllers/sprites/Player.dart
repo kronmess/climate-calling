@@ -53,9 +53,10 @@ class Player extends BaseSprite {
   void pickUpPolarBear(PolarBear bear) {
     if (bear != null && !bear.isPickedUp) {
       this._pickedUpBear = bear;
-      if (this.direction == Direction.left && this.isIdle) {
+      if (this.direction == Direction.left) {
         this.setAnimations(this._spritesLeftBear);
-      } else if (this.direction == Direction.right  && this.isIdle) {
+      } 
+      else if (this.direction == Direction.right) {
         this.setAnimations(this._spritesRightBear);
       }
     }
@@ -67,6 +68,14 @@ class Player extends BaseSprite {
       } else if (this.direction == Direction.right) {
         this.setAnimations(this._spritesRight);
       }
+  }
+  void changeToNormalAnimation() {
+    if (this.direction == Direction.left) {
+      this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
+    }
+    else if (this.direction == Direction.right) {
+      this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
+    }
   }
 
   //Overridden Methods

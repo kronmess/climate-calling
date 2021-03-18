@@ -10,6 +10,10 @@ import 'package:flutter/gestures.dart';
 enum Direction {
   left,
   right,
+}
+
+enum MovementStatus {
+  idle,
   up,
   down
 }
@@ -21,7 +25,7 @@ class BaseSprite extends BaseTimedWidget {
   double xVelocity, yVelocity, gravity;
   bool isJump;
   Direction direction;
-  bool isIdle = true;
+  MovementStatus movementStatus;
   Size fixedSize;
 
   //Constructor
@@ -32,6 +36,7 @@ class BaseSprite extends BaseTimedWidget {
     this.isJump = false,
     double stepTime = 0.1,
     this.direction = Direction.right,
+    this.movementStatus = MovementStatus.idle,
     Size fixedSize,
     double xPos = 0,
     double yPos = 0,
@@ -90,7 +95,7 @@ class BaseSprite extends BaseTimedWidget {
   void update(double t) {
     this.animationComponent?.update(t);
     //Set idle animation
-    if (this.isIdle) {
+    if (this.movementStatus == MovementStatus.idle) {
       this.animationComponent.animation.currentIndex = 0;
     }
   }
