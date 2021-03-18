@@ -51,8 +51,8 @@ class Player extends BaseSprite {
   //Public Methods
   bool isPickingUpBear() => this._pickedUpBear != null;
   void pickUpPolarBear(PolarBear bear) {
-    this._pickedUpBear = bear;
-    if (bear != null) {
+    if (bear != null && !bear.isPickedUp) {
+      this._pickedUpBear = bear;
       if (this.direction == Direction.left && this.isIdle) {
         this.setAnimations(this._spritesLeftBear);
       } else if (this.direction == Direction.right  && this.isIdle) {
