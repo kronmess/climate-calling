@@ -4,6 +4,7 @@ import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
+import 'package:flame/flame.dart';
 import "package:flutter/material.dart";
 
 class FlutterPlayerControlsScreen extends StatefulWidget {
@@ -74,6 +75,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 ),
                 onTap:(){
                   level.player.isMovingUp = true;
+                  Flame.audio.play('jump.ogg');
                 }
               )
             ,
@@ -90,8 +92,10 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 onTap: () {
                   if(!level.player.isPickingUpBear()){
                     levelArc.pickUpPolarBear();
+                    Flame.audio.play('pick.ogg');
                   }else{
                     levelArc.dropPolarBear();
+                    Flame.audio.play('drop.ogg');
                   }                  
                 },
                 
