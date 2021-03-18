@@ -1,5 +1,6 @@
 import 'package:climate_calling/controllers/MovementButton.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
@@ -15,6 +16,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
+    ArcticLevel levelArc = level as ArcticLevel;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -83,7 +85,14 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                     child: Image.asset(PATH_BUTTON_PICKUP)
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  if(!level.player.isPickingUpBear()){
+                    levelArc.pickUpPolarBear();
+                  }else{
+                    levelArc.dropPolarBear();
+                  }                  
+                },
+                
               ),
             ),//space for pick up button
             SizedBox(width: 48),//space for right of button

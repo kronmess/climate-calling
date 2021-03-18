@@ -115,7 +115,6 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void update(double t) {
-
     //Check game status
     if (this._bearRescued == this._bears.length) {
       this.victory = true;
@@ -172,7 +171,7 @@ class ArcticLevel extends BaseLevel {
   void initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
     this.igloo.getAnimationComponent().x = 20;
-    this.igloo.getAnimationComponent().y = 10;
+    this.igloo.getAnimationComponent().y = 160;
   }
 
   @override
