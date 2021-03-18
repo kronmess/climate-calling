@@ -42,10 +42,10 @@ class Player extends BaseSprite {
     this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 1, finalFrame: 4);
     this._spritesLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 7, finalFrame: 10);
     this._spritesRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 7, finalFrame: 10);
-    this._jumpLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 11, finalFrame: 11);
-    this._jumpRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 11, finalFrame: 11);
-    this._jumpLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 12, finalFrame: 12);
-    this._jumpRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 12, finalFrame: 12);
+    this._jumpLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 12, finalFrame: 11);
+    this._jumpRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 12, finalFrame: 11);
+    this._jumpLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 13, finalFrame: 12);
+    this._jumpRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 13, finalFrame: 12);
   }
 
   //Public Methods
