@@ -35,6 +35,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
               BackgroundButton(
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
                 text: "Start",
+                padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
                 onTap: () {
                   climateCalling.switchScreen(ScreenState
                       .kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
