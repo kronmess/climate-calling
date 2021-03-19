@@ -10,7 +10,7 @@ class BackgroundButton extends GestureDetector {
       EdgeInsets padding})
       : super(
           child: Container(
-            padding: padding ?? EdgeInsets.fromLTRB(50, 20, 50, 25),
+            padding: padding ?? EdgeInsets.fromLTRB(50, 20, 50, 20),
             decoration: BoxDecoration(
               color: color,
               image: DecorationImage(
