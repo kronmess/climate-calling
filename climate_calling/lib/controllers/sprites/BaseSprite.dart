@@ -27,6 +27,7 @@ class BaseSprite extends BaseTimedWidget {
   Direction direction;
   MovementStatus movementStatus;
   Size fixedSize;
+  bool isGravityApplied = true;
 
   //Constructor
   BaseSprite(List<Sprite> sprites, {
@@ -66,7 +67,9 @@ class BaseSprite extends BaseTimedWidget {
   void moveUp() {
     this.animationComponent.y -= this.yVelocity; //Moving up is negative because of how the pixel coordinate works
   }
-  void applyGravity() => this.animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
+  void applyGravity() {
+    if (this.isGravityApplied) this.animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
+  }
   bool overlaps(Rect rect) => rect.overlaps(this.animationComponent.toRect());
 
   //Overridden Methods
