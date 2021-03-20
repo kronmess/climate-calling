@@ -1,3 +1,4 @@
+import 'package:climate_calling/flutter_screens/FlutterGameOver.dart';
 import 'package:climate_calling/flutter_screens/FlutterGameSettings.dart';
 import 'package:climate_calling/flutter_screens/FlutterMainMenu.dart';
 import 'package:climate_calling/flutter_screens/FlutterPlayerControls.dart';
@@ -14,13 +15,14 @@ class FlutterScreenManager extends StatefulWidget {
 class _FlutterScreenManagerState extends State<FlutterScreenManager> {
 
   //Fields
-  Widget mainMenu, playerControls, gameSettings;
+  Widget mainMenu, playerControls, gameSettings, gameOver;
 
   //Constructor
   _FlutterScreenManagerState() {
     this.mainMenu = FlutterMainMenuScreen();
     this.playerControls = FlutterPlayerControlsScreen();
     this.gameSettings = FlutterGameSettingsScreen();
+    this.gameOver = FlutterGameOverScreen();
   }
 
   //Public methods
@@ -35,6 +37,8 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
         return this.mainMenu;
       case ScreenState.kGameSettings:
         return this.gameSettings;
+      case ScreenState.kGameOver:
+        return this.gameOver;
       default:
         return SizedBox();
     }
