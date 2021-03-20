@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
+import 'package:climate_calling/game_screens/Background.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
@@ -13,8 +14,6 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
-
-import '../Background.dart';
 
 class ArcticLevel extends BaseLevel {
 
@@ -127,7 +126,8 @@ class ArcticLevel extends BaseLevel {
     }
     if(victory == true){
       climateCalling.switchScreen(ScreenState.kGameOver);
-    }else if(victory == false){
+    }
+    else if(victory == false) {
       climateCalling.switchScreen(ScreenState.kGameOver);
     }
     //Polar bear apply gravity
@@ -167,6 +167,7 @@ class ArcticLevel extends BaseLevel {
         bear.isGravityApplied = false;
         this.victory = false;   //Game defeat
       }
+    }
   }
 
   @override
