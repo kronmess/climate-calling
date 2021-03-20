@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
+import 'package:climate_calling/game_screens/GameOver.dart';
 import 'package:climate_calling/game_screens/GameSettings.dart';
 import 'package:climate_calling/game_screens/MainMenu.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
@@ -18,7 +19,7 @@ class ClimateCalling extends Game with TapDetector {
   BaseTimedWidget _levelArctic;
   BaseTimedWidget _levelTest;
   BaseTimedWidget _settingsScreen;
-
+  BaseTimedWidget _gameOverScreen;
   Function _fnUpdate;
   Function _callback;
 
@@ -30,7 +31,7 @@ class ClimateCalling extends Game with TapDetector {
     // this._levelArctic = ArcticLevel();
     this._levelTest = TestLevel();
     this._settingsScreen = GameSettingsScreen();
-
+    this._gameOverScreen = GameOverScreen();
     _fnUpdate = _init;
     _callback = _doNothing;
   }
@@ -46,6 +47,9 @@ class ClimateCalling extends Game with TapDetector {
 
       case ScreenState.kPolar:
         return this._levelArctic;
+      
+      case ScreenState.kGameOver:
+        return this._gameOverScreen;
 
       case ScreenState.kTest:
         return this._levelTest;
@@ -82,6 +86,12 @@ class ClimateCalling extends Game with TapDetector {
       case ScreenState.kPolar:
         this._levelArctic = ArcticLevel();
         this._levelArctic.resize(this._size);
+        updateScreenState(newScreen, callback: this._callback);
+        break;
+
+      case ScreenState.kGameOver:
+        this._gameOverScreen = GameOverScreen();
+        this._gameOverScreen.resize(this._size);
         updateScreenState(newScreen, callback: this._callback);
         break;
 

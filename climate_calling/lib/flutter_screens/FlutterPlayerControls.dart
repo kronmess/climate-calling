@@ -75,7 +75,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 ),
                 onTap:(){
                   level.player.isMovingUp = true;
-                  Flame.audio.play('jump.ogg');
+                  Flame.audio.play(PATH_SOUND_JUMP);
                   level.player.movementStatus = MovementStatus.up;
                 }
               )
@@ -93,10 +93,10 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 onTap: () {
                   if(!level.player.isPickingUpBear()){
                     levelArc.pickUpPolarBear();
-                    Flame.audio.play('pick.ogg');
+                    Flame.audio.play(PATH_SOUND_PICK);
                   }else{
                     levelArc.dropPolarBear();
-                    Flame.audio.play('drop.ogg');
+                    Flame.audio.play(PATH_SOUND_DROP);
                   }                  
                 },
                 

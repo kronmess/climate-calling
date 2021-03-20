@@ -6,11 +6,20 @@ import 'package:flutter/material.dart';
 
 class NPCSprite extends BaseSprite {
   //Fields
-  List<Sprite> _spritesLeft, _spritesRight;
+  List<Sprite> _spritesLeft, 
+              _spritesRight,
+              _spritesLeftIdle,
+              _spritesRightIdle,
+              _spritesLeftDeath,
+              _spritesRightDeath;
 
   //Constructor
   NPCSprite({@required List<Sprite> spritesLeft, 
-    @required List<Sprite> spritesRight, 
+    @required List<Sprite> spritesRight,
+    List<Sprite> spritesLeftIdle,
+    List<Sprite> spritesRightIdle,
+    List<Sprite> spritesLeftDeath,
+    List<Sprite> spritesRightDeath,
     double gravity = 0, 
     Size fixedSize,
     double xPos,

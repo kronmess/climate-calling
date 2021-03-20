@@ -22,7 +22,9 @@ class Player extends BaseSprite {
                 _jumpLeft,
                 _jumpLeftBear, 
                 _jumpRight,
-                _jumpRightBear;
+                _jumpRightBear,
+                _deathLeft,
+                _deathRight;
   PolarBear _pickedUpBear;
   PolarBear get pickedUpBear => this._pickedUpBear;
 

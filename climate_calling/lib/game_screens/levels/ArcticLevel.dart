@@ -6,7 +6,9 @@ import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
+import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
@@ -79,10 +81,10 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 20);
+    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 170);
     this._bears.add(bear);
 
-    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 300, yPos: 20);
+    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 300, yPos: 170);
     this._bears.add(bear);
   }
 
@@ -120,7 +122,14 @@ class ArcticLevel extends BaseLevel {
     if (this._bearRescued == this._bears.length) {
       this.victory = true;
     }
-    
+    if(this.player.getAnimationComponent().y > 320){
+      victory = false;
+    }
+    if(victory == true){
+      climateCalling.switchScreen(ScreenState.kGameOver);
+    }else if(victory == false){
+      climateCalling.switchScreen(ScreenState.kGameOver);
+    }
     //Polar bear apply gravity
     for (PolarBear bear in this._bears) {
       bear.update(t); 
@@ -133,14 +142,19 @@ class ArcticLevel extends BaseLevel {
     // Rect playerRect = this.player.getAnimationComponent().toRect();
 
     //Polar bear collision
+    bear:
     for (PolarBear bear in this._bears) {
       AnimationComponent bAC = bear.getAnimationComponent();
+      if(bear.getAnimationComponent().y > 330){
+        this.victory = false;
+      }
       //Polar bear collision with platform
       for (Platform platform in this.platforms) {
         AnimationComponent platAC = platform.getAnimationComponent();
         if (bAC.toRect().overlaps(platAC.toRect())) {
           if (bAC.y + bAC.height <= platAC.y + this.gravity) {
             bAC.y = platAC.y - bAC.height;
+            continue bear;
           }
         }
       }
@@ -149,6 +163,8 @@ class ArcticLevel extends BaseLevel {
       if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
+        bAC.y = this.size.height - bAC.height;
+        bear.isGravityApplied = false;
         this.victory = false;   //Game defeat
       }
   }
