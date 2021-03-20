@@ -42,11 +42,13 @@ class BaseSprite extends BaseTimedWidget {
     double xPos = 0,
     double yPos = 0,
   }) {
-    this.animationComponent = sprites == null ? null : AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
-    this.fixedSize = fixedSize == null ? Size(-1, -1) : fixedSize;
-
-    this.animationComponent.x = xPos == null? 0 : xPos;
-    this.animationComponent.y = yPos == null? 0 : yPos;
+    this.initAnimations(
+      sprites: sprites,
+      fixedSize: fixedSize,
+      stepTime: stepTime,
+      xPos: xPos,
+      yPos: yPos,
+    );
   }
 
   //Public Methods
@@ -71,6 +73,22 @@ class BaseSprite extends BaseTimedWidget {
     if (this.isGravityApplied) this.animationComponent.y += this.gravity;    //Going down is positive because of how the pixel coordinate works
   }
   bool overlaps(Rect rect) => rect.overlaps(this.animationComponent.toRect());
+
+  //Protected Methods
+  @protected
+  void initAnimations({
+    @required List<Sprite> sprites,
+    double xPos = 0,
+    double yPos = 0,
+    double stepTime = 0.1,
+    Size fixedSize,
+  }) {
+    this.animationComponent = sprites == null ? null : AnimationComponent(0, 0, anim.Animation.spriteList(sprites, stepTime:stepTime));
+    this.fixedSize = fixedSize == null ? Size(-1, -1) : fixedSize;
+
+    this.animationComponent.x = xPos == null? 0 : xPos;
+    this.animationComponent.y = yPos == null? 0 : yPos;
+  }
 
   //Overridden Methods
   @override
