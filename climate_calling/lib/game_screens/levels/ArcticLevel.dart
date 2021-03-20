@@ -144,13 +144,13 @@ class ArcticLevel extends BaseLevel {
           }
         }
       }
-      //Pollar bear collision with world limit
-      if (this.camera != null && bAC.y + bAC.height > this.camera.maxSize.height) {
+      print("Camera: ${this.camera?.y}");
+      print("Bear pos: ${bAC.y + bAC.height + this.camera?.y}");
+      if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
         this.victory = false;   //Game defeat
       }
-    }
   }
 
   @override
