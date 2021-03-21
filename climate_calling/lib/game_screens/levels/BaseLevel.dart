@@ -98,7 +98,7 @@ abstract class BaseLevel extends BaseTimedWidget{
       //If player goes off screen, stop applying gravity and prevent it from sinkin
       // if (pAC.y + pAC.height >= this.size.height) {
       if (pAC.y + pAC.height >= this.size.height) {
-        if (pAC.width > 0) {
+        if (pAC.height > 0) {
           pAC.y = this.size.height - pAC.height;
           this.victory = false;   //Defeat
           // pAC.y = this.camera.maxSize.height - pAC.height;
