@@ -121,9 +121,9 @@ class ArcticLevel extends BaseLevel {
     if (this._bearRescued == this._bears.length) {
       this.victory = true;
     }
-    if(this.player.getAnimationComponent().y > 320){
-      victory = false;
-    }
+    // if(this.player.getAnimationComponent().y > 320){
+    //   victory = false;
+    // }
     if(victory == true){
       climateCalling.switchScreen(ScreenState.kGameOver);
     }
@@ -145,9 +145,9 @@ class ArcticLevel extends BaseLevel {
     bear:
     for (PolarBear bear in this._bears) {
       AnimationComponent bAC = bear.getAnimationComponent();
-      if(bear.getAnimationComponent().y > 330){
-        this.victory = false;
-      }
+      // if(bear.getAnimationComponent().y > 330){
+      //   this.victory = false;
+      // }
       //Polar bear collision with platform
       for (Platform platform in this.platforms) {
         AnimationComponent platAC = platform.getAnimationComponent();
@@ -165,14 +165,14 @@ class ArcticLevel extends BaseLevel {
         // bear.isPickedUp = true; //Just to make it invisible
         bAC.y = this.size.height - bAC.height;
         bear.isGravityApplied = false;
-        this.victory = false;   //Game defeat
+        // this.victory = false;   //Game defeat
       }
     }
   }
 
   @override
   void initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 4)),fixedSize: Size(1000,50));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(100,20));
 
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 300;
