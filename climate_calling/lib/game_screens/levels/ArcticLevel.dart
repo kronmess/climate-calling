@@ -188,7 +188,7 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void initTerrain() async {
-    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false, fixedSize: Size(100, 100));
     this.igloo.getAnimationComponent().x = 20;
     this.igloo.getAnimationComponent().y = 160;
   }
