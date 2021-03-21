@@ -163,8 +163,8 @@ class ArcticLevel extends BaseLevel {
       if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
-        bAC.y = this.size.height - bAC.height;
-        bear.isGravityApplied = false;
+        // bAC.y = this.size.height - bAC.height;
+        // bear.isGravityApplied = false;
         // this.victory = false;   //Game defeat
       }
     }
