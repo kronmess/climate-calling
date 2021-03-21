@@ -80,6 +80,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   @override
   void resize(Size size) {
     this.player?.resize(size);
+    this.bg?.resize(size);
     this.size = size;
     for (Platform plt in this.platforms) {
       plt?.resize(size);
@@ -157,15 +158,16 @@ abstract class BaseLevel extends BaseTimedWidget{
   void render(Canvas canvas) {
     this.bg?.render(canvas);
     for (Platform plt in this.platforms) {
-      AnimationComponent ac = plt.getAnimationComponent();
-      //Only render if the position of the platform is within the phone screen
-      if (ac.x + ac.width >= 0 && 
-          ac.x <= this.size.width &&
-          ac.y + ac.height >= 0 &&
-          ac.y <= this.size.height
-      ) {
-        plt.render(canvas);
-      }
+      // AnimationComponent ac = plt.getAnimationComponent();
+      // //Only render if the position of the platform is within the phone screen
+      // if (ac.x + ac.width >= 0 && 
+      //     ac.x <= this.size.width &&
+      //     ac.y + ac.height >= 0 &&
+      //     ac.y <= this.size.height
+      // ) {
+      //   plt.render(canvas);
+      // }
+      plt.render(canvas);
     }
     this.player.render(canvas);
   }

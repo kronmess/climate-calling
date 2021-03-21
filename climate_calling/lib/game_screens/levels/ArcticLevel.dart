@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
+import 'package:climate_calling/game_screens/Background.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
@@ -13,8 +14,6 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
-
-import '../Background.dart';
 
 class ArcticLevel extends BaseLevel {
 
@@ -29,7 +28,7 @@ class ArcticLevel extends BaseLevel {
     50, 
     0,
     fixedPlayerSize: Size(80, 80), 
-    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080))
+    background: Background(PATH_ARCTIC_LEVEL_BG)
   ) {
     this._bearRescued = 0;
     this._bears = List();
@@ -127,7 +126,8 @@ class ArcticLevel extends BaseLevel {
     }
     if(victory == true){
       climateCalling.switchScreen(ScreenState.kGameOver);
-    }else if(victory == false){
+    }
+    else if(victory == false) {
       climateCalling.switchScreen(ScreenState.kGameOver);
     }
     //Polar bear apply gravity
@@ -158,8 +158,9 @@ class ArcticLevel extends BaseLevel {
           }
         }
       }
-      //Polar bear collision with world limit
-      if (this.camera != null && bAC.y + bAC.height > this.camera.maxSize.height) {
+      // print("Camera: ${this.camera?.y}");
+      // print("Bear pos: ${bAC.y + bAC.height + this.camera?.y}");
+      if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
         bAC.y = this.size.height - bAC.height;
