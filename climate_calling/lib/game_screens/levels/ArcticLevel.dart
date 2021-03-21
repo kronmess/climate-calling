@@ -28,7 +28,7 @@ class ArcticLevel extends BaseLevel {
     50, 
     0,
     fixedPlayerSize: Size(80, 80), 
-    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080))
+    background: Background(PATH_ARCTIC_LEVEL_BG)
   ) {
     this._bearRescued = 0;
     this._bears = List();
@@ -158,8 +158,8 @@ class ArcticLevel extends BaseLevel {
           }
         }
       }
-      print("Camera: ${this.camera?.y}");
-      print("Bear pos: ${bAC.y + bAC.height + this.camera?.y}");
+      // print("Camera: ${this.camera?.y}");
+      // print("Bear pos: ${bAC.y + bAC.height + this.camera?.y}");
       if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
