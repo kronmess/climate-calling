@@ -80,6 +80,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   @override
   void resize(Size size) {
     this.player?.resize(size);
+    this.bg?.resize(size);
     this.size = size;
     for (Platform plt in this.platforms) {
       plt?.resize(size);
