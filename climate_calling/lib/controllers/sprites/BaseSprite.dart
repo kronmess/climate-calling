@@ -32,7 +32,7 @@ class BaseSprite extends BaseTimedWidget {
   //Constructor
   BaseSprite(List<Sprite> sprites, {
     this.xVelocity = 5, 
-    this.yVelocity = 200, 
+    this.yVelocity = 270, 
     this.gravity = 0,
     this.isJump = false,
     double stepTime = 0.1,

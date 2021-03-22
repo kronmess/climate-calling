@@ -80,10 +80,10 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 150, yPos: 170);
+    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 760, yPos: 230);
     this._bears.add(bear);
 
-    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 300, yPos: 170);
+    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 270, yPos: 300);
     this._bears.add(bear);
   }
 
@@ -172,28 +172,46 @@ class ArcticLevel extends BaseLevel {
 
   @override
   void initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(100,20));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(120,20));
 
     plt.getAnimationComponent().x = 0;
-    plt.getAnimationComponent().y = 300;
+    plt.getAnimationComponent().y = 330;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(400,20));
-    plt.getAnimationComponent().x = 180;
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(200,20));
+    plt.getAnimationComponent().x = 200;
     plt.getAnimationComponent().y = 400;
+
+    this.platforms.add(plt);
+
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(40,20));
+    plt.getAnimationComponent().x = 500;
+    plt.getAnimationComponent().y = 380;
+
+    this.platforms.add(plt);
+
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(40,20));
+    plt.getAnimationComponent().x = 600;
+    plt.getAnimationComponent().y = 360;
+
+    this.platforms.add(plt);
+
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(200,20));
+    plt.getAnimationComponent().x = 720;
+    plt.getAnimationComponent().y = 320;
 
     this.platforms.add(plt);
   }
 
   @override
   void initTerrain() async {
-    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false, fixedSize: Size(100, 100));
-    this.igloo.getAnimationComponent().x = 20;
-    this.igloo.getAnimationComponent().y = 160;
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false, fixedSize: Size(120, 100));
+    this.igloo.getAnimationComponent().x = 0;
+    this.igloo.getAnimationComponent().y = 240;
   }
 
-  @override
+  @override 
   void onInitCamera() {
     super.onInitCamera();
     //Add sprites to camera

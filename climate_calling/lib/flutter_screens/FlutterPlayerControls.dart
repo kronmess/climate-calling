@@ -1,4 +1,5 @@
 import 'package:climate_calling/controllers/MovementButton.dart';
+import 'package:climate_calling/controllers/Timer.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
@@ -21,6 +22,20 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        SizedBox(height: 20),
+        CountDownTimer(
+          secondsRemaining: 180, 
+          whenTimeExpires: (){
+            setState(() {
+              levelArc.victory = false;
+          });
+        },
+        countDownTimerStyle:
+        TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                height: 1.2),
+        ),
         Spacer(),
         Row(
           children: [
