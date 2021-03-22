@@ -4,7 +4,7 @@ class BackgroundButton extends GestureDetector {
   //Constructor
   BackgroundButton(
       {@required AssetImage image,
-      String text,
+      Widget child,
       Function onTap,
       Color color = Colors.transparent,
       EdgeInsets padding})
@@ -18,7 +18,7 @@ class BackgroundButton extends GestureDetector {
                 fit: BoxFit.fill,
               ),
             ),
-            child: Text(text ?? ""),
+            child: child ?? SizedBox(),
           ),
           onTap: onTap,
         );
