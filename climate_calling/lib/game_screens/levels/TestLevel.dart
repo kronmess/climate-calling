@@ -66,7 +66,7 @@ class TestLevel extends BaseLevel {
 
   @override
   void initTerrain() async {
-    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO, 1)), false);
+    this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_LEFT, 1)), false);
     this.igloo.getAnimationComponent().x = 300;
   }
 
