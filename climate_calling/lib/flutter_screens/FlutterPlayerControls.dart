@@ -1,8 +1,11 @@
+import 'package:climate_calling/controllers/BackgroundButton.dart';
 import 'package:climate_calling/controllers/MovementButton.dart';
 import 'package:climate_calling/controllers/Timer.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/game_screens/ClimateCalling.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
+import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/flame.dart';
@@ -21,9 +24,19 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
     ArcticLevel levelArc = level as ArcticLevel;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 20),
+        BackgroundButton(
+                image: AssetImage(PATH_BUTTON_POLAR),
+                child: Text("Return to Main Menu", 
+                style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  climateCalling.switchScreen(ScreenState
+                      .kMainMenu);
+                },
+              ),
         CountDownTimer(
           secondsRemaining: 180, 
           whenTimeExpires: (){

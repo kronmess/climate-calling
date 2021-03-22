@@ -24,6 +24,7 @@ const String PATH_ARCTIC_LEVEL_BG = "artic level final 2.png",
     PATH_NOTO_FIRE = "assets/images/noto_fire.png",
     PATH_SOUND = "assets/images/sound.png",
     PATH_SETTINGS_BORDER = "assets/images/Rectangle 15.png",
+    PATH_BUTTON_POLAR = "assets/images/sprites/button/return to main menu.png",
     PATH_SOUND_PICK = "pick.ogg",
     PATH_SOUND_JUMP = "jump.ogg",
     PATH_SOUND_DROP = "drop.ogg";

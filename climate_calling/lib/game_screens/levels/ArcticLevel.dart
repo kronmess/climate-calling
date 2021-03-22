@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
@@ -60,7 +61,6 @@ class ArcticLevel extends BaseLevel {
   bool dropPolarBear() {
     if (this.player.isPickingUpBear()) {
       PolarBear bear = this.player.pickedUpBear;
-      bear.setDirectionFacing(this.player.direction);
       Rect pRect = this.player.getAnimationComponent().toRect();
       if (pRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
         this._bearRescued++;        //Increase bear rescued counter
@@ -84,7 +84,7 @@ class ArcticLevel extends BaseLevel {
     PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 760, yPos: 230);
     this._bears.add(bear);
 
-    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 270, yPos: 300);
+    bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 270, yPos: 300, direction: Direction.left);
     this._bears.add(bear);
   }
 
