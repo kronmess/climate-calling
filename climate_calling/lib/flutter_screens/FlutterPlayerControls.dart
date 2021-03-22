@@ -15,6 +15,7 @@ class FlutterPlayerControlsScreen extends StatefulWidget {
 
 
 class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScreen> {
+  bool pickUp = false;
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
@@ -82,10 +83,12 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
             Spacer(),
             GestureDetector(
                 child: Container(
-                  height: 64,
-                  width: 64,
-                  child: Center(
-                    child: Image.asset(PATH_BUTTON_MOTION_UP)
+                  height: 65,
+                  width: 65,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(PATH_BUTTON_MOTION_UP),
+                    ),
                   ),
                 ),
                 onTap:(){
@@ -101,23 +104,41 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 child: Container(
                   height: 64,
                   width: 64,
-                  child: Center(
-                    child: Image.asset(PATH_BUTTON_PICKUP)
-                  ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(PATH_BUTTON_PICKUP),
+                      fit: BoxFit.fill,
                 ),
-                onTap: () {
+              ),
+              child:Center(
+                child: 
+                Text(
+                  pickUp ? "DROP" : "PICK UP",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    height: 0,
+                    ),
+                  ) 
+                ),
+                ),
+                onTap: () async {
                   if(!level.player.isPickingUpBear()){
-                    levelArc.pickUpPolarBear();
                     Flame.audio.play(PATH_SOUND_PICK);
+                    pickUp =  await levelArc.pickUpPolarBear();  
+                    setState(() {});
                   }else{
                     levelArc.dropPolarBear();
                     Flame.audio.play(PATH_SOUND_DROP);
+                    pickUp =  await levelArc.dropPolarBear();  
+                    setState(() {});
                   }                  
                 },
                 
               ),
-            ),//space for pick up button
-            SizedBox(width: 48),//space for right of button
+            ),
+            SizedBox(width: 48),
           ],),
           SizedBox(height:30,)
       ],
