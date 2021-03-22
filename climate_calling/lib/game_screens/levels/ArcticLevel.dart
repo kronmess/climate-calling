@@ -60,6 +60,7 @@ class ArcticLevel extends BaseLevel {
   bool dropPolarBear() {
     if (this.player.isPickingUpBear()) {
       PolarBear bear = this.player.pickedUpBear;
+      bear.setDirectionFacing(this.player.direction);
       Rect pRect = this.player.getAnimationComponent().toRect();
       if (pRect.overlaps(this.igloo.getAnimationComponent().toRect())) {
         this._bearRescued++;        //Increase bear rescued counter

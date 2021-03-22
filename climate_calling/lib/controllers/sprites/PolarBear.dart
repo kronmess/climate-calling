@@ -15,6 +15,7 @@ class PolarBear extends NPCSprite {
     Size fixedSize,
     double xPos,
     double yPos,
+    Direction direction = Direction.right,
   }) : super(
     spritesRight: SpriteServices.loadSprites(PATH_POLAR_BEAR_RIGHT, initialFrame: 1, finalFrame: 4), 
     spritesLeft: SpriteServices.loadSprites(PATH_POLAR_BEAR_LEFT, initialFrame: 1, finalFrame: 4), 
@@ -24,6 +25,7 @@ class PolarBear extends NPCSprite {
     fixedSize: fixedSize,
     xPos: xPos,
     yPos: yPos,
+    direction: direction
   ){
     this.getAnimationComponent().width = 500;
     this.getAnimationComponent().height = 300;

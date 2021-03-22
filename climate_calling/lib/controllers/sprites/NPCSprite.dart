@@ -20,6 +20,7 @@ class NPCSprite extends BaseSprite {
     List<Sprite> spritesRightIdle,
     List<Sprite> spritesLeftDeath,
     List<Sprite> spritesRightDeath,
+    Direction direction = Direction.right,
     double gravity = 0, 
     Size fixedSize,
     double xPos,
@@ -30,9 +31,25 @@ class NPCSprite extends BaseSprite {
     fixedSize: fixedSize,
     xPos: xPos,
     yPos: yPos,
+    direction: direction,
     ) {
     this._spritesLeft = spritesLeft;
     this._spritesRight = spritesRight;
+    if (this.direction == Direction.left) {
+      this.setAnimations(this._spritesLeft);
+    } else {
+      this.setAnimations(this._spritesRight);
+    }
+  }
+
+  //Public Methods
+  void setDirectionFacing(Direction direction) {
+    this.direction = direction;
+    if (this.direction == Direction.left) {
+      this.setAnimations(this._spritesLeft);
+    } else {
+      this.setAnimations(this._spritesRight);
+    }
   }
 
   //Overridden Methods
