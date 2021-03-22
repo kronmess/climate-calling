@@ -4,6 +4,7 @@ import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 
 class Player extends BaseSprite {
@@ -109,6 +110,7 @@ class Player extends BaseSprite {
         this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
       }
       super.moveUp();
+      Flame.audio.play(PATH_SOUND_JUMP);
     }
   }
 

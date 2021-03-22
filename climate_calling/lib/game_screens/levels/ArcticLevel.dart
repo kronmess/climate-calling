@@ -12,6 +12,7 @@ import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/components/animation_component.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
@@ -47,6 +48,7 @@ class ArcticLevel extends BaseLevel {
         if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
           this.player.pickUpPolarBear(bear);
           bear.isPickedUp = true;
+          Flame.audio.play(PATH_SOUND_PICK);
           return true;
         }
       }
@@ -73,7 +75,7 @@ class ArcticLevel extends BaseLevel {
         bear.isPickedUp = false;
       }
       this.player.dropPolarBear();
-
+      Flame.audio.play(PATH_SOUND_DROP);
       return true;
     }
     return false;
