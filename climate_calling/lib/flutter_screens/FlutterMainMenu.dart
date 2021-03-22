@@ -34,7 +34,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
             children: [
               BackgroundButton(
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
-                text: "Start",
+                child: Text("Start"),
                 padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
                 onTap: () {
                   climateCalling.switchScreen(ScreenState
@@ -43,7 +43,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
               ),
               BackgroundButton(
                 image: AssetImage(PATH_BUTTON_MAIN_MENU),
-                text: "Game Settings",
+                child: Text("Game Settings"),
                 onTap: () {
                   climateCalling.switchScreen(ScreenState
                       .kGameSettings); //Changes the screen from main menu to settings page
