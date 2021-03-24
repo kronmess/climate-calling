@@ -19,7 +19,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
         Flexible(
           flex: 2,
           child: Image(
-            image: AssetImage(PATH_LOGO_APP),
+            image: AssetImage(PATH_LOGO_MAIN),
             height: 1000,
             width: 1000,
           ),
