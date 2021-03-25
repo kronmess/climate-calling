@@ -18,7 +18,7 @@ class _FlutterGameOverScreenState extends State<FlutterGameOverScreen> {
       Align(
         child: BackgroundButton(
                   image: AssetImage(PATH_BUTTON_MAIN_MENU),
-                  child: Text("Game Over"),
+                  child: Text("Retry"),
                   padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
                   onTap: () {
                     climateCalling.switchScreen(ScreenState
