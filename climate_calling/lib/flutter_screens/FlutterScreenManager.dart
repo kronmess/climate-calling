@@ -61,6 +61,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Climate Calling",
       home: Scaffold(
         resizeToAvoidBottomInset: false,
