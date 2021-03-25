@@ -3,7 +3,9 @@ A 2d platforming game developed using Flutter, being developed for the 2021 Goog
 <p align="center">
   <img src="climate_calling/assets/images/logomain.png" />
 </p>
-# How to install
+
+
+#How to install
 
 Navigate to the releases page 
 
