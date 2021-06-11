@@ -26,7 +26,7 @@ class ArcticLevel extends BaseLevel {
   //Constructor
   ArcticLevel() : super(
     50,
-    200,
+    210,
     fixedPlayerSize: Size(80, 80), 
     background: Background(
         PATH_ARCTIC_LEVEL_BG,

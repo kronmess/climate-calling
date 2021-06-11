@@ -42,7 +42,7 @@ abstract class BaseLevel extends BaseTimedWidget{
       Size cameraSize,
     }
   ) async {
-    this.player = Player(fixedSize: fixedPlayerSize);
+    this.player = Player(fixedSize: fixedPlayerSize, xPos: x, yPos: y);
     this.gravity = gravity;
     this.platforms = List();
     this.applyGravity = true;
@@ -57,8 +57,8 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.camera = Camera(this.player,
       phoneSize: this.size, 
       mapSize: cameraSize ?? Size(
-        this.bg.getAnimationComponent().width,
-        this.bg.getAnimationComponent().height
+        this.bg?.getAnimationComponent()?.width,
+        this.bg?.getAnimationComponent()?.height
       ),
       background: this.bg
     );
@@ -66,9 +66,9 @@ abstract class BaseLevel extends BaseTimedWidget{
     //Set gravity value to player
     this.player.gravity = gravity;
 
-    //Move the player to the desired position
-    this.player.getAnimationComponent().x = x;
-    this.player.getAnimationComponent().y = y;
+    // //Move the player to the desired position
+    // this.player.getAnimationComponent().x = x;
+    // this.player.getAnimationComponent().y = y;
 
     this.onInitCamera();  //Function call after camera is initialized
 

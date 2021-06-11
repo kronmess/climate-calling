@@ -15,7 +15,6 @@ class Player extends BaseSprite {
         isMovingDown = false;
   double time = 0;
   double height = 0;
-  double yPos = 0;
   List<Sprite> _spritesLeft, 
                 _spritesRight, 
                 _spritesLeftBear, 
