@@ -1,9 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:climate_calling/controllers/sprites/Background.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
-import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -72,21 +73,23 @@ class Camera {
     if (this.x < this.phoneCenter.x) {
       this.x = playerCenter.x;
     } else if (this.x > this.mapSize.width - this.phoneCenter.x) {
-      this.x = this.mapSize.width - playerCenter.x;
+      this.x = this.mapSize.width - this.phoneCenter.x + playerCenter.x;
     } else {
       deltaX = (playerCenter.x - this.phoneCenter.x) * this.lerp;
       this.x += deltaX;   // Update camera pos
       this.player.getAnimationComponent().x += deltaX * -1;   // Update player pos
+      this.background.getAnimationComponent().x += deltaX * -1;  // Update background pos
     }
 
-    if (this.y <= this.phoneCenter.y) {
+    if (this.y < this.phoneCenter.y) {
       this.y = playerCenter.y;
-    } else if (this.y >= this.mapSize.height - this.phoneCenter.y) {
-      this.y = this.mapSize.height - playerCenter.y;
+    } else if (this.y > this.mapSize.height - this.phoneCenter.y) {
+      this.y = this.mapSize.height - this.phoneCenter.y + playerCenter.y;
     } else {
       deltaY = (playerCenter.y - this.phoneCenter.y) * this.lerp;
       this.y += deltaY;   // Update camera pos
       this.player.getAnimationComponent().y += deltaY * -1;   // Update player pos
+      this.background.getAnimationComponent().y += deltaY * -1;  // Update background pos
     }
 
     // Update sprite positions

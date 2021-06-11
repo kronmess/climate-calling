@@ -4,7 +4,7 @@ import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
-import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/controllers/sprites/Background.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
@@ -28,7 +28,10 @@ class ArcticLevel extends BaseLevel {
     50,
     200,
     fixedPlayerSize: Size(80, 80), 
-    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080)),
+    background: Background(
+        PATH_ARCTIC_LEVEL_BG,
+        fixedSize: Size(1920, 1080)
+    ),
     cameraSize: Size(1920, 1080),
   ) {
     this._bearRescued = 0;

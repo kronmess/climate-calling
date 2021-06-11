@@ -2,7 +2,7 @@ import 'package:climate_calling/controllers/BaseTimedWidget.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
-import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/controllers/sprites/Background.dart';
 import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:flame/components/animation_component.dart';
@@ -26,7 +26,7 @@ abstract class BaseLevel extends BaseTimedWidget{
       x, 
       y, 
       gravity: gravity, 
-      fixedPlayerSize: fixedPlayerSize, 
+      fixedPlayerSize: fixedPlayerSize,
       background: background,
       cameraSize: cameraSize
     );
@@ -38,7 +38,7 @@ abstract class BaseLevel extends BaseTimedWidget{
     double y, {
       double gravity = 5,
       Size fixedPlayerSize,
-      Background background,
+        Background background,
       Size cameraSize,
     }
   ) async {
@@ -46,7 +46,7 @@ abstract class BaseLevel extends BaseTimedWidget{
     this.gravity = gravity;
     this.platforms = List();
     this.applyGravity = true;
-    this.bg = await background;
+    this.bg = background;
     this.victory = null;
     this.collisionMargin = this.gravity * 2;
 
@@ -54,11 +54,11 @@ abstract class BaseLevel extends BaseTimedWidget{
     await this.initPlatforms();
     await this.initTerrain();
 
-    this.camera = await Camera(this.player,
+    this.camera = Camera(this.player,
       phoneSize: this.size, 
       mapSize: cameraSize ?? Size(
-        this.bg.getSpriteComponent().width,
-        this.bg.getSpriteComponent().height
+        this.bg.getAnimationComponent().width,
+        this.bg.getAnimationComponent().height
       ),
       background: this.bg
     );
@@ -91,7 +91,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   @override
   void resize(Size size) {
     this.player?.resize(size);
-    this.bg?.resize(size);
+    this.bg?.resize(this.camera?.mapSize);
     this.size = size;
     for (Platform plt in this.platforms) {
       plt?.resize(size);

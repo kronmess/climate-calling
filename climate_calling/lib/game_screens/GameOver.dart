@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:climate_calling/controllers/BaseTimedWidget.dart';
-import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/legacy/Background.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
@@ -11,7 +11,7 @@ class GameOverScreen extends BaseTimedWidget {
 
   //Constructor
   GameOverScreen() {
-    this._background = Background(PATH_ARCTIC_LEVEL_BG);
+    this._background = Background(PATH_ARCTIC_LEVEL_BG + "1.png");
   }
 
   //Overridden Methods

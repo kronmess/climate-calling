@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/Player.dart';
-import 'package:climate_calling/game_screens/Background.dart';
+import 'package:climate_calling/legacy/Background.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/components/component.dart';

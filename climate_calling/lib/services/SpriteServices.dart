@@ -54,7 +54,7 @@ class SpriteServices {
 
   /// Loads sprites from the resource folder
   static List<Sprite> loadSprites(String folderPath, {@required int initialFrame, @required int finalFrame}) {
-    List<Sprite> list = List();
+    List<Sprite> list = [];
 
     if (initialFrame <= 0) initialFrame = 1;
     if (finalFrame < initialFrame) finalFrame = initialFrame;
@@ -143,7 +143,7 @@ class SpriteServices {
 
   /// Add an image as a list of image consisting of one element
   static List<Sprite> getSpriteImageAsList(ui.Image img) {
-    List<Sprite> ls = List();
+    List<Sprite> ls = [];
 
     Sprite spr = Sprite.fromImage(img);
     ls.add(spr);
