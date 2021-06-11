@@ -6,14 +6,12 @@ import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/Background.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
-import 'package:climate_calling/services/Camera.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/tap.dart';
 
@@ -38,9 +36,7 @@ class ArcticLevel extends BaseLevel {
   }
 
   //Public methods
-  /**
-   * Method to pick up bear. Returns true if polar bear is successfully picked up.
-   */
+  /// Method to pick up bear. Returns true if polar bear is successfully picked up.
   Future<bool> pickUpPolarBear() async {
     if (!this.player.isPickingUpBear()) {
       Rect pRect = this.player.getAnimationComponent().toRect();
@@ -55,11 +51,9 @@ class ArcticLevel extends BaseLevel {
     }
     return false;
   }
-  /**
-   * Method to drop polar bear.
-   * Dropped polar bear will be rendered and dropped at the player's current position
-   * Returns true if polar bear is successfully dropped.
-   */
+  /// Method to drop polar bear.
+  /// Dropped polar bear will be rendered and dropped at the player's current position
+  /// Returns true if polar bear is successfully dropped.
   bool dropPolarBear() {
     if (this.player.isPickingUpBear()) {
       PolarBear bear = this.player.pickedUpBear;
