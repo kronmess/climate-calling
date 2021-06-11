@@ -23,7 +23,7 @@ class TestLevel extends BaseLevel {
   TestLevel() : super(0, 0, fixedPlayerSize: Size(80, 80)) {
     this.bears = List();
     this._initPolarBears();
-    this.camera = Camera(this.player, phoneSize: this.size, maxSize: Size(1000, 500), sprites: this.platforms);
+    this.camera = Camera(this.player, phoneSize: this.size, mapSize: Size(1000, 500), sprites: this.platforms);
     this.player.xVelocity = 12;
   }
 
@@ -65,7 +65,7 @@ class TestLevel extends BaseLevel {
   }
 
   @override
-  void initTerrain() async {
+  Future<void> initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_LEFT, 1)), false);
     this.igloo.getAnimationComponent().x = 300;
   }

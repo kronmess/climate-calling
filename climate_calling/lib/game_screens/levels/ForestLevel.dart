@@ -7,12 +7,12 @@ class ForestLevel extends BaseLevel {
 
   // Overridden Methods
   @override
-  void initPlatforms() {
+  Future<void> initPlatforms() {
     // TODO: implement initPlatforms
   }
 
   @override
-  void initTerrain() {
+  Future<void> initTerrain() {
     // TODO: implement initTerrain
   }
 

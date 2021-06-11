@@ -25,13 +25,14 @@ class ArcticLevel extends BaseLevel {
 
   //Constructor
   ArcticLevel() : super(
-    50, 
-    0,
+    50,
+    200,
     fixedPlayerSize: Size(80, 80), 
-    background: Background(PATH_ARCTIC_LEVEL_BG)
+    background: Background(PATH_ARCTIC_LEVEL_BG, size: Size(1920, 1080)),
+    cameraSize: Size(1920, 1080),
   ) {
     this._bearRescued = 0;
-    this._bears = List();
+    this._bears = [];
     this._initBears();
   }
 
@@ -149,7 +150,7 @@ class ArcticLevel extends BaseLevel {
       for (Platform platform in this.platforms) {
         AnimationComponent platAC = platform.getAnimationComponent();
         if (bAC.toRect().overlaps(platAC.toRect())) {
-          if (bAC.y + bAC.height <= platAC.y + this.gravity) {
+          if (bAC.y + bAC.height <= platAC.y + this.collisionMargin) {
             bAC.y = platAC.y - bAC.height;
             continue bear;
           }
@@ -157,7 +158,7 @@ class ArcticLevel extends BaseLevel {
       }
       // print("Camera: ${this.camera?.y}");
       // print("Bear pos: ${bAC.y + bAC.height + this.camera?.y}");
-      if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.maxSize.height) {
+      if (this.camera != null && bAC.y + bAC.height + this.camera.y> this.camera.mapSize.height) {
         //Kill polar bear
         // bear.isPickedUp = true; //Just to make it invisible
         // bAC.y = this.size.height - bAC.height;
@@ -168,7 +169,7 @@ class ArcticLevel extends BaseLevel {
   }
 
   @override
-  void initPlatforms() async{
+  Future<void> initPlatforms() async{
     Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(120,20));
 
     plt.getAnimationComponent().x = 0;
@@ -202,7 +203,7 @@ class ArcticLevel extends BaseLevel {
   }
 
   @override
-  void initTerrain() async {
+  Future<void> initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_RIGHT, 1)), false, fixedSize: Size(120, 100));
     this.igloo.getAnimationComponent().x = 0;
     this.igloo.getAnimationComponent().y = 240;

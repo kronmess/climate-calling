@@ -18,6 +18,7 @@ abstract class BaseLevel extends BaseTimedWidget{
   Background bg;
   Camera camera;
   bool victory;
+  double collisionMargin;
 
   //Constructor
   BaseLevel(double x, double y, {double gravity = 5, Size fixedPlayerSize, Background background, Size cameraSize}) {
@@ -32,23 +33,33 @@ abstract class BaseLevel extends BaseTimedWidget{
   }
 
   //Public methods
-  void init(double x, double y, {double gravity = 5, Size fixedPlayerSize, Background background, Size cameraSize}) async {
+  void init(
+    double x,
+    double y, {
+      double gravity = 5,
+      Size fixedPlayerSize,
+      Background background,
+      Size cameraSize,
+    }
+  ) async {
     this.player = Player(fixedSize: fixedPlayerSize);
     this.gravity = gravity;
     this.platforms = List();
     this.applyGravity = true;
     this.bg = await background;
     this.victory = null;
+    this.collisionMargin = this.gravity * 2;
 
     //Initialize platforms and terrain
     await this.initPlatforms();
     await this.initTerrain();
 
-    this.camera = await Camera(this.player, 
+    this.camera = await Camera(this.player,
       phoneSize: this.size, 
-      maxSize: this.bg != null? Size(this.bg.getSpriteComponent().width, 
-                    this.bg.getSpriteComponent().height
-      ) : cameraSize, 
+      mapSize: cameraSize ?? Size(
+        this.bg.getSpriteComponent().width,
+        this.bg.getSpriteComponent().height
+      ),
       background: this.bg
     );
 
@@ -72,9 +83,9 @@ abstract class BaseLevel extends BaseTimedWidget{
 
   //abstrasct Methods
   @protected
-  void initPlatforms();
+  Future<void> initPlatforms();
   @protected
-  void initTerrain();
+  Future<void> initTerrain();
 
   //Overridden Methods
   @override
@@ -123,7 +134,7 @@ abstract class BaseLevel extends BaseTimedWidget{
         if (plt.overlaps(playerRect)) {
           // SpriteServices.checkPassThrough(this.player, plt);
           AnimationComponent platAC = plt.getAnimationComponent();
-          if (this.player.isMovingDown && pAC.y + pAC.height <= platAC.y + this.gravity) {    //Use gravity value for margin of error
+          if (this.player.isMovingDown && pAC.y + pAC.height <= platAC.y + collisionMargin) {
             pAC.y = platAC.y - pAC.height;
             this.player.isMovingDown = false;
           }
