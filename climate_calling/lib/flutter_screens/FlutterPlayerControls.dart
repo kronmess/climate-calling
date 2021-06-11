@@ -22,7 +22,6 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
   @override
   Widget build(BuildContext context) {
     BaseLevel level = climateCalling.getActiveScreen() as BaseLevel;
-    ArcticLevel levelArc = level as ArcticLevel;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,7 +40,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
           secondsRemaining: 60, 
           whenTimeExpires: (){
             setState(() {
-              levelArc.victory = false;
+              level.victory = false;
           });
         },
         countDownTimerStyle:
@@ -136,16 +135,19 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 ),
                 ),
                 onTap: () async {
-                  if(!level.player.isPickingUpBear()){                   
-                    pickUp =  await levelArc.pickUpPolarBear();  
-                    setState(() {});
-                  }else{
-                    levelArc.dropPolarBear();
-                    pickUp =  await levelArc.dropPolarBear();  
-                    setState(() {});
-                  }                  
+                  if (screenState == ScreenState.kPolar) {
+                    ArcticLevel levelArc = level as ArcticLevel;
+
+                    if(!level.player.isPickingUpBear()){
+                      pickUp =  await levelArc.pickUpPolarBear();
+                      setState(() {});
+                    }else{
+                      levelArc.dropPolarBear();
+                      pickUp =  await levelArc.dropPolarBear();
+                      setState(() {});
+                    }
+                  }
                 },
-                
               ),
             ),
             SizedBox(width: 48),
