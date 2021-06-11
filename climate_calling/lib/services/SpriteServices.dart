@@ -12,9 +12,7 @@ import 'package:image/image.dart' as image;
 
 class SpriteServices {
   
-  /**
-   * Uses AABB collision detection to detect if 2 sprites collide with one another
-   */
+  /// Uses AABB collision detection to detect if 2 sprites collide with one another
   static bool hasCollision(BaseSprite sp1, BaseSprite sp2) {
     AnimationComponent ac1 = sp1.getAnimationComponent();
     AnimationComponent ac2 = sp2.getAnimationComponent();
@@ -25,9 +23,7 @@ class SpriteServices {
             ac1.y + ac1.height > ac2.y);
   }
 
-  /**
-   * Checks if the first sprite is on top of the second sprite
-   */
+  /// Checks if the first sprite is on top of the second sprite
   static bool isDirectlyOnTop(BaseSprite sp1, BaseSprite sp2) {
     AnimationComponent ac1 = sp1.getAnimationComponent();
     AnimationComponent ac2 = sp2.getAnimationComponent();
@@ -35,9 +31,7 @@ class SpriteServices {
     return ac1.y + ac1.height == ac2.y;
   }
 
-  /**
-   * Combine the same image X times and returns the Image object from Dart UI package
-   */
+  /// Combine the same image X times and returns the Image object from Dart UI package
   static Future<ui.Image> mergeImage(String imagePath, int count) async {
     List<image.Image> images = List();
     for (int i=0; i<count; i++) {
@@ -58,9 +52,7 @@ class SpriteServices {
     return frameInfo.image;
   }
 
-  /**
-   * Loads sprites from the resource folder
-   */
+  /// Loads sprites from the resource folder
   static List<Sprite> loadSprites(String folderPath, {@required int initialFrame, @required int finalFrame}) {
     List<Sprite> list = List();
 
@@ -74,11 +66,9 @@ class SpriteServices {
     return list;
   }
 
-  /**
-   * Checks if the first sprite passes through the second sprite.
-   * If it does, prevent it. If the first sprite is on top of the second one,
-   * Return true to mark that the first sprite must stop applying gravity.
-   */
+  /// Checks if the first sprite passes through the second sprite.
+  /// If it does, prevent it. If the first sprite is on top of the second one,
+  /// Return true to mark that the first sprite must stop applying gravity.
   static bool checkPassThrough(BaseSprite sp1, BaseSprite sp2) {
     AnimationComponent pAC = sp1.getAnimationComponent();
     AnimationComponent platAC = sp2.getAnimationComponent();
@@ -104,9 +94,7 @@ class SpriteServices {
       return false;
   }
 
-  /**
-   * Returns the x and y difference between the positions of 2 sprite objects.
-   */
+  /// Returns the x and y difference between the positions of 2 sprite objects.
   @deprecated
   static Point getDeltaPos(BaseSprite sp1, BaseSprite sp2) {
     //TODO: consider the width and height as well?
@@ -153,9 +141,7 @@ class SpriteServices {
     return Point(xDiff, yDiff);
   }
 
-  /**
-   * Add an image as a list of image consisting of one element
-   */
+  /// Add an image as a list of image consisting of one element
   static List<Sprite> getSpriteImageAsList(ui.Image img) {
     List<Sprite> ls = List();
 
@@ -165,9 +151,7 @@ class SpriteServices {
     return ls;
   }
 
-  /**
-   * Get the location of the sprite's center
-   */
+  /// Get the location of the sprite's center
   static Point getSpriteCenter(BaseSprite sprite)
   {
     return Point((sprite.getAnimationComponent().x + sprite.getAnimationComponent().width)/2, 
