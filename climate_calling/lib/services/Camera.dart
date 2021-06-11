@@ -39,8 +39,8 @@ class Camera {
     // Calculate phone center
     this.phoneCenter = Point(this.phoneSize.width/2, this.phoneSize.height/2);
 
-    print("Phone Center: ${this.phoneCenter.x}, ${this.phoneCenter.y}");
-    print("Map Size: ${this.mapSize.width}, ${this.mapSize.height}");
+    // print("Phone Center: ${this.phoneCenter.x}, ${this.phoneCenter.y}");
+    // print("Map Size: ${this.mapSize.width}, ${this.mapSize.height}");
   }
 
   //Public methods
