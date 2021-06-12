@@ -12,7 +12,7 @@ class GameSettingsScreen extends BaseTimedWidget {
 
   //Constructor
   GameSettingsScreen() {
-    this._background = Background(PATH_WILDFIRE_BG);
+    this._background = Background(PATH_MAIN_MENU_BG);
   }
 
   //Overridden Methods
