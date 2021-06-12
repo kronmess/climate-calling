@@ -12,7 +12,7 @@ const String
     PATH_BUTTON_MAIN_MENU =
         "assets/images/sprites/main menu buttons/main menu button.png",
     PATH_BUTTON_PICKUP = "assets/images/sprites/button/pick up button.png",
-    PATH_WILDFIRE_BG = "wildfire aussie.png",
+    PATH_WILDFIRE_BG = "sprites/background/forest/",
     PATH_PLAYER_LEFT = "sprites/main_char/left/",
     PATH_PLAYER_RIGHT = "sprites/main_char/right/",
     PATH_POLAR_BEAR_LEFT = "sprites/Polar Bear/left/",
