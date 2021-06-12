@@ -38,7 +38,7 @@ class _FlutterMainMenuScreenState extends State<FlutterMainMenuScreen> {
                 padding: EdgeInsets.fromLTRB(80, 20, 80, 20),
                 onTap: () {
                   climateCalling.switchScreen(ScreenState
-                      .kForest); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
+                      .kPolar); //Changes the screen from main menu to polar bear level TODO: change to the last screen instead
                 },
               ),
               BackgroundButton(

@@ -21,7 +21,7 @@ class ForestLevel extends BaseLevel {
     220,
     fixedPlayerSize: Size(80, 80),
     background: Background(
-        PATH_ARCTIC_TILE,
+        PATH_ARCTIC_LEVEL_BG,
         fixedSize: Size(1920, 1080)
   ), cameraSize: Size(1920, 1080),
   ) 
