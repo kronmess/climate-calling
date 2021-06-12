@@ -100,32 +100,32 @@ class ForestLevel extends BaseLevel {
   }
   @override
   Future<void> initPlatforms() async{
-    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(190,20));
+    Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_FOREST_TILE, 1)),fixedSize: Size(190,20));
 
     plt.getAnimationComponent().x = 0;
     plt.getAnimationComponent().y = 330;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(240,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_FOREST_TILE, 1)),fixedSize: Size(240,20));
     plt.getAnimationComponent().x = 200;
     plt.getAnimationComponent().y = 220;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(260,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_FOREST_TILE, 1)),fixedSize: Size(260,20));
     plt.getAnimationComponent().x = 720;
     plt.getAnimationComponent().y = 320;
 
     this.platforms.add(plt);
     
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(260,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_FOREST_TILE, 1)),fixedSize: Size(260,20));
     plt.getAnimationComponent().x = 980;
     plt.getAnimationComponent().y = 320;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(260,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_FOREST_TILE, 1)),fixedSize: Size(260,20));
     plt.getAnimationComponent().x = 1300;
     plt.getAnimationComponent().y = 420;
 
