@@ -37,7 +37,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                 },
               ),
         CountDownTimer(
-          secondsRemaining: 60, 
+          secondsRemaining: 180, 
           whenTimeExpires: (){
             setState(() {
               level.victory = false;

@@ -81,7 +81,7 @@ class ArcticLevel extends BaseLevel {
 
   //Private Methods
   void _initBears() {
-    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 760, yPos: 230);
+    PolarBear bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 760, yPos: 220);
     this._bears.add(bear);
 
     bear = PolarBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 270, yPos: 300, direction: Direction.left);
@@ -126,7 +126,7 @@ class ArcticLevel extends BaseLevel {
     //   victory = false;
     // }
     if(victory == true){
-      climateCalling.switchScreen(ScreenState.kGameOver);
+      climateCalling.switchScreen(ScreenState.kForest);
     }
     else if(victory == false) {
       climateCalling.switchScreen(ScreenState.kGameOver);
@@ -176,31 +176,31 @@ class ArcticLevel extends BaseLevel {
     Platform plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(120,20));
 
     plt.getAnimationComponent().x = 0;
-    plt.getAnimationComponent().y = 330;
+    plt.getAnimationComponent().y = 370;
 
     this.platforms.add(plt);
 
     plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(200,20));
     plt.getAnimationComponent().x = 200;
-    plt.getAnimationComponent().y = 380;
+    plt.getAnimationComponent().y = 430;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(40,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(60,20));
     plt.getAnimationComponent().x = 500;
-    plt.getAnimationComponent().y = 380;
+    plt.getAnimationComponent().y = 430;
 
     this.platforms.add(plt);
 
-    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(40,20));
+    plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(60,20));
     plt.getAnimationComponent().x = 600;
-    plt.getAnimationComponent().y = 360;
+    plt.getAnimationComponent().y = 410;
 
     this.platforms.add(plt);
 
     plt = Platform(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_ARCTIC_TILE, 1)),fixedSize: Size(200,20));
     plt.getAnimationComponent().x = 720;
-    plt.getAnimationComponent().y = 320;
+    plt.getAnimationComponent().y = 370;
 
     this.platforms.add(plt);
   }
@@ -209,7 +209,7 @@ class ArcticLevel extends BaseLevel {
   Future<void> initTerrain() async {
     this.igloo = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_RIGHT, 1)), false, fixedSize: Size(120, 100));
     this.igloo.getAnimationComponent().x = 0;
-    this.igloo.getAnimationComponent().y = 240;
+    this.igloo.getAnimationComponent().y = 280;
   }
 
   @override 

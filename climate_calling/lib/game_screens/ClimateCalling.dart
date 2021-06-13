@@ -13,6 +13,8 @@ import 'package:flame/util.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 
+import 'levels/ForestLevel.dart';
+
 class ClimateCalling extends Game with TapDetector {
   //Fields
   BaseTimedWidget _menuScreen;
@@ -20,6 +22,7 @@ class ClimateCalling extends Game with TapDetector {
   BaseTimedWidget _levelTest;
   BaseTimedWidget _settingsScreen;
   BaseTimedWidget _gameOverScreen;
+  BaseTimedWidget _levelForest;
   Function _fnUpdate;
   Function _callback;
 
@@ -32,6 +35,7 @@ class ClimateCalling extends Game with TapDetector {
     this._levelTest = TestLevel();
     this._settingsScreen = GameSettingsScreen();
     this._gameOverScreen = GameOverScreen();
+    this._levelForest = ForestLevel();
     _fnUpdate = _init;
     _callback = _doNothing;
   }
@@ -53,6 +57,9 @@ class ClimateCalling extends Game with TapDetector {
 
       case ScreenState.kTest:
         return this._levelTest;
+
+      case ScreenState.kForest:
+        return this._levelForest;
 
       default:
         return this._menuScreen;
@@ -102,12 +109,19 @@ class ClimateCalling extends Game with TapDetector {
             callback: this
                 ._callback); //Required to render the settings menu flutter widgets
         break;
+
+      case ScreenState.kForest:
+      this._levelForest = ForestLevel();
+      this._levelForest.resize(this._size);
+      updateScreenState(newScreen, callback: this._callback);
+      break;
+
       case ScreenState.kTest:
         // this._levelTest = TestLevel();
         // this._levelTest.resize(this._size);
         updateScreenState(newScreen, callback: this._callback); //Test
         break;
-
+        
       default:
         updateScreenState(newScreen);
         break;

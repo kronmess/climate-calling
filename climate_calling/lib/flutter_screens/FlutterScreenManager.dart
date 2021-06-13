@@ -44,7 +44,7 @@ class _FlutterScreenManagerState extends State<FlutterScreenManager> {
     }
   }
   bool _showPlayerControls() {
-    return screenState == ScreenState.kPolar || screenState == ScreenState.kFactory || screenState == ScreenState.kForest || screenState == ScreenState.kTest;
+    return screenState == ScreenState.kPolar || screenState == ScreenState.kForest || screenState == ScreenState.kFactory || screenState == ScreenState.kTest;
   }
 
   //Overridden Methods

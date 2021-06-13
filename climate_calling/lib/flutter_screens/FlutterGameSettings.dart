@@ -128,7 +128,7 @@ class _FlutterGameSettingsScreenState extends State<FlutterGameSettingsScreen> {
                     ),
                     child: SettingsButton(
                       image: AssetImage(PATH_SETTINGS_BUTTON),
-                      text: "Return to Main Menu",
+                      text: "Close Settings",
                       onTap: () {
                         climateCalling.switchScreen(ScreenState.kMainMenu);
                       },
