@@ -2,13 +2,12 @@ import 'package:climate_calling/controllers/BackgroundButton.dart';
 import 'package:climate_calling/controllers/MovementButton.dart';
 import 'package:climate_calling/controllers/Timer.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
-import 'package:climate_calling/game_screens/ClimateCalling.dart';
 import 'package:climate_calling/game_screens/levels/ArcticLevel.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
+import 'package:climate_calling/game_screens/levels/ForestLevel.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
-import 'package:flame/flame.dart';
 import "package:flutter/material.dart";
 
 class FlutterPlayerControlsScreen extends StatefulWidget {
@@ -138,12 +137,23 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   if (screenState == ScreenState.kPolar) {
                     ArcticLevel levelArc = level as ArcticLevel;
 
-                    if(!level.player.isPickingUpBear()){
-                      pickUp =  await levelArc.pickUpPolarBear();
+                    if (!level.player.isPickingUpBear()) {
+                      pickUp = await levelArc.pickUpPolarBear();
                       setState(() {});
-                    }else{
-                      levelArc.dropPolarBear();
-                      pickUp =  await levelArc.dropPolarBear();
+                    } else {
+                      // levelArc.dropPolarBear();
+                      pickUp = await levelArc.dropPolarBear();
+                      setState(() {});
+                    }
+                  } else {
+                    ForestLevel levelForest = level as ForestLevel;
+
+                    if (!level.player.isPickingUpBear()) {
+                      pickUp = await levelForest.pickUpPandaBear();
+                      setState(() {});
+                    } else {
+                      // levelForest.dropPandaBear();
+                      pickUp = await levelForest.dropPandaBear();
                       setState(() {});
                     }
                   }

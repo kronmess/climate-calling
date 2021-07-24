@@ -46,7 +46,7 @@ class ArcticLevel extends BaseLevel {
       Rect pRect = this.player.getAnimationComponent().toRect();
       for (PolarBear bear in this._bears) {
         if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
-          this.player.pickUpPolarBear(bear);
+          this.player.pickUpBear(bear);
           bear.isPickedUp = true;
           Flame.audio.play(PATH_SOUND_PICK);
           return true;
@@ -72,7 +72,7 @@ class ArcticLevel extends BaseLevel {
         bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
         bear.isPickedUp = false;
       }
-      this.player.dropPolarBear();
+      this.player.dropBear();
       Flame.audio.play(PATH_SOUND_DROP);
       return true;
     }

@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 
 class NPCSprite extends BaseSprite {
   //Fields
-  List<Sprite> _spritesLeft, 
-              _spritesRight,
-              _spritesLeftIdle,
-              _spritesRightIdle,
-              _spritesLeftDeath,
-              _spritesRightDeath;
+  @protected
+  List<Sprite> spritesLeft,
+              spritesRight,
+              spritesLeftIdle,
+              spritesRightIdle,
+              spritesLeftDeath,
+              spritesRightDeath;
 
   //Constructor
   NPCSprite({@required List<Sprite> spritesLeft, 
@@ -33,12 +34,12 @@ class NPCSprite extends BaseSprite {
     yPos: yPos,
     direction: direction,
     ) {
-    this._spritesLeft = spritesLeft;
-    this._spritesRight = spritesRight;
+    this.spritesLeft = spritesLeft;
+    this.spritesRight = spritesRight;
     if (this.direction == Direction.left) {
-      this.setAnimations(this._spritesLeft);
+      this.setAnimations(this.spritesLeft);
     } else {
-      this.setAnimations(this._spritesRight);
+      this.setAnimations(this.spritesRight);
     }
   }
 
@@ -46,9 +47,9 @@ class NPCSprite extends BaseSprite {
   void setDirectionFacing(Direction direction) {
     this.direction = direction;
     if (this.direction == Direction.left) {
-      this.setAnimations(this._spritesLeft);
+      this.setAnimations(this.spritesLeft);
     } else {
-      this.setAnimations(this._spritesRight);
+      this.setAnimations(this.spritesRight);
     }
   }
 
@@ -56,7 +57,7 @@ class NPCSprite extends BaseSprite {
   @override
   void moveLeft() {
     if (this.direction != Direction.left) {
-      this.setAnimations(this._spritesLeft);
+      this.setAnimations(this.spritesLeft);
       this.direction = Direction.left;
     }
     super.moveLeft();
@@ -65,7 +66,7 @@ class NPCSprite extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != Direction.right) {
-      this.setAnimations(this._spritesRight);
+      this.setAnimations(this.spritesRight);
       this.direction = Direction.right;
     }
     super.moveRight();

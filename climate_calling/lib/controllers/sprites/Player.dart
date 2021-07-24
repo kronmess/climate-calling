@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
+import 'package:climate_calling/controllers/sprites/Bear.dart';
 import 'package:climate_calling/controllers/sprites/PolarBear.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/constants.dart';
@@ -17,16 +18,20 @@ class Player extends BaseSprite {
   double height = 0;
   List<Sprite> _spritesLeft, 
                 _spritesRight, 
-                _spritesLeftBear, 
-                _spritesRightBear, 
+                _spritesLeftPolarBear,
+                _spritesRightPolarBear,
+                _spritesLeftPandaBear,
+                _spritesRightPandaBear,
                 _jumpLeft,
-                _jumpLeftBear, 
+                _jumpLeftPolarBear,
+                _jumpLeftPandaBear,
                 _jumpRight,
-                _jumpRightBear,
+                _jumpRightPolarBear,
+                _jumpRightPandaBear,
                 _deathLeft,
                 _deathRight;
-  PolarBear _pickedUpBear;
-  PolarBear get pickedUpBear => this._pickedUpBear;
+  Bear _pickedUpBear;
+  Bear get pickedUpBear => this._pickedUpBear;
 
   //Constructor
   Player(
@@ -42,28 +47,32 @@ class Player extends BaseSprite {
   ) {
     this._spritesRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 1, finalFrame: 4);
     this._spritesLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 1, finalFrame: 4);
-    this._spritesLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 7, finalFrame: 10);
-    this._spritesRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 7, finalFrame: 10);
+    this._spritesLeftPolarBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 7, finalFrame: 10);
+    this._spritesRightPolarBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 7, finalFrame: 10);
+    this._spritesLeftPandaBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 14, finalFrame: 17);
+    this._spritesRightPandaBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 14, finalFrame: 17);
     this._jumpLeft = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 12, finalFrame: 11);
     this._jumpRight = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 12, finalFrame: 11);
-    this._jumpLeftBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 13, finalFrame: 12);
-    this._jumpRightBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 13, finalFrame: 12);
+    this._jumpLeftPolarBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 13, finalFrame: 12);
+    this._jumpRightPolarBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 13, finalFrame: 12);
+    this._jumpLeftPandaBear = SpriteServices.loadSprites(PATH_PLAYER_LEFT, initialFrame: 20, finalFrame: 19);
+    this._jumpRightPandaBear = SpriteServices.loadSprites(PATH_PLAYER_RIGHT, initialFrame: 20, finalFrame: 19);
   }
 
   //Public Methods
   bool isPickingUpBear() => this._pickedUpBear != null;
-  void pickUpPolarBear(PolarBear bear) {
+  void pickUpBear(Bear bear) {
     if (bear != null && !bear.isPickedUp) {
       this._pickedUpBear = bear;
       if (this.direction == Direction.left) {
-        this.setAnimations(this._spritesLeftBear);
+        this.setAnimations(bear is PolarBear? this._spritesLeftPolarBear : this._spritesLeftPandaBear);
       } 
       else if (this.direction == Direction.right) {
-        this.setAnimations(this._spritesRightBear);
+        this.setAnimations(bear is PolarBear? this._spritesRightPolarBear : this._spritesRightPandaBear);
       }
     }
   }
-  void dropPolarBear() {
+  void dropBear() {
     this._pickedUpBear = null;
     if (this.direction == Direction.left) {
         this.setAnimations(this._spritesLeft);
@@ -73,10 +82,10 @@ class Player extends BaseSprite {
   }
   void changeToNormalAnimation() {
     if (this.direction == Direction.left) {
-      this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
+      this.setAnimations(this.isPickingUpBear()? this._pickedUpBear is PolarBear? this._spritesLeftPolarBear : this._spritesLeftPandaBear : this._spritesLeft);
     }
     else if (this.direction == Direction.right) {
-      this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
+      this.setAnimations(this.isPickingUpBear()? this._pickedUpBear is PolarBear? this._spritesRightPolarBear : this._spritesRightPandaBear : this._spritesRight);
     }
   }
 
@@ -84,7 +93,7 @@ class Player extends BaseSprite {
   @override
   void moveLeft() {
     if (this.direction != Direction.left) {
-      this.setAnimations(this.isPickingUpBear()? this._spritesLeftBear : this._spritesLeft);
+      this.setAnimations(this.isPickingUpBear()? this._pickedUpBear is PolarBear? this._spritesLeftPolarBear : this._spritesLeftPandaBear : this._spritesLeft);
       this.direction = Direction.left;
     }
     super.moveLeft();
@@ -93,7 +102,7 @@ class Player extends BaseSprite {
   @override
   void moveRight() {
     if (this.direction != Direction.right) {
-      this.setAnimations(this.isPickingUpBear()? this._spritesRightBear : this._spritesRight);
+      this.setAnimations(this.isPickingUpBear()? this._pickedUpBear is PolarBear? this._spritesRightPolarBear : this._spritesRightPandaBear : this._spritesRight);
       this.direction = Direction.right;
     }
     super.moveRight();
@@ -103,10 +112,10 @@ class Player extends BaseSprite {
   void moveUp() {
     if (this.isJump == false) {
       if (this.direction == Direction.right) {
-        this.setAnimations(this.isPickingUpBear()? this._jumpRightBear : this._jumpRight);
+        this.setAnimations(this.isPickingUpBear()? this._pickedUpBear is PolarBear? this._jumpRightPolarBear : this._jumpRightPandaBear : this._jumpRight);
       }
       else if (this.direction == Direction.left) {
-        this.setAnimations(this.isPickingUpBear()? this._jumpLeftBear : this._jumpLeft);
+        this.setAnimations(this.isPickingUpBear()? this.pickedUpBear is PolarBear? this._jumpLeftPolarBear : this._jumpLeftPandaBear : this._jumpLeft);
       }
       super.moveUp();
       Flame.audio.play(PATH_SOUND_JUMP);

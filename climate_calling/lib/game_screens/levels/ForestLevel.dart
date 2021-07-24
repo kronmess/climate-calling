@@ -10,6 +10,7 @@ import 'package:climate_calling/shared/ScreenState.dart';
 import 'package:climate_calling/shared/constants.dart';
 import 'package:climate_calling/shared/globals.dart';
 import 'package:flame/components/animation_component.dart';
+import 'package:flame/flame.dart';
 
 
 
@@ -30,7 +31,48 @@ class ForestLevel extends BaseLevel {
     this._bears = [];
     this._initBears();
   }
-  
+
+  // Public methods
+  // Method to pick up bear. Returns true if polar bear is successfully picked up.
+  Future<bool> pickUpPandaBear() async {
+    if (!this.player.isPickingUpBear()) {
+      Rect pRect = this.player.getAnimationComponent().toRect();
+      for (PandaBear bear in this._bears) {
+        if (pRect.overlaps(bear.getAnimationComponent().toRect())) {
+          this.player.pickUpBear(bear);
+          bear.isPickedUp = true;
+          Flame.audio.play(PATH_SOUND_PICK);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  /// Method to drop polar bear.
+  /// Dropped polar bear will be rendered and dropped at the player's current position
+  /// Returns true if polar bear is successfully dropped.
+  bool dropPandaBear() {
+    if (this.player.isPickingUpBear()) {
+      PandaBear bear = this.player.pickedUpBear;
+      Rect pRect = this.player.getAnimationComponent().toRect();
+      //TODO: Uncomment this to make the level passable, remove 'false' in the if statement
+      if (/*pRect.overlaps(this.igloo.getAnimationComponent().toRect())*/ false) {
+        this._bearRescued++;        //Increase bear rescued counter
+      }
+      else {
+        //Move bear to player pos
+        bear.getAnimationComponent().x = this.player.getAnimationComponent().x;
+        bear.getAnimationComponent().y = this.player.getAnimationComponent().y;
+        bear.isPickedUp = false;
+      }
+      this.player.dropBear();
+      Flame.audio.play(PATH_SOUND_DROP);
+      return true;
+    }
+    return false;
+  }
+
+  // Overridden Methods
   @override
   Future<void> initTerrain() {
     // TODO: implement initTerrain
