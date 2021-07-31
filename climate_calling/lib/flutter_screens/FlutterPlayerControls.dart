@@ -133,7 +133,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                   ) 
                 ),
                 ),
-                onTap: () async {
+                 onTap: () async {
                   if (screenState == ScreenState.kPolar) {
                     ArcticLevel levelArc = level as ArcticLevel;
 
@@ -142,7 +142,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                       setState(() {});
                     } else {
                       // levelArc.dropPolarBear();
-                      pickUp = await levelArc.dropPolarBear();
+                      pickUp = await !levelArc.dropPolarBear();
                       setState(() {});
                     }
                   } else {
@@ -153,7 +153,7 @@ class _FlutterPlayerControlsScreenState extends State<FlutterPlayerControlsScree
                       setState(() {});
                     } else {
                       // levelForest.dropPandaBear();
-                      pickUp = await levelForest.dropPandaBear();
+                      pickUp = await !levelForest.dropPandaBear();
                       setState(() {});
                     }
                   }

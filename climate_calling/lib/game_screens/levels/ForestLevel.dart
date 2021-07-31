@@ -4,6 +4,7 @@ import 'package:climate_calling/controllers/sprites/Background.dart';
 import 'package:climate_calling/controllers/sprites/BaseSprite.dart';
 import 'package:climate_calling/controllers/sprites/PandaBear.dart';
 import 'package:climate_calling/controllers/sprites/Platform.dart';
+import 'package:climate_calling/controllers/sprites/Terrain.dart';
 import 'package:climate_calling/game_screens/levels/BaseLevel.dart';
 import 'package:climate_calling/services/SpriteServices.dart';
 import 'package:climate_calling/shared/ScreenState.dart';
@@ -17,6 +18,7 @@ import 'package:flame/flame.dart';
 class ForestLevel extends BaseLevel {
   List<PandaBear> _bears;
   int _bearRescued;
+  Terrain hut;
   // Constructor
   ForestLevel() : super(50, 
     220,
@@ -56,8 +58,8 @@ class ForestLevel extends BaseLevel {
       PandaBear bear = this.player.pickedUpBear;
       Rect pRect = this.player.getAnimationComponent().toRect();
       //TODO: Uncomment this to make the level passable, remove 'false' in the if statement
-      if (/*pRect.overlaps(this.igloo.getAnimationComponent().toRect())*/ false) {
-        this._bearRescued++;        //Increase bear rescued counter
+      if (pRect.overlaps(this.hut.getAnimationComponent().toRect())) {
+        this._bearRescued++;       
       }
       else {
         //Move bear to player pos
@@ -74,9 +76,12 @@ class ForestLevel extends BaseLevel {
 
   // Overridden Methods
   @override
-  Future<void> initTerrain() {
-    // TODO: implement initTerrain
+  Future<void> initTerrain() async {
+    this.hut = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_RIGHT, 1)), false, fixedSize: Size(120, 100));
+    this.hut.getAnimationComponent().x = 1400;
+    this.hut.getAnimationComponent().y = 330;
   }
+
 
   void _initBears() {
     PandaBear bear = PandaBear(gravity: this.gravity, fixedSize: Size(70, 50), xPos: 1020, yPos: 210);
@@ -89,6 +94,7 @@ class ForestLevel extends BaseLevel {
    @override
   void render(Canvas canvas) async{
     super.render(canvas);
+    this.hut?.render(canvas);
     for (PandaBear bear in this._bears) {
       bear?.render(canvas);
     }
@@ -98,6 +104,7 @@ class ForestLevel extends BaseLevel {
   @override
   void resize(Size size) {
     super.resize(size);
+    this.hut?.resize(size);
     this.camera?.phoneSize = size;
     for (PandaBear bear in this._bears) {
       bear?.resize(size);
@@ -111,7 +118,7 @@ class ForestLevel extends BaseLevel {
       this.victory = true;
     }
     if(victory == true){
-      climateCalling.switchScreen(ScreenState.kForest);
+      climateCalling.switchScreen(ScreenState.kGameOver);
     }
     else if(victory == false) {
       climateCalling.switchScreen(ScreenState.kGameOver);
@@ -124,6 +131,7 @@ class ForestLevel extends BaseLevel {
 
     super.update(t);
     this.camera?.update();
+    this.hut?.update(t);
     bear:
     for (PandaBear bear in this._bears) {
       AnimationComponent bAC = bear.getAnimationComponent();
@@ -178,5 +186,6 @@ class ForestLevel extends BaseLevel {
     super.onInitCamera();
     //Add sprites to camera
     this.camera.addSprites(this._bears);
+    this.camera.addSprite(this.hut);
   }
 }
