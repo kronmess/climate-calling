@@ -57,6 +57,7 @@ flutter:
     - assets/images/sprites/
     - assets/images/sprites/button/
     - assets/images/sprites/igloo/
+    - assets/images/sprites/hut/
     - assets/images/sprites/main_char/right/
     - assets/images/sprites/main_char/left/
     - assets/images/sprites/Polar Bear/left/

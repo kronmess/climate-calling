@@ -21,6 +21,7 @@ const String
     PATH_PANDA_BEAR_RIGHT = "sprites/Panda/right/",
     PATH_IGLOO_LEFT = "assets/images/sprites/igloo/igloo.png",
     PATH_IGLOO_RIGHT = "assets/images/sprites/igloo/igloo2.png",
+    PATH_HUT = "assets/images/sprites/hut/hut.png",
     PATH_ARCTIC_TILE = "assets/images/sprites/arctic_level/tiles/ice_tiles.png",
     PATH_FOREST_TILE = "assets/images/sprites/forest_level/tiles/forest_tiles.png",
     PATH_SETTINGS_TILE = "assets/images/setting page.png",

@@ -77,7 +77,7 @@ class ForestLevel extends BaseLevel {
   // Overridden Methods
   @override
   Future<void> initTerrain() async {
-    this.hut = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_IGLOO_RIGHT, 1)), false, fixedSize: Size(120, 100));
+    this.hut = Terrain(SpriteServices.getSpriteImageAsList(await SpriteServices.mergeImage(PATH_HUT, 1)), false, fixedSize: Size(120, 100));
     this.hut.getAnimationComponent().x = 1400;
     this.hut.getAnimationComponent().y = 330;
   }
